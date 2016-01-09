@@ -4,7 +4,7 @@ import java.sql.Blob;
 
 public class ScenerySpot
 {
-	
+	//
 	private int ScenerySpotId;
 	private String ScenerySpotName;
 	private String ScenerySpotAddress;
