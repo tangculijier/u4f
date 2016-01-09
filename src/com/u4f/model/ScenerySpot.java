@@ -17,6 +17,15 @@ public class ScenerySpot
 	private String ScenerySpotLab2;
 	private String ScenerySpotLab3;
 	private Blob ScenerySpotPicture;
+	private int scenerySpotDistance;
+	public int getScenerySpotDistance()
+	{
+		return scenerySpotDistance;
+	}
+	public void setScenerySpotDistance(int scenerySpotDistance)
+	{
+		this.scenerySpotDistance = scenerySpotDistance;
+	}
 	public int getScenerySpotId()
 	{
 		return ScenerySpotId;
