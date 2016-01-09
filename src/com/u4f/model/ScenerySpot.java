@@ -16,9 +16,7 @@ public class ScenerySpot
 	private String ScenerySpotLab1;
 	private String ScenerySpotLab2;
 	private String ScenerySpotLab3;
-	//景点图片
 	private Blob ScenerySpotPicture;
-	//景点距离
 	private int scenerySpotDistance;
 	public int getScenerySpotDistance()
 	{
