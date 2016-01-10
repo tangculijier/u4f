@@ -70,11 +70,8 @@ public class ScenerySpotDao
 		{
 			e.printStackTrace();
 		} finally
-		{
-			DBTools.closeConn(conn);
-			DBTools.close(rs);
-			DBTools.close(ps);
-
+		{			
+			DBTools.close(conn, ps, rs);
 		}
 		return spots;
 
@@ -166,9 +163,7 @@ public class ScenerySpotDao
 			e.printStackTrace();
 		} finally
 		{
-			DBTools.closeConn(conn);
-			DBTools.close(rs);
-			DBTools.close(ps);
+			DBTools.close(conn, ps, rs);
 
 		}
 		return spots;
@@ -211,9 +206,7 @@ public class ScenerySpotDao
 			e.printStackTrace();
 		} finally
 		{
-			DBTools.closeConn(conn);
-			DBTools.close(rs);
-			DBTools.close(ps);
+			DBTools.close(conn, ps, rs);
 		}
 		return notes;
 	}
@@ -239,10 +232,7 @@ public class ScenerySpotDao
 			e.printStackTrace();
 		} finally
 		{
-			DBTools.closeConn(conn);
-			DBTools.close(rs);
-			DBTools.close(ps);
-
+			DBTools.close(conn, ps, rs);
 		}
 		return photos;
 	}

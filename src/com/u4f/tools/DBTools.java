@@ -40,19 +40,15 @@ import java.sql.Statement;
 			}
 	    	return ps;
 	    }
-	    public static void closeConn(Connection conn){
-	        
-	         if (conn != null) {
+	    public static void close(Connection conn,Statement stmt,ResultSet rs){
+	    	
+	    	if (conn != null) {
 	             try {
 	                 conn.close();
 	             } catch (SQLException e) {
 	                 e.printStackTrace();
 	             }
 	         }
-	             
-	    }
-	    
-	    public static void close(Statement stmt){
 	    	if (stmt != null) {
 	            try {
 	                stmt.close();
@@ -60,18 +56,18 @@ import java.sql.Statement;
 	                e.printStackTrace();
 	            }
 	        }
-
+	    	 if (rs != null) {
+		            try {
+		                rs.close();
+		            } catch (SQLException e) {
+		                e.printStackTrace();
+		            }
+		        }
 	    }
-	    public static void close(ResultSet rs){
-	    	if (rs != null) {
-	            try {
-	                rs.close();
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
+	    
+	  
 
-	    }
+	    
 	         
 	
 	

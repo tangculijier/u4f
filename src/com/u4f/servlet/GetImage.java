@@ -75,9 +75,7 @@ public class GetImage extends HttpServlet {
 			System.out.println("Found some error : " + ex);
 		} finally {
 
-			DBTools.closeConn(conn);
-			DBTools.close(rs);
-			DBTools.close(ps);
+			DBTools.close(conn, ps, rs);
 		}
 	}
 
