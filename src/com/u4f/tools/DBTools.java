@@ -20,7 +20,7 @@ import java.sql.Statement;
 	    		
 			    Class.forName("com.mysql.jdbc.Driver");
 				System.out.println("驱动加载");
-	    		conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/travel","root","hourui");
+	    		conn= DriverManager.getConnection("jdbc:mysql://localhost:3306/travel","root","");
 	    		System.out.println("连接数据库");
 	    	}catch(Exception se){   
 	    	    System.out.println("fail");   

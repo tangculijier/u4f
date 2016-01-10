@@ -55,16 +55,16 @@ import java.util.Map;
 	        Double mpdLng = Double.parseDouble((degree * Math.cos(latitude * (Math.PI / 180))+"").replace("-", ""));
 	        Double dpmLng = 1 / mpdLng;
 	        Double radiusLng = dpmLng * raidusMile;
-	        //获取最小经度
+	       
 	        Double minLat = longitude - radiusLng;
-	        // 获取最大经度
+	        
 	        Double maxLat = longitude + radiusLng;
 	          
 	        Double dpmLat = 1 / degree;
 	        Double radiusLat = dpmLat * raidusMile;
-	        // 获取最小纬度
+	       
 	        Double minLng = latitude - radiusLat;
-	        // 获取最大纬度
+	       
 	        Double maxLng = latitude + radiusLat;
 	          
 	        map.put("minLat", minLat+"");

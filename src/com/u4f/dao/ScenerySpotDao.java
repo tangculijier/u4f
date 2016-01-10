@@ -77,7 +77,7 @@ public class ScenerySpotDao {
 
 	public List<ScenerySpot> getNearScenerySpot(Double latitude,Double longtitude){
 		ScenerySpotDao dao=new ScenerySpotDao ();
-		String raidus="0.0001";
+		String raidus="1000";
 		
 		List<ScenerySpot> spots=new ArrayList<ScenerySpot>();
 		
@@ -137,6 +137,11 @@ public class ScenerySpotDao {
 				spot.setScenerySpotName(name);
 				spot.setScenerySpotTrans(scenerySpotTrans);
 				
+			//	String la=spot.getScenerySpotLat()+"";
+			//	String lb=spot.getScenerySpotLong()+"";
+				double distance=Double.parseDouble(MapDistance.getDistance(latitude+"", longtitude+"", spot.getScenerySpotLat()+"", spot.getScenerySpotLong()+""));
+				System.out.println("distance:"+distance);
+				spot.setScenerySpotDistance(distance);
 				spots.add(spot);
 				System.out.println("ccc");
 			}

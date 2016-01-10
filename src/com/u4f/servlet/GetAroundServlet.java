@@ -40,10 +40,10 @@ public class GetAroundServlet extends HttpServlet {
 		List<ScenerySpot> list=new ArrayList<ScenerySpot>();
 		
 		ScenerySpotDao dao=new ScenerySpotDao();
-		//list=dao.getNearScenerySpot(myLng, myLati);
-		list=dao.getAllScenerySpot();
+		//list=dao.getNearScenerySpot(myLng,myLati);
+		list=dao.getNearScenerySpot(myLati,myLng);
+		//list=dao.getAllScenerySpot();
 		JSONArray array = JSONArray.fromObject(list);
-		 //list=dao.getAllScenerySpot();
 		for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i));
 		}
@@ -52,11 +52,6 @@ public class GetAroundServlet extends HttpServlet {
 		}
 		out.flush();
 		out.close();
-		
-	
-		
-		
-		
 
 	}
 

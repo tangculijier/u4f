@@ -17,12 +17,12 @@ public class ScenerySpot
 	private String ScenerySpotLab2;
 	private String ScenerySpotLab3;
 	private Blob ScenerySpotPicture;
-	private int scenerySpotDistance;
-	public int getScenerySpotDistance()
+	private double scenerySpotDistance;
+	public double getScenerySpotDistance()
 	{
 		return scenerySpotDistance;
 	}
-	public void setScenerySpotDistance(int scenerySpotDistance)
+	public void setScenerySpotDistance(double scenerySpotDistance)
 	{
 		this.scenerySpotDistance = scenerySpotDistance;
 	}
@@ -134,19 +134,10 @@ public class ScenerySpot
 				+ ", ScenerySpotLab1=" + ScenerySpotLab1 + ", ScenerySpotLab2="
 				+ ScenerySpotLab2 + ", ScenerySpotLab3=" + ScenerySpotLab3
 				+ ", ScenerySpotPicture=" + ScenerySpotPicture
-				+ ", getScenerySpotId()=" + getScenerySpotId()
-				+ ", getScenerySpotName()=" + getScenerySpotName()
-				+ ", getScenerySpotAddress()=" + getScenerySpotAddress()
-				+ ", getScenerySpotLat()=" + getScenerySpotLat()
-				+ ", getScenerySpotLong()=" + getScenerySpotLong()
-				+ ", getBelongCityId()=" + getBelongCityId()
-				+ ", getScenerySpotTicket()=" + getScenerySpotTicket()
-				+ ", getScenerySpotTrans()=" + getScenerySpotTrans()
-				+ ", getScenerySpotLab1()=" + getScenerySpotLab1()
-				+ ", getScenerySpotLab2()=" + getScenerySpotLab2()
-				+ ", getScenerySpotLab3()=" + getScenerySpotLab3()
-				+ ", getScenerySpotPicture()=" + getScenerySpotPicture()
-				+  "]";
+				+ ", scenerySpotDistance=" + scenerySpotDistance + "]";
+	
+
+	
 	}
 	
 	
