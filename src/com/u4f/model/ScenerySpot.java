@@ -4,19 +4,56 @@ import java.sql.Blob;
 
 public class ScenerySpot
 {
-	//hah
+	/**
+	 * 景点id
+	 */
 	private int ScenerySpotId;
+	/**
+	 * 景点名字 如：兴庆公园
+	 */
 	private String ScenerySpotName;
+	/**
+	 * 景点地址 如：西安市碑林区咸宁西路111号
+	 */
 	private String ScenerySpotAddress;
+	/**
+	 * 景点纬度 如：34.1343
+	 */
 	private double ScenerySpotLat;
+	/**
+	 * 景点经度 如：108.3456
+	 */
 	private double ScenerySpotLong;
+	/**
+	 * 所属城市id
+	 */
 	private int belongCityId;
-	private double ScenerySpotTicket;
+	/**
+	 * 景点开放时间 如：早8:30-12:30 晚12:00  可为null
+	 */
+	private String ScenerySpotOpenTime;
+	/**
+	 * 景点门票信息 如：学生票半价30元 可为null
+	 */
+	private String ScenerySpotTicket;
+	/**
+	 * 景点交通信息 如：45路、108路 可为null
+	 */
 	private String ScenerySpotTrans;
+	/**
+	 * 景点标签1 如：公园
+	 */
 	private String ScenerySpotLab1;
 	private String ScenerySpotLab2;
 	private String ScenerySpotLab3;
+	/**
+	 * 景点图片
+	 */
 	private Blob ScenerySpotPicture;
+	
+	/**
+	 * 景点与当前用户之间的距离 如：100
+	 */
 	private int scenerySpotDistance;
 	public int getScenerySpotDistance()
 	{
@@ -74,11 +111,17 @@ public class ScenerySpot
 	{
 		this.belongCityId = belongCityId;
 	}
-	public double getScenerySpotTicket()
+	public String getScenerySpotOpenTime() {
+		return ScenerySpotOpenTime;
+	}
+	public void setScenerySpotOpenTime(String scenerySpotOpenTime) {
+		ScenerySpotOpenTime = scenerySpotOpenTime;
+	}
+	public String getScenerySpotTicket()
 	{
 		return ScenerySpotTicket;
 	}
-	public void setScenerySpotTicket(double scenerySpotTicket)
+	public void setScenerySpotTicket(String scenerySpotTicket)
 	{
 		ScenerySpotTicket = scenerySpotTicket;
 	}
