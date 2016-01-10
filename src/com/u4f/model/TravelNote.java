@@ -7,7 +7,7 @@ import java.util.List;
 public class TravelNote {
 
 	private int travelNoteId;
-	private int userId;
+	private User user;
 	private int ScenerySpotId;
 	private String travelNoteTitle;
 	private String travelNoteContent;
@@ -28,11 +28,11 @@ public class TravelNote {
 	public void setTravelNoteId(int travelNoteId) {
 		this.travelNoteId = travelNoteId;
 	}
-	public int getUserId() {
-		return userId;
+	public User getUserId() {
+		return user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserId(User user) {
+		this.user = user;
 	}
 	public int getScenerySpotId() {
 		return ScenerySpotId;
@@ -61,8 +61,8 @@ public class TravelNote {
 	@Override
 	public String toString()
 	{
-		return "TravelNote [travelNoteId=" + travelNoteId + ", userId="
-				+ userId + ", ScenerySpotId=" + ScenerySpotId
+		return "TravelNote [travelNoteId=" + travelNoteId + ", user="
+				+ user + ", ScenerySpotId=" + ScenerySpotId
 				+ ", travelNoteTitle=" + travelNoteTitle
 				+ ", travelNoteContent=" + travelNoteContent + ", publicTime="
 				+ publicTime + ", travelPhotos=" + travelPhotos + "]";

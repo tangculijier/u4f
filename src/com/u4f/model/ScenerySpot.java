@@ -50,15 +50,15 @@ public class ScenerySpot
 	 * 景点图片
 	 */
 	private Blob ScenerySpotPicture;
-	private double scenerySpotDistance;	
+	private String scenerySpotDistance;	
 	/**
 	 * 景点与当前用户之间的距离 如：100
 	 */
-	public double getScenerySpotDistance()
+	public String getScenerySpotDistance()
 	{
 		return scenerySpotDistance;
 	}
-	public void setScenerySpotDistance(double scenerySpotDistance)
+	public void setScenerySpotDistance(String scenerySpotDistance)
 	{
 		this.scenerySpotDistance = scenerySpotDistance;
 	}

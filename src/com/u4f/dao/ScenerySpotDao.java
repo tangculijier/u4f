@@ -149,10 +149,10 @@ public class ScenerySpotDao
 
 				// String la=spot.getScenerySpotLat()+"";
 				// String lb=spot.getScenerySpotLong()+"";
-				double distance = Double.parseDouble(MapDistance.getDistance(
+				String distance =MapDistance.getDistance(
 						latitude + "", longtitude + "",
 						spot.getScenerySpotLat() + "",
-						spot.getScenerySpotLong() + ""));
+						spot.getScenerySpotLong() + "");
 				System.out.println("distance:" + distance);
 				spot.setScenerySpotDistance(distance);
 				spots.add(spot);
@@ -167,74 +167,6 @@ public class ScenerySpotDao
 
 		}
 		return spots;
-	}
-
-	public List<TravelNote> getTravelNote(int ScenerySpotId)
-	{
-		List<TravelNote> notes = new ArrayList<TravelNote>();
-		ScenerySpotDao dao = new ScenerySpotDao();
-		conn = DBTools.getConn(conn);
-		String sql = "select * from travelNote where scenerySpotId="
-				+ ScenerySpotId;
-		try
-		{
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while (rs.next())
-			{
-				int travelNoteId = rs.getInt("travelNoteId");
-				int userId=rs.getInt("userId");
-				String travelNoteTitle=rs.getString("travelNoteTitle");
-				String travelNoteContent=rs.getString("travelNoteContent");
-				Timestamp publicTime=rs.getTimestamp("publicTime");
-				TravelNote note=new TravelNote();
-				
-				note.setTravelNoteId(travelNoteId);
-				note.setUserId(userId);
-				note.setTravelNoteTitle(travelNoteTitle);
-				note.setTravelNoteContent(travelNoteContent);
-				note.setPublicTime(publicTime);
-				
-				note.setTravelPhotos(dao.getPhotos(note.getTravelNoteId()));
-				notes.add(note);
-				
-			}
-			
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		} finally
-		{
-			DBTools.close(conn, ps, rs);
-		}
-		return notes;
-	}
-	
-	public List<Blob> getPhotos(int travelNoteId)
-	{
-		List<Blob> photos = new ArrayList<Blob>();
-		String sql = "select image from travelPhoto where travelNoteId="
-				+ travelNoteId;
-		conn = DBTools.getConn(conn);
-		try
-		{
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while (rs.next())
-			{
-				Blob image = rs.getBlob("image");
-				photos.add(image);
-			}
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		} finally
-		{
-			DBTools.close(conn, ps, rs);
-		}
-		return photos;
 	}
 
 }
