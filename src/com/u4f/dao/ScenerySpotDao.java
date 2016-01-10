@@ -34,7 +34,7 @@ public class ScenerySpotDao {
 				double scenerySpotLat=rs.getDouble("ScenerySpotLat");
 				double scenerySpotLong=rs.getDouble("ScenerySpotLong");
 				int belongCityId=rs.getInt("belongCityId");
-			    double scenerySpotTicket=rs.getDouble("ScenerySpotTicket");
+			    String scenerySpotTicket=rs.getString("ScenerySpotTicket");
 				String scenerySpotTrans=rs.getString("ScenerySpotTrans");
 				String scenerySpotLab1=rs.getString("ScenerySpotLab1");
 			    String scenerySpotLab2=rs.getString("ScenerySpotLab2");
@@ -115,7 +115,7 @@ public class ScenerySpotDao {
 				double scenerySpotLat=rs.getDouble("ScenerySpotLat");
 				double scenerySpotLong=rs.getDouble("ScenerySpotLong");
 				int belongCityId=rs.getInt("belongCityId");
-			    double scenerySpotTicket=rs.getDouble("ScenerySpotTicket");
+			    String scenerySpotTicket=rs.getString("ScenerySpotTicket");
 				String scenerySpotTrans=rs.getString("ScenerySpotTrans");
 				String scenerySpotLab1=rs.getString("ScenerySpotLab1");
 			    String scenerySpotLab2=rs.getString("ScenerySpotLab2");
