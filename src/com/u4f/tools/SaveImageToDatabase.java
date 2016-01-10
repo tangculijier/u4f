@@ -57,13 +57,13 @@ public class SaveImageToDatabase {
 
 		 FileInputStream fis;
 	    	conn = DBTools.getConn(conn);
-	     //   String sql="insert into ScenerySpot(ScenerySpotPicture) values(?) where ScenerySpotId=2";
-	    	String sql="update ScenerySpot set ScenerySpotPicture=? where ScenerySpotId=2";
+	        String sql="insert into travelPhoto(image) values(?)";
+	    //	String sql="update ScenerySpot set ScenerySpotPicture=? where ScenerySpotId=2";
 	                  
 	        try {
 	          
 	        	
-	            File image = new File("/Users/hourui/Downloads/大唐芙蓉园.JPG");           
+	            File image = new File("/Users/hourui/Downloads/兴庆公园1.png");           
 	            ps = conn.prepareStatement(sql);
 	           // ps.setString(1, "michael");
 	       
