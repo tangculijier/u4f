@@ -94,13 +94,13 @@ public class ScenerySpotDao
 		map = MapDistance.getAround(lati, longti, raidus);
 
 		double minLat = MapDistance.take_effect_number(Double.parseDouble(map
-				.get("minLat")));
+				.get("minLat")),6);
 		double maxLat = MapDistance.take_effect_number(Double.parseDouble(map
-				.get("maxLat")));
+				.get("maxLat")),6);
 		double minLong = MapDistance.take_effect_number(Double.parseDouble(map
-				.get("minLng")));
+				.get("minLng")),6);
 		double maxLong = MapDistance.take_effect_number(Double.parseDouble(map
-				.get("maxLng")));
+				.get("maxLng")),6);
 
 		System.out.println("minlat:" + minLat + ",maxLat:" + maxLat
 				+ ",minLong:" + minLong + ",maxLng:" + maxLong);
