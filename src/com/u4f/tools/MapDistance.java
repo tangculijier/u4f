@@ -56,16 +56,29 @@ import java.util.Map;
 	        Double dpmLng = 1 / mpdLng;
 	        Double radiusLng = dpmLng * raidusMile;
 	       
-	        Double minLat = longitude - radiusLng;
+//	        Double minLat = longitude - radiusLng;
+//	        
+//	        Double maxLat = longitude + radiusLng;
+//	          
+//	        Double dpmLat = 1 / degree;
+//	        Double radiusLat = dpmLat * raidusMile;
+//	       
+//	        Double minLng = latitude - radiusLat;
+//	       
+//	        Double maxLng = latitude + radiusLat;
 	        
-	        Double maxLat = longitude + radiusLng;
+	        
+	        Double minLat = latitude - radiusLng;
+	        
+	        Double maxLat = latitude + radiusLng;
 	          
 	        Double dpmLat = 1 / degree;
 	        Double radiusLat = dpmLat * raidusMile;
 	       
-	        Double minLng = latitude - radiusLat;
+	        Double minLng = longitude - radiusLat;
 	       
-	        Double maxLng = latitude + radiusLat;
+	        Double maxLng = longitude + radiusLat;
+	        
 	          
 	        map.put("minLat", minLat+"");
 	        map.put("maxLat", maxLat+"");
