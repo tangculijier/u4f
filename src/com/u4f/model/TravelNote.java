@@ -11,15 +11,15 @@ public class TravelNote {
 	private String travelNoteTitle;
 	private String travelNoteContent;
 	private String publicTime;
-	private List<String>  travelPhotos;
+	private List<String>  travelPhotosURL;
 	
 	public List<String> getTravelPhotos()
 	{
-		return travelPhotos;
+		return travelPhotosURL;
 	}
 	public void setTravelPhotos(List<String> travelPhotos)
 	{
-		this.travelPhotos = travelPhotos;
+		this.travelPhotosURL = travelPhotos;
 	}
 	public int getTravelNoteId() {
 		return travelNoteId;
@@ -64,7 +64,7 @@ public class TravelNote {
 				+ user + ", ScenerySpotId=" + ScenerySpotId
 				+ ", travelNoteTitle=" + travelNoteTitle
 				+ ", travelNoteContent=" + travelNoteContent + ", publicTime="
-				+ publicTime + ", travelPhotos=" + travelPhotos + "]";
+				+ publicTime + ", travelPhotos=" + travelPhotosURL + "]";
 	}
 	
 	

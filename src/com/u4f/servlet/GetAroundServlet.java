@@ -41,7 +41,7 @@ public class GetAroundServlet extends HttpServlet {
 		
 		ScenerySpotDao dao=new ScenerySpotDao();
 		//list=dao.getNearScenerySpot(myLng,myLati);
-		list=dao.getNearScenerySpot(myLati,myLng);
+		list=dao.getNearScenerySpotDao(myLati,myLng);
 		//list=dao.getAllScenerySpot();
 		
 		JSONArray array = JSONArray.fromObject(list);

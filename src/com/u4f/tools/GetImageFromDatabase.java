@@ -22,44 +22,45 @@ public class GetImageFromDatabase {
     	
     	
     }
-    	public static void test(){
-        FileOutputStream fos;
-        conn = DBTools.getConn(conn);
-        try {
-        	
-            File imageout = new File("/Users/hourui/Downloads/aaaaaaaa.JPG");
-            fos=new FileOutputStream(imageout);
-             
-           
-            ps = conn
-                    .prepareStatement("select image from testimg where name=?");
-            ps.setString(1, "michael");
-            rs=ps.executeQuery();
-            rs.next();
-            Blob image_blob=rs.getBlob("image");
-            InputStream is=image_blob.getBinaryStream();
-             
-             int ch = 0;  
-                try {  
-                    while((ch=is.read()) != -1){  
-                        fos.write(ch);  
-                    }  
-                } catch (IOException e1) {  
-                    e1.printStackTrace();  
-                } finally{  
-                               
-                    fos.close();  
-                    is.close();  
-                }
-        }
-        // catch if found any exception during rum time.
-        catch (Exception ex) {
-            System.out.println("Found some error : " + ex);
-        } finally {
-        	DBTools.close(conn, ps, rs);
-        }
-    }
 }
+//    	public static void test(){
+//        FileOutputStream fos;
+//        conn = DBTools.getConn(conn);
+//        try {
+//        	
+//            File imageout = new File("/Users/hourui/Downloads/aaaaaaaa.JPG");
+//            fos=new FileOutputStream(imageout);
+//             
+//           
+//            ps = conn
+//                    .prepareStatement("select image from testimg where name=?");
+//            ps.setString(1, "michael");
+//            rs=ps.executeQuery();
+//            rs.next();
+//            Blob image_blob=rs.getBlob("image");
+//            InputStream is=image_blob.getBinaryStream();
+//             
+//             int ch = 0;  
+//                try {  
+//                    while((ch=is.read()) != -1){  
+//                        fos.write(ch);  
+//                    }  
+//                } catch (IOException e1) {  
+//                    e1.printStackTrace();  
+//                } finally{  
+//                               
+//                    fos.close();  
+//                    is.close();  
+//                }
+//        }
+//        // catch if found any exception during rum time.
+//        catch (Exception ex) {
+//            System.out.println("Found some error : " + ex);
+//        } finally {
+//        	DBTools.close(conn, ps, rs);
+//        }
+//    }
+//}
     	
 //    	public static byte[] getScenerySpotImage(int id){
 //    		

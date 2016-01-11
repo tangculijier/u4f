@@ -13,7 +13,7 @@ public class Utest {
 	//@Test
 	public void testConn(){
 	
-		conn=DBTools.getConn(conn);
+		conn=DBTools.getConn();
 		System.out.println("sss");
 		
 		

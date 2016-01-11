@@ -40,12 +40,14 @@ public class GetTravelNote extends HttpServlet
 		PrintWriter out = response.getWriter();
 		int scenerySpotId=Integer.parseInt(request.getParameter("scenerySpotId"));
 		TravelNoteDao dao=new TravelNoteDao();
-		List<TravelNote> notes=dao.getTravelNote(scenerySpotId);
+		List<TravelNote> notes=dao.getTravelNoteDao(scenerySpotId);
 		JSONArray array = JSONArray.fromObject(notes);
-		for(int i=0;i<notes.size();i++){
+		for(int i=0;i<notes.size();i++)
+		{
 			System.out.println(notes.get(i).getTravelNoteId()+"....."+notes.get(i).getTravelNoteTitle()+"....."+notes.get(i).getTravelNoteContent());
 		}
-		if(array.size()!=0){
+		if(array.size()!=0)
+		{
 			out.print(array);
 		}
 		out.flush();
