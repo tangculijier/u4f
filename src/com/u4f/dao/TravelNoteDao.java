@@ -1,10 +1,8 @@
 package com.u4f.dao;
 
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +39,8 @@ public class TravelNoteDao
 				System.out.println("....id..."+travelNoteId);
 				int userId=rs.getInt("userId");
 				int level=rs.getInt("user.level");
-				System.out.println("...level.."+level);
-				
-				String name=rs.getString("user.username");
-				
-				
+				System.out.println("...level.."+level);				
+				String name=rs.getString("user.username");				
 				System.out.println("...usrename.."+name);
 				String travelNoteTitle=rs.getString("travelNote.travelNoteTitle");
 				System.out.println("...title.."+travelNoteTitle);
@@ -62,21 +57,17 @@ public class TravelNoteDao
 				note.setTravelNoteContent(travelNoteContent);
 				note.setPublicTime(publicTime);
 				
-				note.setTravelPhotos(dao.getPhotos(note.getTravelNoteId()));
+				List<String> photos=new ArrayList<String>();
+			//	photos=dao.getPhotos(travelNoteId);
+			//	note.setTravelPhotos(photos);
 				User user=new User();
 				user.setUserId(userId);
 				user.setLevel(level);
 				user.setUsername(name);
-			
-				
-				
-				System.out.println("...test..");
-				
-				
 				
 				note.setUser(user);
 				notes.add(note);
-				
+				System.out.println("notes.size:"+notes.size());
 			}
 			
 
@@ -90,19 +81,22 @@ public class TravelNoteDao
 		return notes;
 	}
 	
-	public List<Blob> getPhotos(int travelNoteId)
+	public List<String> getPhotos(int travelNoteId)
 	{
-		List<Blob> photos = new ArrayList<Blob>();
-		String sql = "select image from travelPhoto where travelNoteId="
-				+ travelNoteId;
+		List<String> photos = new ArrayList<String>();
+		String sql = "select image from travelPhoto where travelNoteId="+ travelNoteId;
+		System.out.println(sql);
+		if(conn==null)
+		{
 		conn = DBTools.getConn(conn);
+		}
 		try
 		{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next())
 			{
-				Blob image = rs.getBlob("image");
+				String image = rs.getString("image");
 				photos.add(image);
 			}
 

@@ -1,6 +1,5 @@
 package com.u4f.model;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,13 +11,13 @@ public class TravelNote {
 	private String travelNoteTitle;
 	private String travelNoteContent;
 	private String publicTime;
-	private List<Blob>  travelPhotos;
+	private List<String>  travelPhotos;
 	
-	public List<Blob> getTravelPhotos()
+	public List<String> getTravelPhotos()
 	{
 		return travelPhotos;
 	}
-	public void setTravelPhotos(List<Blob> travelPhotos)
+	public void setTravelPhotos(List<String> travelPhotos)
 	{
 		this.travelPhotos = travelPhotos;
 	}

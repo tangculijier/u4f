@@ -1,13 +1,12 @@
 package com.u4f.model;
 
-import java.sql.Blob;
 
 public class Travelphoto
 {
 
 	private int travelPhotoId;
 	private int travelNoteId;
-	private Blob image;
+	private String image;
 	public int getTravelPhotoId()
 	{
 		return travelPhotoId;
@@ -24,11 +23,11 @@ public class Travelphoto
 	{
 		this.travelNoteId = travelNoteId;
 	}
-	public Blob getImage()
+	public String getImage()
 	{
 		return image;
 	}
-	public void setImage(Blob image)
+	public void setImage(String image)
 	{
 		this.image = image;
 	}

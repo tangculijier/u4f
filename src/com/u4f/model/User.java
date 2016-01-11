@@ -1,6 +1,5 @@
 package com.u4f.model;
 
-import java.sql.Blob;
 
 public class User
 {
@@ -10,7 +9,7 @@ public class User
 	private String password;
 	private int level; //用户级别
 	private int score;// 用户积分
-	private Blob userAvatar; //用户头像
+	private String userAvatar; //用户头像
 	public int getUserId()
 	{
 		return userId;
@@ -51,11 +50,11 @@ public class User
 	{
 		this.score = score;
 	}
-	public Blob getUserAvatar()
+	public String getUserAvatar()
 	{
 		return userAvatar;
 	}
-	public void setUserAvatar(Blob userAvatar)
+	public void setUserAvatar(String userAvatar)
 	{
 		this.userAvatar = userAvatar;
 	}

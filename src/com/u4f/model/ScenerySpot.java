@@ -49,11 +49,15 @@ public class ScenerySpot
 	/**
 	 * 景点图片
 	 */
-	private Blob ScenerySpotPicture;
-	private String scenerySpotDistance;	
+	private String ScenerySpotPicture;
+	
 	/**
 	 * 景点与当前用户之间的距离 如：100
 	 */
+	
+	private String scenerySpotDistance;	
+	
+	
 	public String getScenerySpotDistance()
 	{
 		return scenerySpotDistance;
@@ -156,11 +160,11 @@ public class ScenerySpot
 	{
 		ScenerySpotLab3 = scenerySpotLab3;
 	}
-	public Blob getScenerySpotPicture()
+	public String getScenerySpotPicture()
 	{
 		return ScenerySpotPicture;
 	}
-	public void setScenerySpotPicture(Blob scenerySpotPicture)
+	public void setScenerySpotPicture(String scenerySpotPicture)
 	{
 		ScenerySpotPicture = scenerySpotPicture;
 	}
