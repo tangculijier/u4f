@@ -1,7 +1,5 @@
 package com.u4f.model;
 
-import java.sql.Blob;
-
 public class ScenerySpot
 {
 	/**

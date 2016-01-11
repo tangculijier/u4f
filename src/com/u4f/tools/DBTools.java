@@ -23,7 +23,7 @@ public class DBTools
 
 	private static final String DataBase_NAME = "travel";
 	private static final String DataBase_USER = "root";
-	private static final String DataBase_PASSWORD = "hourui";
+	private static final String DataBase_PASSWORD = "";
 
 	public static Connection getConn()
 	{

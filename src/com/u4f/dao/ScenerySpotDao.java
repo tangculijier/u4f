@@ -1,17 +1,10 @@
 package com.u4f.dao;
 
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.u4f.model.ScenerySpot;
-import com.u4f.model.TravelNote;
 import com.u4f.tools.DBTools;
 import com.u4f.tools.MapDistance;
 
@@ -22,10 +15,7 @@ public class ScenerySpotDao
 	{
 		ScenerySpotDao dao = new ScenerySpotDao();
 		List<ScenerySpot> spots = DBTools.getAllScenerySpot();
-		return spots;
-
-				
-		
+		return spots;	
 
 	}
 

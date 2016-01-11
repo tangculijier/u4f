@@ -1,13 +1,9 @@
 package com.u4f.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.u4f.model.TravelNote;
-import com.u4f.model.User;
 import com.u4f.tools.DBTools;
 
 public class TravelNoteDao

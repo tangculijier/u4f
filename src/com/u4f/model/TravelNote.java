@@ -1,6 +1,6 @@
 package com.u4f.model;
 
-import java.sql.Timestamp;
+
 import java.util.List;
 
 public class TravelNote {
@@ -66,9 +66,4 @@ public class TravelNote {
 				+ ", travelNoteContent=" + travelNoteContent + ", publicTime="
 				+ publicTime + ", travelPhotos=" + travelPhotosURL + "]";
 	}
-	
-	
-	
-	
-	
 }
