@@ -11,7 +11,7 @@ public class TravelNote {
 	private int ScenerySpotId;
 	private String travelNoteTitle;
 	private String travelNoteContent;
-	private Timestamp publicTime;
+	private String publicTime;
 	private List<Blob>  travelPhotos;
 	
 	public List<Blob> getTravelPhotos()
@@ -28,10 +28,10 @@ public class TravelNote {
 	public void setTravelNoteId(int travelNoteId) {
 		this.travelNoteId = travelNoteId;
 	}
-	public User getUserId() {
+	public User getUser() {
 		return user;
 	}
-	public void setUserId(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	public int getScenerySpotId() {
@@ -52,10 +52,10 @@ public class TravelNote {
 	public void setTravelNoteContent(String travelNoteContent) {
 		this.travelNoteContent = travelNoteContent;
 	}
-	public Timestamp getPublicTime() {
+	public String getPublicTime() {
 		return publicTime;
 	}
-	public void setPublicTime(Timestamp publicTime) {
+	public void setPublicTime(String publicTime) {
 		this.publicTime = publicTime;
 	}
 	@Override
