@@ -162,7 +162,7 @@ public class DBTools
 				String scenerySpotLab1 = rs.getString("ScenerySpotLab1");
 				String scenerySpotLab2 = rs.getString("ScenerySpotLab2");
 				String scenerySpotLab3 = rs.getString("ScenerySpotLab3");
-				// String ScenerySpotPicture=rs.getString("");
+				String scenerySpotPicture=rs.getString("ScenerySpotPicture");
 
 				ScenerySpot spot = new ScenerySpot();
 				spot.setBelongCityId(belongCityId);
@@ -177,7 +177,7 @@ public class DBTools
 				spot.setScenerySpotLong(scenerySpotLong);
 				spot.setScenerySpotName(name);
 				spot.setScenerySpotTrans(scenerySpotTrans);
-
+				spot.setScenerySpotPicture(scenerySpotPicture);
 				// String la=spot.getScenerySpotLat()+"";
 				// String lb=spot.getScenerySpotLong()+"";
 				String distance =MapDistance.getDistance(
