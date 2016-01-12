@@ -4,6 +4,7 @@ package com.u4f.dao;
 import java.util.List;
 
 import com.u4f.model.TravelNote;
+import com.u4f.model.User;
 import com.u4f.tools.DBTools;
 
 public class TravelNoteDao
@@ -23,4 +24,13 @@ public class TravelNoteDao
 		return photos;
 	}
 
+	public void uploadTravelNote(TravelNote note){
+		DBTools.insertTravelNote(note);
+	}
+
+	public User findUserById(int userId)
+	{
+		User user=DBTools.findUserById(userId);
+		return user;
+	}
 }

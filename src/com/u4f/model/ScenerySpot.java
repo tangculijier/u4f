@@ -5,23 +5,23 @@ public class ScenerySpot
 	/**
 	 * 景点id
 	 */
-	private int ScenerySpotId;
+	private int scenerySpotId;
 	/**
 	 * 景点名字 如：兴庆公园
 	 */
-	private String ScenerySpotName;
+	private String scenerySpotName;
 	/**
 	 * 景点地址 如：西安市碑林区咸宁西路111号
 	 */
-	private String ScenerySpotAddress;
+	private String scenerySpotAddress;
 	/**
 	 * 景点纬度 如：34.1343
 	 */
-	private double ScenerySpotLat;
+	private double scenerySpotLat;
 	/**
 	 * 景点经度 如：108.3456
 	 */
-	private double ScenerySpotLong;
+	private double scenerySpotLong;
 	/**
 	 * 所属城市id
 	 */
@@ -29,25 +29,25 @@ public class ScenerySpot
 	/**
 	 * 景点开放时间 如：早8:30-12:30 晚12:00  可为null
 	 */
-	private String ScenerySpotOpenTime;
+	private String scenerySpotOpenTime;
 	/**
 	 * 景点门票信息 如：学生票半价30元 可为null
 	 */
-	private String ScenerySpotTicket;
+	private String scenerySpotTicket;
 	/**
 	 * 景点交通信息 如：45路、108路 可为null
 	 */
-	private String ScenerySpotTrans;
+	private String scenerySpotTrans;
 	/**
 	 * 景点标签1 如：公园
 	 */
-	private String ScenerySpotLab1;
-	private String ScenerySpotLab2;
-	private String ScenerySpotLab3;
+	private String scenerySpotLab1;
+	private String scenerySpotLab2;
+	private String scenerySpotLab3;
 	/**
 	 * 景点图片
 	 */
-	private String ScenerySpotPicture;
+	private String scenerySpotPicture;
 	
 	/**
 	 * 景点与当前用户之间的距离 如：100
@@ -66,43 +66,43 @@ public class ScenerySpot
 	}
 	public int getScenerySpotId()
 	{
-		return ScenerySpotId;
+		return scenerySpotId;
 	}
 	public void setScenerySpotId(int scenerySpotId)
 	{
-		ScenerySpotId = scenerySpotId;
+		scenerySpotId = scenerySpotId;
 	}
 	public String getScenerySpotName()
 	{
-		return ScenerySpotName;
+		return scenerySpotName;
 	}
 	public void setScenerySpotName(String scenerySpotName)
 	{
-		ScenerySpotName = scenerySpotName;
+		scenerySpotName = scenerySpotName;
 	}
 	public String getScenerySpotAddress()
 	{
-		return ScenerySpotAddress;
+		return scenerySpotAddress;
 	}
 	public void setScenerySpotAddress(String scenerySpotAddress)
 	{
-		ScenerySpotAddress = scenerySpotAddress;
+		scenerySpotAddress = scenerySpotAddress;
 	}
 	public double getScenerySpotLat()
 	{
-		return ScenerySpotLat;
+		return scenerySpotLat;
 	}
 	public void setScenerySpotLat(double scenerySpotLat)
 	{
-		ScenerySpotLat = scenerySpotLat;
+		scenerySpotLat = scenerySpotLat;
 	}
 	public double getScenerySpotLong()
 	{
-		return ScenerySpotLong;
+		return scenerySpotLong;
 	}
 	public void setScenerySpotLong(double scenerySpotLong)
 	{
-		ScenerySpotLong = scenerySpotLong;
+		scenerySpotLong = scenerySpotLong;
 	}
 	public int getBelongCityId()
 	{
@@ -113,71 +113,71 @@ public class ScenerySpot
 		this.belongCityId = belongCityId;
 	}
 	public String getScenerySpotOpenTime() {
-		return ScenerySpotOpenTime;
+		return scenerySpotOpenTime;
 	}
 	public void setScenerySpotOpenTime(String scenerySpotOpenTime) {
-		ScenerySpotOpenTime = scenerySpotOpenTime;
+		scenerySpotOpenTime = scenerySpotOpenTime;
 	}
 	public String getScenerySpotTicket()
 	{
-		return ScenerySpotTicket;
+		return scenerySpotTicket;
 	}
 	public void setScenerySpotTicket(String scenerySpotTicket)
 	{
-		ScenerySpotTicket = scenerySpotTicket;
+		scenerySpotTicket = scenerySpotTicket;
 	}
 	public String getScenerySpotTrans()
 	{
-		return ScenerySpotTrans;
+		return scenerySpotTrans;
 	}
 	public void setScenerySpotTrans(String scenerySpotTrans)
 	{
-		ScenerySpotTrans = scenerySpotTrans;
+		scenerySpotTrans = scenerySpotTrans;
 	}
 	public String getScenerySpotLab1()
 	{
-		return ScenerySpotLab1;
+		return scenerySpotLab1;
 	}
 	public void setScenerySpotLab1(String scenerySpotLab1)
 	{
-		ScenerySpotLab1 = scenerySpotLab1;
+		scenerySpotLab1 = scenerySpotLab1;
 	}
 	public String getScenerySpotLab2()
 	{
-		return ScenerySpotLab2;
+		return scenerySpotLab2;
 	}
 	public void setScenerySpotLab2(String scenerySpotLab2)
 	{
-		ScenerySpotLab2 = scenerySpotLab2;
+		scenerySpotLab2 = scenerySpotLab2;
 	}
 	public String getScenerySpotLab3()
 	{
-		return ScenerySpotLab3;
+		return scenerySpotLab3;
 	}
 	public void setScenerySpotLab3(String scenerySpotLab3)
 	{
-		ScenerySpotLab3 = scenerySpotLab3;
+		scenerySpotLab3 = scenerySpotLab3;
 	}
 	public String getScenerySpotPicture()
 	{
-		return ScenerySpotPicture;
+		return scenerySpotPicture;
 	}
 	public void setScenerySpotPicture(String scenerySpotPicture)
 	{
-		ScenerySpotPicture = scenerySpotPicture;
+		scenerySpotPicture = scenerySpotPicture;
 	}
 	@Override
 	public String toString() {
-		return "ScenerySpot [ScenerySpotId=" + ScenerySpotId
-				+ ", ScenerySpotName=" + ScenerySpotName
-				+ ", ScenerySpotAddress=" + ScenerySpotAddress
-				+ ", ScenerySpotLat=" + ScenerySpotLat + ", ScenerySpotLong="
-				+ ScenerySpotLong + ", belongCityId=" + belongCityId
-				+ ", ScenerySpotTicket=" + ScenerySpotTicket
-				+ ", ScenerySpotTrans=" + ScenerySpotTrans
-				+ ", ScenerySpotLab1=" + ScenerySpotLab1 + ", ScenerySpotLab2="
-				+ ScenerySpotLab2 + ", ScenerySpotLab3=" + ScenerySpotLab3
-				+ ", ScenerySpotPicture=" + ScenerySpotPicture
+		return "ScenerySpot [ScenerySpotId=" + scenerySpotId
+				+ ", ScenerySpotName=" + scenerySpotName
+				+ ", ScenerySpotAddress=" + scenerySpotAddress
+				+ ", ScenerySpotLat=" + scenerySpotLat + ", ScenerySpotLong="
+				+ scenerySpotLong + ", belongCityId=" + belongCityId
+				+ ", ScenerySpotTicket=" + scenerySpotTicket
+				+ ", ScenerySpotTrans=" + scenerySpotTrans
+				+ ", ScenerySpotLab1=" + scenerySpotLab1 + ", ScenerySpotLab2="
+				+ scenerySpotLab2 + ", ScenerySpotLab3=" + scenerySpotLab3
+				+ ", ScenerySpotPicture=" + scenerySpotPicture
 				+ ", scenerySpotDistance=" + scenerySpotDistance + "]";
 	
 

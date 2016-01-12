@@ -6,6 +6,7 @@ import java.util.List;
 public class TravelNote {
 
 	private int travelNoteId;
+	private int userId;
 	private User user;
 	private int ScenerySpotId;
 	private String travelNoteTitle;
@@ -65,5 +66,13 @@ public class TravelNote {
 				+ ", travelNoteTitle=" + travelNoteTitle
 				+ ", travelNoteContent=" + travelNoteContent + ", publicTime="
 				+ publicTime + ", travelPhotos=" + travelPhotosURL + "]";
+	}
+	public int getUserId()
+	{
+		return userId;
+	}
+	public void setUserId(int userId)
+	{
+		this.userId = userId;
 	}
 }

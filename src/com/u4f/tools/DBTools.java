@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.u4f.model.Facility;
 import com.u4f.model.ScenerySpot;
 import com.u4f.model.TravelNote;
 import com.u4f.model.User;
@@ -286,6 +287,89 @@ public class DBTools
 			//DBTools.close();
 		}
 		return photos;
+	}
+
+    // 上传攻略
+	public static void insertTravelNote(TravelNote note)
+	{
+		String sql="insert into travelNote(userId,travelNoteTitle,travelNoteContent,publicTime,scenerySpotId) values(?,?,?,?,?)";
+		System.out.println(sql);
+		try{
+			conn=getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, note.getUserId());
+			ps.setString(2, note.getTravelNoteTitle());
+			ps.setString(3, note.getTravelNoteContent());
+			ps.setString(4, note.getPublicTime());
+			ps.setInt(5, note.getScenerySpotId());
+			System.out.println(sql);
+			ps.execute();
+			System.out.println("upload success!");
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			close();
+		}
+	}
+
+   //根据用户名查找用户
+	public static User findUserById(int userId)
+	{
+		String sql="select * from user where userId="+userId;
+		User user=new User();
+		try
+		{
+			conn = getConn();
+			ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				user.setLevel(rs.getInt("level"));
+				user.setUsername(rs.getString("username"));
+			}		
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			close();
+		}	
+		
+		return user;
+	}
+
+
+	public static List<Facility> findFacilitys(int id, int type)
+	{
+		String sql="select * from facility where scenerySpotId="+id+" and facilityType="+type;
+		System.out.println(sql);
+		List<Facility> list=new ArrayList<Facility>();
+		conn=getConn();
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				int facilityId=rs.getInt("facilityId");
+				String facilityName=rs.getString("facilityName");
+				double facilityLng=rs.getDouble("facilityLng");
+			   double facilityLati=rs.getDouble("facilityLati");
+			   
+			   Facility f=new Facility();
+			   f.setFacilityId(facilityId);
+			   f.setFacilityName(facilityName);
+			   f.setFacilityLng(facilityLng);
+			   f.setFacilityLati(facilityLati);
+			   f.setFacilityType(type);
+			   f.setScenerySpotId(id);
+			   list.add(f);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close();
+		}
+		
+		return list;
 	}
 
 }
