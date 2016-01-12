@@ -70,7 +70,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotId(int scenerySpotId)
 	{
-		scenerySpotId = scenerySpotId;
+		this.scenerySpotId = scenerySpotId;
 	}
 	public String getScenerySpotName()
 	{
@@ -78,7 +78,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotName(String scenerySpotName)
 	{
-		scenerySpotName = scenerySpotName;
+		this.scenerySpotName = scenerySpotName;
 	}
 	public String getScenerySpotAddress()
 	{
@@ -86,7 +86,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotAddress(String scenerySpotAddress)
 	{
-		scenerySpotAddress = scenerySpotAddress;
+		this.scenerySpotAddress = scenerySpotAddress;
 	}
 	public double getScenerySpotLat()
 	{
@@ -94,7 +94,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotLat(double scenerySpotLat)
 	{
-		scenerySpotLat = scenerySpotLat;
+		this.scenerySpotLat = scenerySpotLat;
 	}
 	public double getScenerySpotLong()
 	{
@@ -102,7 +102,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotLong(double scenerySpotLong)
 	{
-		scenerySpotLong = scenerySpotLong;
+		this.scenerySpotLong = scenerySpotLong;
 	}
 	public int getBelongCityId()
 	{
@@ -116,7 +116,7 @@ public class ScenerySpot
 		return scenerySpotOpenTime;
 	}
 	public void setScenerySpotOpenTime(String scenerySpotOpenTime) {
-		scenerySpotOpenTime = scenerySpotOpenTime;
+		this.scenerySpotOpenTime = scenerySpotOpenTime;
 	}
 	public String getScenerySpotTicket()
 	{
@@ -124,7 +124,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotTicket(String scenerySpotTicket)
 	{
-		scenerySpotTicket = scenerySpotTicket;
+		this.scenerySpotTicket = scenerySpotTicket;
 	}
 	public String getScenerySpotTrans()
 	{
@@ -132,7 +132,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotTrans(String scenerySpotTrans)
 	{
-		scenerySpotTrans = scenerySpotTrans;
+		this.scenerySpotTrans = scenerySpotTrans;
 	}
 	public String getScenerySpotLab1()
 	{
@@ -140,7 +140,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotLab1(String scenerySpotLab1)
 	{
-		scenerySpotLab1 = scenerySpotLab1;
+		this.scenerySpotLab1 = scenerySpotLab1;
 	}
 	public String getScenerySpotLab2()
 	{
@@ -148,7 +148,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotLab2(String scenerySpotLab2)
 	{
-		scenerySpotLab2 = scenerySpotLab2;
+		this.scenerySpotLab2 = scenerySpotLab2;
 	}
 	public String getScenerySpotLab3()
 	{
@@ -156,7 +156,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotLab3(String scenerySpotLab3)
 	{
-		scenerySpotLab3 = scenerySpotLab3;
+		this.scenerySpotLab3 = scenerySpotLab3;
 	}
 	public String getScenerySpotPicture()
 	{
@@ -164,7 +164,7 @@ public class ScenerySpot
 	}
 	public void setScenerySpotPicture(String scenerySpotPicture)
 	{
-		scenerySpotPicture = scenerySpotPicture;
+		this.scenerySpotPicture = scenerySpotPicture;
 	}
 	@Override
 	public String toString() {

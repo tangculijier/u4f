@@ -152,18 +152,18 @@ public class DBTools
 			while (rs.next())
 			{
 				// System.out.println("bbb");
-				int id = rs.getInt("ScenerySpotId");
-				String name = rs.getString("ScenerySpotName");
-				String adress = rs.getString("ScenerySpotAddress");
-				double scenerySpotLat = rs.getDouble("ScenerySpotLat");
-				double scenerySpotLong = rs.getDouble("ScenerySpotLong");
+				int id = rs.getInt("scenerySpotId");
+				String name = rs.getString("scenerySpotName");
+				String adress = rs.getString("scenerySpotAddress");
+				double scenerySpotLat = rs.getDouble("scenerySpotLat");
+				double scenerySpotLong = rs.getDouble("scenerySpotLong");
 				int belongCityId = rs.getInt("belongCityId");
-				String scenerySpotTicket = rs.getString("ScenerySpotTicket");
-				String scenerySpotTrans = rs.getString("ScenerySpotTrans");
-				String scenerySpotLab1 = rs.getString("ScenerySpotLab1");
-				String scenerySpotLab2 = rs.getString("ScenerySpotLab2");
-				String scenerySpotLab3 = rs.getString("ScenerySpotLab3");
-				String scenerySpotPicture=rs.getString("ScenerySpotPicture");
+				String scenerySpotTicket = rs.getString("scenerySpotTicket");
+				String scenerySpotTrans = rs.getString("scenerySpotTrans");
+				String scenerySpotLab1 = rs.getString("scenerySpotLab1");
+				String scenerySpotLab2 = rs.getString("scenerySpotLab2");
+				String scenerySpotLab3 = rs.getString("scenerySpotLab3");
+				String scenerySpotPicture=rs.getString("scenerySpotPicture");
 
 				ScenerySpot spot = new ScenerySpot();
 				spot.setBelongCityId(belongCityId);

@@ -22,7 +22,7 @@ public class ScenerySpotDao
 	public List<ScenerySpot> getNearScenerySpotDao(Double latitude,Double longtitude)
 	{
 		
-		String raidus = "1000";
+		String raidus = "1000000";
 
 		Map<String, String> map = new HashMap<String, String>();
 		String lati = latitude + "";
@@ -43,8 +43,8 @@ public class ScenerySpotDao
 
 		// String
 		// sql="select * from ScenerySpot where ScenerySpotLat between ? and ? and ScenerySpotLong between ? and ? ";
-		String sql = "select * from ScenerySpot where ScenerySpotLat between "
-				+ minLat + " and " + maxLat + " and ScenerySpotLong between "
+		String sql = "select * from ScenerySpot where scenerySpotLat between "
+				+ minLat + " and " + maxLat + " and scenerySpotLong between "
 				+ minLong + " and " + maxLong;
 		System.out.println(sql);
 		
