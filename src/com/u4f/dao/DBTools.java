@@ -1,4 +1,4 @@
-package com.u4f.tools;
+package com.u4f.dao;
 
 
 import java.sql.DriverManager;
@@ -14,6 +14,7 @@ import com.u4f.model.Facility;
 import com.u4f.model.ScenerySpot;
 import com.u4f.model.TravelNote;
 import com.u4f.model.User;
+import com.u4f.tools.MapDistance;
 
 	
 public class DBTools
@@ -32,7 +33,7 @@ public class DBTools
 		{
 
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+DataBase_NAME, DataBase_USER,DataBase_PASSWORD);
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/travel?useUnicode=true&characterEncoding=utf-8", DataBase_USER,DataBase_PASSWORD);
 			System.out.println("连接数据库成功");
 		} catch (Exception se)
 		{

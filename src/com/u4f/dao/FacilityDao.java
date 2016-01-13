@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.u4f.model.Facility;
-import com.u4f.tools.DBTools;
 
 public class FacilityDao
 {

@@ -1,4 +1,4 @@
-package com.u4f.servlet;
+package com.u4f.other;
 
 import java.io.IOException;
 
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import  javax.servlet.ServletOutputStream;
-import com.u4f.tools.DBTools;
-import com.u4f.tools.GetImageFromDatabase;
+
+import com.u4f.dao.DBTools;
 
 
 //public class GetImage extends HttpServlet {

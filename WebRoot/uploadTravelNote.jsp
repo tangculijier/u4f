@@ -39,7 +39,8 @@ function checkPhoto(){
    System.out.println("jsp上的time:"+publicTime);
    %>
    
-   <form action="UploadTravelPhotos" method="post"  enctype="multipart/form-data"> 
+  <!--   <form action="UploadTravelPhotos" method="post"  enctype="multipart/form-data"> -->
+   <form action="UploadTravelNote" method="post">
    <input type="text" name="scenerySpotId" value="11">
    <input type="text" name="userId" value="1">
    <br>

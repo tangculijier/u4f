@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.u4f.model.ScenerySpot;
-import com.u4f.tools.DBTools;
 import com.u4f.tools.MapDistance;
 
 public class ScenerySpotDao

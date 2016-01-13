@@ -1,4 +1,4 @@
-package com.u4f.tools;
+package com.u4f.other;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.u4f.tools.DBTools;
+import com.u4f.dao.DBTools;
 
 
 public class GetImageFromDatabase {

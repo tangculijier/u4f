@@ -1,4 +1,4 @@
-package com.u4f.tools;
+package com.u4f.other;
 public class Location {  
     private double latitude;  
     private double longitude;  

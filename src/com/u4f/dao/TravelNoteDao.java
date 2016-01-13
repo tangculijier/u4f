@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.u4f.model.TravelNote;
 import com.u4f.model.User;
-import com.u4f.tools.DBTools;
 
 public class TravelNoteDao
 {

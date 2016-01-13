@@ -34,8 +34,16 @@ public class UploadTravelNote extends HttpServlet
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
+		
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		
 		int scenerySpotId = 0;
@@ -77,13 +85,6 @@ System.out.println(note.getUserId()+","+note.getPublicTime()+","+note.getScenery
 
 		out.flush();
 		out.close();
-	}
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
-	{
-
-		
 	}
 
 	public void init() throws ServletException

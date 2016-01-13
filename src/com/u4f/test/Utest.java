@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 import org.junit.Test;
 
-import com.u4f.tools.DBTools;
+import com.u4f.dao.DBTools;
 import com.u4f.tools.MapDistance;
 
 public class Utest {

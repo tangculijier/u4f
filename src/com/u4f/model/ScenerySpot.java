@@ -180,8 +180,6 @@ public class ScenerySpot
 				+ ", ScenerySpotPicture=" + scenerySpotPicture
 				+ ", scenerySpotDistance=" + scenerySpotDistance + "]";
 	
-
-	
 	}
 	
 	
