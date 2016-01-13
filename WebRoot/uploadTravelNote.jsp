@@ -32,12 +32,6 @@ function checkPhoto(){
   
   <body>
   <!--   <form action="UploadTravelNote">-->
-   <% 
-   Timestamp publicTime=new Timestamp(System.currentTimeMillis());
-   //request.setAttribute("publicTime",publicTime);
-   session.setAttribute("publicTime",publicTime);
-   System.out.println("jsp上的time:"+publicTime);
-   %>
    
   <!--   <form action="UploadTravelPhotos" method="post"  enctype="multipart/form-data"> -->
    <form action="UploadTravelNote" method="post">

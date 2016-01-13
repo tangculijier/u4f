@@ -25,7 +25,7 @@ public class DBTools
 
 	private static final String DataBase_NAME = "travel";
 	private static final String DataBase_USER = "root";
-	private static final String DataBase_PASSWORD = "";
+	private static final String DataBase_PASSWORD = "hourui";
 
 	public static Connection getConn()
 	{
@@ -291,8 +291,9 @@ public class DBTools
 	}
 
     // 上传攻略
-	public static void insertTravelNote(TravelNote note)
+	public static boolean insertTravelNote(TravelNote note)
 	{
+		boolean res = false;
 		String sql="insert into travelNote(userId,travelNoteTitle,travelNoteContent,publicTime,scenerySpotId) values(?,?,?,?,?)";
 		System.out.println(sql);
 		try{
@@ -304,14 +305,24 @@ public class DBTools
 			ps.setString(4, note.getPublicTime());
 			ps.setInt(5, note.getScenerySpotId());
 			System.out.println(sql);
-			ps.execute();
-			System.out.println("upload success!");
+			int updateRow  = ps.executeUpdate();
+			if(updateRow != 0)
+			{
+				res = true;
+				System.out.println("upload success!");
+			}
+			else
+			{	
+				System.out.println("upload falied!");
+			}
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}finally{
 			close();
 		}
+		return res;
 	}
 
    //根据用户名查找用户

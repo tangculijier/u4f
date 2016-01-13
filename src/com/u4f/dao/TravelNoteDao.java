@@ -23,8 +23,8 @@ public class TravelNoteDao
 		return photos;
 	}
 
-	public void uploadTravelNote(TravelNote note){
-		DBTools.insertTravelNote(note);
+	public boolean uploadTravelNote(TravelNote note){
+		return DBTools.insertTravelNote(note);
 	}
 
 	public User findUserById(int userId)

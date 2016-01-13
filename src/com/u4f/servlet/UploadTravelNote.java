@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.u4f.dao.TravelNoteDao;
 import com.u4f.model.TravelNote;
 import com.u4f.model.User;
+import com.u4f.tools.DateUtil;
 
 public class UploadTravelNote extends HttpServlet
 {
@@ -40,16 +41,15 @@ public class UploadTravelNote extends HttpServlet
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
 		
 		int scenerySpotId = 0;
 		if (request.getParameter("scenerySpotId") != null)
-			scenerySpotId = Integer.parseInt(request
-					.getParameter("scenerySpotId"));
+		{
+			scenerySpotId = Integer.parseInt(request.getParameter("scenerySpotId"));
+
+		}
 
 		int userId = 0;
 		if (request.getParameter("userId") != null)
@@ -57,20 +57,19 @@ public class UploadTravelNote extends HttpServlet
 			userId = Integer.parseInt(request.getParameter("userId"));
 		}
 		System.out.println("userId:"+userId);
+		
 		String travelNoteContent = request.getParameter("travelNoteContent");
 		System.out.println("travelNoteContent:"+travelNoteContent);
 		
 		//List<String> travelNotePhotos = request.getParameter("travelNotePhotos");
 		
-		Timestamp publicTime =(Timestamp)request.getSession().getAttribute("publicTime");
-		System.out.println("publicTime:"+publicTime);
        String travelNoteTitle=request.getParameter("travelNoteTitle");
        
 		TravelNoteDao dao = new TravelNoteDao();
 		TravelNote note = new TravelNote();
 		note.setUserId(userId);
-		java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
-		note.setPublicTime(format.format(publicTime));
+		
+		note.setPublicTime(DateUtil.getNowTime());
 		note.setScenerySpotId(scenerySpotId);
 		note.setTravelNoteContent(travelNoteContent);
 		note.setTravelNoteTitle(travelNoteTitle);
@@ -79,10 +78,11 @@ public class UploadTravelNote extends HttpServlet
 		// 查找user相关信息
 
 		//user = dao.findUserById(userId);
-System.out.println(note.getUserId()+","+note.getPublicTime()+","+note.getScenerySpotId()+","+note.getTravelNoteContent()+
+		System.out.println(note.getUserId()+","+note.getPublicTime()+","+note.getScenerySpotId()+","+note.getTravelNoteContent()+
 		","+note.getTravelNoteTitle());
-		dao.uploadTravelNote(note);
-
+		boolean res = dao.uploadTravelNote(note);
+		PrintWriter out = response.getWriter();
+		out.print(res);
 		out.flush();
 		out.close();
 	}
