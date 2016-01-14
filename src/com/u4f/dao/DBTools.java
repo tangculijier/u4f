@@ -13,6 +13,7 @@ import java.util.List;
 import com.u4f.model.Facility;
 import com.u4f.model.ScenerySpot;
 import com.u4f.model.TravelNote;
+import com.u4f.model.TravelPhoto;
 import com.u4f.model.User;
 import com.u4f.tools.MapDistance;
 
@@ -25,7 +26,7 @@ public class DBTools
 
 	private static final String DataBase_NAME = "travel";
 	private static final String DataBase_USER = "root";
-	private static final String DataBase_PASSWORD = "hourui";
+	private static final String DataBase_PASSWORD = "";
 
 	public static Connection getConn()
 	{
@@ -383,5 +384,40 @@ public class DBTools
 		
 		return list;
 	}
+
+
+	public static boolean insertTravelPhoto(TravelPhoto photo)
+	{
+		boolean res=false;
+		String sql="insert into travelPhoto(travelNoteId,photoName,image) values(?,?,?)";
+		System.out.println(sql);
+		try{
+			conn=getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, photo.getTravelNoteId());
+			
+			ps.setString(2,photo.getPhotoName());
+			ps.setString(3, photo.getImageURL());
+			int updateRow=ps.executeUpdate();
+			if(updateRow>0){
+				res = true;
+				System.out.println("upload photo success!");
+			}
+			else
+			{	
+				System.out.println("upload photo falied!");
+			}
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}finally{
+				close();
+			}
+		
+		return res;
+	}
+
+
+	
 
 }

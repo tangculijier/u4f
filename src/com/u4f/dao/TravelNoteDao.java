@@ -16,7 +16,7 @@ public class TravelNoteDao
 		return notes;
 	}
 	
-	public List<String> getPhotosByTravelNoteIdDao(int travelNoteId)
+	public List<String> getPhotosByTravelNoteId(int travelNoteId)
 	{
 		List<String> photos = DBTools.getPhotosByTravelNoteId(travelNoteId);
 		

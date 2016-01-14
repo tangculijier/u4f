@@ -31,10 +31,10 @@ function checkPhoto(){
   </head>
   
   <body>
-  <!--   <form action="UploadTravelNote">-->
+  <!--   <form action="UploadTravelNote" method="post">-->
    
-  <!--   <form action="UploadTravelPhotos" method="post"  enctype="multipart/form-data"> -->
-   <form action="UploadTravelNote" method="post">
+    <form action="UploadTravelPhotos" method="post"  enctype="multipart/form-data">
+
    <input type="text" name="scenerySpotId" value="11">
    <input type="text" name="userId" value="1">
    <br>
@@ -43,14 +43,18 @@ function checkPhoto(){
    内容：
    <br>
    <textarea name="travelNoteContent" style="width:200px;height:80px;">这里写内容</textarea>
-   <br>
-  
-   添加照片：
-   
-   <input type="file" name="fileName" size="20"/>
-  
-     <input type="submit" value="上传"/>
-    
+ 
+    <table align="center">
+     <tr>  <td>请选择要上传的照片：</td> 
+      <td><input type="file"id="p"name="file1"size="20"/></td>
+       </tr>  
+       <tr align="center">  
+       <td align="center"colspan="2"> 
+        <input type="text"name="photo"value="123"/> 
+         <input type="submit"value="上传"/> 
+         </td> 
+         </tr> 
+         </table> 
     
   </form>  
   </body>
