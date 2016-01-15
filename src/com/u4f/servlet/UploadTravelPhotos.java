@@ -21,6 +21,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.u4f.dao.TravelPhotoDao;
 import com.u4f.model.TravelPhoto;
+import com.u4f.tools.SystemUtil;
 
 
 
@@ -80,8 +81,8 @@ public class UploadTravelPhotos extends HttpServlet
 	        System.out.println("uri"+uri);
 	     
 	     //   String upload= uri+"/WebRoot/uploadImg/";
-	        String upload= "/Users/hourui/Workspaces/MyEclipse 10/u4f/WebRoot/uploadImg/";
-	      
+	     //   String upload= "/Users/hourui/Workspaces/MyEclipse 10/u4f/WebRoot/uploadImg/";
+	      String upload=SystemUtil.getUploadPah();
 	        System.out.println(upload);
 	        if(!new File(upload).isDirectory())   
 	     	   new File(upload).mkdirs(); 

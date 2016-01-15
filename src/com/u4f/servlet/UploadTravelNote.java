@@ -74,10 +74,7 @@ public class UploadTravelNote extends HttpServlet
 		note.setTravelNoteContent(travelNoteContent);
 		note.setTravelNoteTitle(travelNoteTitle);
 		
-		//User user = new User();
-		// 查找user相关信息
-
-		//user = dao.findUserById(userId);
+		
 		System.out.println(note.getUserId()+","+note.getPublicTime()+","+note.getScenerySpotId()+","+note.getTravelNoteContent()+
 		","+note.getTravelNoteTitle());
 		boolean res = dao.uploadTravelNote(note);

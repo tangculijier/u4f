@@ -18,14 +18,22 @@ public class Utest {
 		
 		
 	}
-	@Test
+	//@Test
 	public void testDistance(){
 		System.out.println("DSD");
-		String lat1="34.249385";
-		String lat2="34.257119";
-		String long1="108.993403";
-		String long2="108.989982";
+		String lat1="34.257072";
+		String lat2="34.257070";
+		String long1="108.990022";
+		String long2="108.990020";
 		String str=MapDistance.getDistance(lat1, long1, lat2, long2);
 		System.out.println(str);
 	}
+	
+	@Test
+	public void testA(){
+		
+		System.out.println("===========os.name:"+System.getProperties().getProperty("os.name")); 
+	}
+	
+	
 }

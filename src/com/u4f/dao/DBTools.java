@@ -11,11 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.u4f.model.Facility;
+import com.u4f.model.Scenery;
 import com.u4f.model.ScenerySpot;
+import com.u4f.model.Signature;
 import com.u4f.model.TravelNote;
 import com.u4f.model.TravelPhoto;
 import com.u4f.model.User;
 import com.u4f.tools.MapDistance;
+import com.u4f.tools.SystemUtil;
 
 	
 public class DBTools
@@ -26,7 +29,9 @@ public class DBTools
 
 	private static final String DataBase_NAME = "travel";
 	private static final String DataBase_USER = "root";
-	private static final String DataBase_PASSWORD = "";
+	
+	
+	private static final String DataBase_PASSWORD =SystemUtil.getMySqlPwd();
 
 	public static Connection getConn()
 	{
@@ -417,7 +422,103 @@ public class DBTools
 		return res;
 	}
 
+	public static Scenery findSceneryById(int sceneryId){
+		
+		String sql="select * from scenery where sceneryId="+sceneryId;
+		conn=getConn();
+		Scenery s=new Scenery();
+		try
+		{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				//int sceneRyId=rs.getInt("sceneryId");
+				String sceneryName=rs.getString("sceneryName");
+				double sceneryLng=Double.parseDouble(rs.getString("sceneryLng"));
+				double sceneryLati=Double.parseDouble(rs.getString("sceneryLati"));
+				String sceneryDescribe="";
+				if(rs.getString("sceneryDescribe")!=null)
+				sceneryDescribe=rs.getString("sceneryDescribe");	
+				
+				
+				s.setSceneryDescribe(sceneryDescribe);
+				s.setSceneryId(sceneryId);
+				s.setSceneryName(sceneryName);
+				s.setSceneryLng(sceneryLng);
+				s.setSceneryLati(sceneryLati);
+				
+				
+			}
+			
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			close();
+		}	
+		return s;
+	}
 
-	
-
+	public static boolean isInSignScope(double longtitude, double latitude,int sceneryId)
+	{
+		//设定景点范围距离为100米
+		double fixDistance=100;
+		boolean res=false;
+		Scenery s=findSceneryById(sceneryId);
+//	  System.out.println("latitude:"+latitude+",longtitude:"+longtitude);
+			double lng2=s.getSceneryLng();
+			double lati2=s.getSceneryLati();
+	//	System.out.println("lati2:"+lati2+",lng2:"+lng2);
+			
+		String distance=MapDistance.getDistance(latitude+"", longtitude+"", s.getSceneryLati()+"", s.getSceneryLng()+"");
+		System.out.println("distance:"+distance);
+		//如果结果返回千米
+		if(distance.indexOf("k")!=-1){
+			res=false;
+		}
+		else
+		{
+		//结果返回为米, 去掉单位进行比较
+		distance=distance.substring(0,distance.length()-1);
+		if(Double.parseDouble(distance)>fixDistance){
+			System.out.println("用户不在当前景点范围内，不能签到");
+			res= false;
+		}else{
+			System.out.println("用户在当前景点范围内，可以签到");
+			res=true;
+		}
+		}
+		return res;
+	}
+	public static boolean insertIntoSignature(Signature s){
+		boolean res=false;
+		String sql="insert into signature(signatureTime,signatureLng,signatureLati,userId,sceneryId) values(?,?,?,?,?)";
+		try{
+			conn=getConn();
+			ps=conn.prepareStatement(sql);
+			ps.setString(1,s.getSignatureTime());
+			ps.setString(2, s.getSignatureLng()+"");
+			ps.setString(3, s.getSignatureLati()+"");
+			ps.setInt(4, s.getUserId());
+			ps.setInt(5, s.getSceneryId());
+			
+		    int updateRow=ps.executeUpdate();
+			if(updateRow>0){
+				System.out.println("插入成功");
+				res=true;
+			}
+			else{
+				System.out.println("插入失败");
+			}
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally{
+			close();
+		}
+		return res;
+	}
 }

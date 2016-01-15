@@ -9,7 +9,7 @@ import com.u4f.model.User;
 public class TravelNoteDao
 {
 
-	public List<TravelNote> getTravelNoteDao(int scenerySpotId)
+	public List<TravelNote> getTravelNote(int scenerySpotId)
 	{
 		List<TravelNote> notes = DBTools.getTravelNote(scenerySpotId);
 	

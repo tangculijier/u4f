@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>My JSP 'SignIn.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -18,20 +19,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
   </head>
   
   <body>
-   <a href="GetAroundServlet?latitude=34.2494&longtitude=108.9934"><h3>获取附近景点</h3></a>
-   <br>
-   
-   <a href="GetTravelNote?scenerySpotId=11">获取该景点信息</a>
-   <br>
-   
-   <a href="uploadTravelNote.jsp">上传游记</a>
-   
-   <a href="FindFacility?scenerySpotId=11&facilityType=1">查找facility</a>
-   
-   <a href="SignIn.jsp">测试签到</a>
-   
+   <form action="SignInServlet" method="post">
+   <input type="text" name="userId" value="2"><br>
+   <input type="text" name="sceneryId" value="1"><br>
+   lng:<input type="text" name="longtitude" value="" > 
+   lati:<input type="text" name="latitude" value="" > 
+   <input type="submit" value="绛惧埌"> 
+   </form>
   </body>
 </html>
