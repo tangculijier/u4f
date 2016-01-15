@@ -24,11 +24,7 @@ public class SystemUtil
 	public static boolean isMac()
 	{
 		String systemName = System.getProperties().getProperty("os.name");
-		if (systemVersion.equals(systemName))
-		{
-			return true;
-		} else
-			return false;
+		return systemVersion.equals(systemName);
 	}
 	
 	public static String getMySqlPwd()
