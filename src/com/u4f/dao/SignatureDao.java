@@ -5,6 +5,7 @@ import java.util.List;
 import com.u4f.model.Scenery;
 import com.u4f.model.ScenerySpot;
 import com.u4f.model.Signature;
+import com.u4f.model.SignedSpot;
 
 public class SignatureDao
 {
@@ -21,7 +22,7 @@ public class SignatureDao
 	 return DBTools.insertIntoSignature(s);
  }
 
-public List<ScenerySpot> getMySignedScenerySpot(int userId)
+public List<SignedSpot> getMySignedScenerySpot(int userId)
 {
 	
 	return DBTools.FindMySignedScenerySpot(userId);

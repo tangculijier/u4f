@@ -15,6 +15,7 @@ import net.sf.json.JSONArray;
 import com.u4f.dao.SignatureDao;
 import com.u4f.model.ScenerySpot;
 import com.u4f.model.Signature;
+import com.u4f.model.SignedSpot;
 import com.u4f.tools.MyConst;
 
 public class GetMySignedScenerySpot extends HttpServlet
@@ -55,7 +56,7 @@ public class GetMySignedScenerySpot extends HttpServlet
 		int	userId=request.getParameter("userId") == null ? MyConst.USERID_DEFAULT : Integer.parseInt(request.getParameter("userId"));
 
 		SignatureDao dao=new SignatureDao();
-		List<ScenerySpot> list=new ArrayList<ScenerySpot>();
+		List<SignedSpot> list=new ArrayList<SignedSpot>();
 		list=dao.getMySignedScenerySpot(userId);
 		JSONArray array = JSONArray.fromObject(list);
 		System.out.println(list);

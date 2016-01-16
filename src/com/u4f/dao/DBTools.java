@@ -8,15 +8,18 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.u4f.model.Facility;
 import com.u4f.model.Scenery;
 import com.u4f.model.ScenerySpot;
 import com.u4f.model.Signature;
+import com.u4f.model.SignedSpot;
 import com.u4f.model.TravelNote;
 import com.u4f.model.TravelPhoto;
 import com.u4f.model.User;
+import com.u4f.tools.DateUtil;
 import com.u4f.tools.MapDistance;
 import com.u4f.tools.SystemUtil;
 
@@ -570,44 +573,30 @@ public class DBTools
 	/*
 	 * 得到用户签到过的所有景区
 	 */
-	public static List<ScenerySpot> FindMySignedScenerySpot(int userId)
+	public static List<SignedSpot> FindMySignedScenerySpot(int userId)
 	{
-		String sql="select sceneryspot.* from signature,scenery,sceneryspot where signature.sceneryId=scenery.sceneryId and scenery.scenerySpotId=sceneryspot.scenerySpotId and signature.userId="+userId;
+		String sql="select count(*) as count,sceneryspot.*,signature.signatureTime from signature,scenery,sceneryspot where signature.sceneryId=scenery.sceneryId and scenery.scenerySpotId=sceneryspot.scenerySpotId and signature.userId="+userId;
 		conn=getConn();
-		List<ScenerySpot> spots = new ArrayList<ScenerySpot>();
+		List<SignedSpot> spots = new ArrayList<SignedSpot>();
 		try
 		{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next())
-			{
+			{   int count=rs.getInt("count");
 				int id = rs.getInt("ScenerySpotId");
-				String name = rs.getString("ScenerySpotName");
-				String adress = rs.getString("ScenerySpotAddress");
-				double scenerySpotLat = rs.getDouble("ScenerySpotLat");
-				double scenerySpotLong = rs.getDouble("ScenerySpotLong");
-				int belongCityId = rs.getInt("belongCityId");
-				String scenerySpotTicket = rs.getString("ScenerySpotTicket");
-				String scenerySpotTrans = rs.getString("ScenerySpotTrans");
-				String scenerySpotLab1 = rs.getString("ScenerySpotLab1");
-				String scenerySpotLab2 = rs.getString("ScenerySpotLab2");
-				String scenerySpotLab3 = rs.getString("ScenerySpotLab3");
-				// String ScenerySpotPicture=rs.getString("");
+				String name =rs.getString("ScenerySpotName");
+				String time=DateUtil.getDateOnlyYearMonthDay(rs.getString("signature.signatureTime"));
+				
+				String scenerySpotPicture=rs.getString("scenerySpotPicture");
 
-				ScenerySpot spot = new ScenerySpot();
-				spot.setBelongCityId(belongCityId);
-				spot.setScenerySpotAddress(adress);
-				spot.setBelongCityId(belongCityId);
-				spot.setScenerySpotId(id);
-				spot.setScenerySpotLab1(scenerySpotLab1);
-				spot.setScenerySpotLab2(scenerySpotLab2);
-				spot.setScenerySpotLab3(scenerySpotLab3);
-				spot.setScenerySpotTicket(scenerySpotTicket);
-				spot.setScenerySpotLat(scenerySpotLat);
-				spot.setScenerySpotLong(scenerySpotLong);
-				spot.setScenerySpotName(name);
-				spot.setScenerySpotTrans(scenerySpotTrans);
-
+				SignedSpot spot = new SignedSpot();
+				
+				spot.setSpotId(id);
+				spot.setSpotName(name);
+				spot.setSpotAvatar(scenerySpotPicture);
+                spot.setSignedTime(time);
+                spot.setSignedCounts(count);
 				spots.add(spot);
 
 			}
