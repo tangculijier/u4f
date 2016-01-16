@@ -355,7 +355,9 @@ public class DBTools
 		return user;
 	}
 
-
+/*
+ * 根据类型以及所在景区查找当前景区内的所有餐厅，厕所，商店。
+ */
 	public static List<Facility> findFacilitys(int id, int type)
 	{
 		String sql="select * from facility where scenerySpotId="+id+" and facilityType="+type;
@@ -390,7 +392,9 @@ public class DBTools
 		return list;
 	}
 
-
+/*
+ * 在游记中上传照片
+ */
 	public static boolean insertTravelPhoto(TravelPhoto photo)
 	{
 		boolean res=false;
@@ -459,7 +463,9 @@ public class DBTools
 		}	
 		return s;
 	}
-
+/*
+ * 判断用户是否在某景点的签到范围内
+ */
 	public static boolean isInSignScope(double longtitude, double latitude,int sceneryId)
 	{
 		//设定景点范围距离为100米
@@ -522,7 +528,9 @@ public class DBTools
 		return res;
 	}
 
-
+/*
+ * 得到某景区内所有景点
+ */
 	public static List<Scenery> findAllScenery(int scenerySpotId)
 	{
 		List<Scenery> ss=new ArrayList<Scenery>();
@@ -557,5 +565,136 @@ public class DBTools
 			close();
 		}
 		return ss;
+	}
+
+	/*
+	 * 得到用户签到过的所有景区
+	 */
+	public static List<ScenerySpot> FindMySignedScenerySpot(int userId)
+	{
+		String sql="select sceneryspot.* from signature,scenery,sceneryspot where signature.sceneryId=scenery.sceneryId and scenery.scenerySpotId=sceneryspot.scenerySpotId and signature.userId="+userId;
+		conn=getConn();
+		List<ScenerySpot> spots = new ArrayList<ScenerySpot>();
+		try
+		{
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next())
+			{
+				int id = rs.getInt("ScenerySpotId");
+				String name = rs.getString("ScenerySpotName");
+				String adress = rs.getString("ScenerySpotAddress");
+				double scenerySpotLat = rs.getDouble("ScenerySpotLat");
+				double scenerySpotLong = rs.getDouble("ScenerySpotLong");
+				int belongCityId = rs.getInt("belongCityId");
+				String scenerySpotTicket = rs.getString("ScenerySpotTicket");
+				String scenerySpotTrans = rs.getString("ScenerySpotTrans");
+				String scenerySpotLab1 = rs.getString("ScenerySpotLab1");
+				String scenerySpotLab2 = rs.getString("ScenerySpotLab2");
+				String scenerySpotLab3 = rs.getString("ScenerySpotLab3");
+				// String ScenerySpotPicture=rs.getString("");
+
+				ScenerySpot spot = new ScenerySpot();
+				spot.setBelongCityId(belongCityId);
+				spot.setScenerySpotAddress(adress);
+				spot.setBelongCityId(belongCityId);
+				spot.setScenerySpotId(id);
+				spot.setScenerySpotLab1(scenerySpotLab1);
+				spot.setScenerySpotLab2(scenerySpotLab2);
+				spot.setScenerySpotLab3(scenerySpotLab3);
+				spot.setScenerySpotTicket(scenerySpotTicket);
+				spot.setScenerySpotLat(scenerySpotLat);
+				spot.setScenerySpotLong(scenerySpotLong);
+				spot.setScenerySpotName(name);
+				spot.setScenerySpotTrans(scenerySpotTrans);
+
+				spots.add(spot);
+
+			}
+
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		} finally
+		{			
+			close();
+		}
+		return spots;
+		
+	}
+
+
+	public static List<Scenery> FindMySignedScenery(int userId,int scenerySpotId)
+	{
+		String sql="select scenery.* from signature,scenery where signature.sceneryId=scenery.sceneryId and signature.userId="+userId+" and scenery.scenerySpotId="+scenerySpotId+" order by signature.signatureTime DESC";
+		System.out.println(sql);
+		conn=getConn();
+		List<Scenery>  ss=new ArrayList<Scenery>();
+		
+		try
+		{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				int sceneryId=rs.getInt("sceneryId");
+				String sceneryName=rs.getString("sceneryName");
+				double sceneryLng=Double.parseDouble(rs.getString("sceneryLng"));
+				double sceneryLati=Double.parseDouble(rs.getString("sceneryLati"));
+				String sceneryDescribe="";
+				if(rs.getString("sceneryDescribe")!=null)
+				sceneryDescribe=rs.getString("sceneryDescribe");	
+				
+				Scenery s=new Scenery();
+				s.setSceneryDescribe(sceneryDescribe);
+				s.setSceneryId(sceneryId);
+				s.setSceneryName(sceneryName);
+				s.setSceneryLng(sceneryLng);
+				s.setSceneryLati(sceneryLati);
+				s.setScenerySpotId(scenerySpotId);
+				ss.add(s);
+								
+			}			
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			close();
+		}	
+		
+		return ss;
+		
+	}
+
+
+	public static boolean isSigned(int userId, int sceneryId)
+	{
+		boolean res=false;
+		String sql="select * from signature where userId="+userId+" and sceneryId="+sceneryId;
+		conn=getConn();
+		
+		try
+		{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				Signature s=new Signature();
+				s.setSceneryId(rs.getInt("sceneryId"));
+				s.setSignatureId(rs.getInt("signatureId"));
+				s.setSignatureLati(rs.getDouble("signatureLati"));
+				s.setSignatureLng(rs.getDouble("signatureLng"));
+				s.setSignatureTime(rs.getString("signatureTime"));
+				s.setUserId(userId);
+				System.out.println(s);
+				res=true;
+			}			
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+			close();
+		}	
+		return res;
 	}
 }

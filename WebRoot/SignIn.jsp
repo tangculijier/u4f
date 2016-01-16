@@ -24,8 +24,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    <form action="SignInServlet" method="post">
-   <input type="text" name="userId" value="2"><br>
-   <input type="text" name="sceneryId" value="1"><br>
+   用户Id 默认为2<input type="text" name="userId" value="2"><br>
+   小景点Id <input type="text" name="sceneryId" value="1"><br>
    lng:<input type="text" name="longtitude" value="" > 
    lati:<input type="text" name="latitude" value="" > 
    <input type="submit" value="签到"> 

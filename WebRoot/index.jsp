@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <a href="GetAroundServlet?latitude=34.2494&longtitude=108.9934"><h3>获取附近景点</h3></a>
+   <a href="GetAroundServlet?latitude=34.2494&longtitude=108.9934">默认参数latitude=34.2494&longtitude=108.9934，获取附近景点</a>
    <br>
    
    <a href="GetTravelNote?scenerySpotId=11">获取该景点信息</a>
@@ -30,13 +30,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <a href="uploadTravelNote.jsp">上传游记</a>
    <br>
    
-   <a href="FindFacility?scenerySpotId=11&facilityType=1">查找facility</a>
+   <a href="FindFacility?scenerySpotId=11&facilityType=1">默认参数为scenerySpotId=11&facilityType=1，查找facility</a>
    
    <br>
-   <a href="GetAllSceneryByScenerySpotId?scenerySpotId=12">查找某景区内所有景点</a>
+   <a href="GetAllSceneryByScenerySpotId?scenerySpotId=12">默认参数为scenerySpotId=12，查找某景区内所有景点</a>
    <br>
    <a href="SignIn.jsp">测试签到</a>
+   
+   
+    <br>
+   <a href="GetMySignedScenerySpot?userId=2">默认参数为userId=2，得到用户签到过的所有景区</a>
    <br>
    
+    <a href="GetMySignedScenery?userId=2&scenerySpotId=12">默认参数为userId=2&scenerySpotId=12，得到用户签到过某景区内的所有小景点</a>
+   <br>
   </body>
 </html>

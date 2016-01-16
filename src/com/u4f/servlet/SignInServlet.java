@@ -42,10 +42,11 @@ public class SignInServlet extends HttpServlet
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
+		
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("");
+		
 		int userId=0;
 		if(request.getParameter("userId")!=null)
 			userId=Integer.parseInt(request.getParameter("userId"));
@@ -63,18 +64,40 @@ public class SignInServlet extends HttpServlet
 		
 		
 		SignatureDao dao=new SignatureDao();
-		boolean res=false;
-		if(dao.isInSignScope(longtitude,latitude,sceneryId)){
-			System.out.println("servlet: 签到范围内");
-			Signature s=new Signature();
-			s.setSceneryId(sceneryId);
-			s.setUserId(userId);
-			s.setSignatureLng(longtitude);
-			s.setSignatureLati(latitude);
-			s.setSignatureTime(DateUtil.getNowTime());
+		
+		/*
+		 *  0是已经签到 1是成功签到 2是签到失败
+		 */
+		int res = 2;
+		// 判断用户是否已经签到
+		if (dao.isSigned(userId, sceneryId))
+		{
+			// 用户已经签到
+			res = 0;
 
-			res=dao.insertIntoSignature(s);
+		} else
+		{
+
+			if (dao.isInSignScope(longtitude, latitude, sceneryId))
+			{
+				System.out.println("servlet: 签到范围内");
+				Signature s = new Signature();
+				s.setSceneryId(sceneryId);
+				s.setUserId(userId);
+				s.setSignatureLng(longtitude);
+				s.setSignatureLati(latitude);
+				s.setSignatureTime(DateUtil.getNowTime());
+
+				if (dao.insertIntoSignature(s))
+				{
+					res = 1; // 成功签到
+				} else
+				{
+					res = 2;
+				}
+			}
 		}
+		System.out.print(res);
 		out.print(res);
 		out.flush();
 		out.close();

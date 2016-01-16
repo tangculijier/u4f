@@ -53,6 +53,20 @@
     <servlet-name>GetAllSceneryByScenerySpotId</servlet-name>
     <servlet-class>com.u4f.servlet.GetAllSceneryByScenerySpotId</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetMySignedScenerySpot</servlet-name>
+    <servlet-class>com.u4f.servlet.GetMySignedScenerySpot</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetMySignedScenery</servlet-name>
+    <servlet-class>com.u4f.servlet.GetMySignedScenery</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -92,6 +106,14 @@
   <servlet-mapping>
     <servlet-name>GetAllSceneryByScenerySpotId</servlet-name>
     <url-pattern>/GetAllSceneryByScenerySpotId</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetMySignedScenerySpot</servlet-name>
+    <url-pattern>/GetMySignedScenerySpot</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetMySignedScenery</servlet-name>
+    <url-pattern>/GetMySignedScenery</url-pattern>
   </servlet-mapping>	
   
 <!--   <filter>
