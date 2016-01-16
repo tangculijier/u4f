@@ -50,7 +50,6 @@ public class GetAllSceneryByScenerySpotId extends HttpServlet
 
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 		int scenerySpotId=0;
 		if(request.getParameter("scenerySpotId")!=null){
 			scenerySpotId=Integer.parseInt(request.getParameter("scenerySpotId"));

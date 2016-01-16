@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.u4f.dao.SignatureDao;
 import com.u4f.model.Signature;
 import com.u4f.tools.DateUtil;
+import com.u4f.tools.MyConst;
 
 public class SignInServlet extends HttpServlet
 {
@@ -47,26 +48,15 @@ public class SignInServlet extends HttpServlet
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		int userId=0;
-		if(request.getParameter("userId")!=null)
-			userId=Integer.parseInt(request.getParameter("userId"));
-	    int sceneryId=0;
-	    if(request.getParameter("sceneryId")!=null)
-		sceneryId=Integer.parseInt(request.getParameter("sceneryId"));
-		
-	    double longtitude=0;
-	    if(request.getParameter("longtitude")!=null)
-	    longtitude=Double.parseDouble(request.getParameter("longtitude"));
-	    
-	    double latitude=0;
-	    if(request.getParameter("latitude")!=null)
-        latitude=Double.parseDouble(request.getParameter("latitude"));
-		
-		
+		int	userId=request.getParameter("userId") == null ? MyConst.USERID_DEFAULT  : Integer.parseInt(request.getParameter("userId"));
+		int	sceneryId=request.getParameter("sceneryId") == null ? 1 : Integer.parseInt(request.getParameter("sceneryId"));
+		double  longtitude=request.getParameter("longtitude") == null? 0 :Double.parseDouble(request.getParameter("longtitude"));
+	    double  latitude=request.getParameter("latitude") == null? 0 :Double.parseDouble(request.getParameter("latitude"));
+
 		SignatureDao dao=new SignatureDao();
 		
 		/*
-		 *  0是已经签到 1是成功签到 2是签到失败
+		 *  0是已经签到 1是成功签到 2是签到失败 3是距离太远
 		 */
 		int res = 2;
 		// 判断用户是否已经签到
@@ -95,6 +85,10 @@ public class SignInServlet extends HttpServlet
 				{
 					res = 2;
 				}
+			}
+			else
+			{
+				res = 3;
 			}
 		}
 		System.out.print(res);
