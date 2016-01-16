@@ -28,10 +28,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <br>
    
    <a href="uploadTravelNote.jsp">上传游记</a>
+   <br>
    
    <a href="FindFacility?scenerySpotId=11&facilityType=1">查找facility</a>
    
+   <br>
+   <a href="GetAllSceneryByScenerySpotId?scenerySpotId=12">查找某景区内所有景点</a>
+   <br>
    <a href="SignIn.jsp">测试签到</a>
+   <br>
    
   </body>
 </html>

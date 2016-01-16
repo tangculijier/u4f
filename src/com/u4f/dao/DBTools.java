@@ -521,4 +521,41 @@ public class DBTools
 		}
 		return res;
 	}
+
+
+	public static List<Scenery> findAllScenery(int scenerySpotId)
+	{
+		List<Scenery> ss=new ArrayList<Scenery>();
+		String sql="select * from scenery where scenerySpotId="+scenerySpotId;
+		conn=getConn();
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				int sceneryId=rs.getInt("sceneryId");
+				String sceneryName=rs.getString("sceneryName");
+				double sceneryLng=Double.parseDouble(rs.getString("sceneryLng"));
+				double sceneryLati=Double.parseDouble(rs.getString("sceneryLati"));
+				String sceneryDescribe="";
+				if(rs.getString("sceneryDescribe")!=null)
+				sceneryDescribe=rs.getString("sceneryDescribe");	
+				
+				Scenery s=new Scenery();
+				s.setSceneryId(sceneryId);
+				s.setSceneryDescribe(sceneryDescribe);
+				s.setSceneryName(sceneryName);
+				s.setSceneryLng(sceneryLng);
+				s.setSceneryLati(sceneryLati);
+				s.setScenerySpotId(scenerySpotId);
+				
+				ss.add(s);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close();
+		}
+		return ss;
+	}
 }
