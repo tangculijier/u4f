@@ -575,7 +575,7 @@ public class DBTools
 	 */
 	public static List<SignedSpot> FindMySignedScenerySpot(int userId)
 	{
-		String sql="select count(*) as count,sceneryspot.*,signature.signatureTime from signature,scenery,sceneryspot where signature.sceneryId=scenery.sceneryId and scenery.scenerySpotId=sceneryspot.scenerySpotId and signature.userId="+userId;
+		String sql="select count(*) as count,sceneryspot.*,signature.signatureTime from signature,scenery,sceneryspot where signature.sceneryId=scenery.sceneryId and scenery.scenerySpotId=sceneryspot.scenerySpotId and signature.userId="+userId+" group by scenerySpotId";
 		conn=getConn();
 		List<SignedSpot> spots = new ArrayList<SignedSpot>();
 		try

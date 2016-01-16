@@ -15,6 +15,7 @@ import net.sf.json.JSONArray;
 import com.u4f.dao.SignatureDao;
 import com.u4f.model.Scenery;
 import com.u4f.model.ScenerySpot;
+import com.u4f.tools.MyConst;
 /*
  * 得到用户签到过的所有小景点
  */
@@ -52,18 +53,15 @@ public class GetMySignedScenery extends HttpServlet
 
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		int userId=0;
-		if(request.getParameter("userId")!=null)
-			userId=Integer.parseInt(request.getParameter("userId"));
-		int scenerySpotId=0;
-		if(request.getParameter("scenerySpotId")!=null)
-			scenerySpotId=Integer.parseInt(request.getParameter("scenerySpotId"));
+		int	userId=request.getParameter("userId") == null ? MyConst.USERID_DEFAULT  : Integer.parseInt(request.getParameter("userId"));
+		int	scenerySpotId=request.getParameter("scenerySpotId") == null ? 1 : Integer.parseInt(request.getParameter("scenerySpotId"));
 		SignatureDao dao=new SignatureDao();
 		List<Scenery> list=new ArrayList<Scenery>();
 		list=dao.getMySignedScenery(userId,scenerySpotId);
 		JSONArray array = JSONArray.fromObject(list);
-		System.out.println(list);
-		if(array.size()!=0){
+		//System.out.println(list);
+		if(array.size()!=0)
+		{
 			out.print(array);
 		}
 		out.flush();
