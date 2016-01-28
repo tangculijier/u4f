@@ -48,6 +48,14 @@ public class SignedSpot
 	{
 		this.signedCounts = count;
 	}
+	@Override
+	public String toString()
+	{
+		return "SignedSpot [spotId=" + spotId + ", spotName=" + spotName
+				+ ", spotAvatar=" + spotAvatar + ", signedTime=" + signedTime
+				+ ", signedCounts=" + signedCounts + "]";
+	}
+	
 	
 	
 }

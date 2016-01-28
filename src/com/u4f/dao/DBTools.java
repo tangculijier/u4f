@@ -575,8 +575,9 @@ public class DBTools
 	 */
 	public static List<SignedSpot> FindMySignedScenerySpot(int userId)
 	{
-		String sql="select count(*) as count,sceneryspot.*,signature.signatureTime from signature,scenery,sceneryspot where signature.sceneryId=scenery.sceneryId and scenery.scenerySpotId=sceneryspot.scenerySpotId and signature.userId="+userId;
+		String sql="select count(*) as count,sceneryspot.*,signature.signatureTime from signature,scenery,sceneryspot where signature.sceneryId=scenery.sceneryId and scenery.scenerySpotId=sceneryspot.scenerySpotId and signature.userId="+userId+" group by scenerySpotId";
 		conn=getConn();
+		System.out.println(sql);
 		List<SignedSpot> spots = new ArrayList<SignedSpot>();
 		try
 		{
@@ -597,6 +598,8 @@ public class DBTools
 				spot.setSpotAvatar(scenerySpotPicture);
                 spot.setSignedTime(time);
                 spot.setSignedCounts(count);
+                
+                System.out.println(spot);
 				spots.add(spot);
 
 			}
