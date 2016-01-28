@@ -12,6 +12,7 @@ import java.util.Random;
     private int dataSetLength;// 数据集元素个数，即数据集的长度  
     private ArrayList<String> dataSet;// 数据集链表  
     private ArrayList<String> center;// 中心链表  
+    private ArrayList<String> lastCenter;// 上一次中心链表  
     private ArrayList<ArrayList<String>> cluster; // 簇  
     private ArrayList<Float> jc;// 误差平方和，k越接近dataSetLength，误差越小  
     private Random random;  
@@ -61,6 +62,7 @@ import java.util.Random;
             k = dataSetLength;  
         }  
         center = initCenters();  
+      
         cluster = initCluster();  
         jc = new ArrayList<Float>();  
     }  
@@ -73,36 +75,42 @@ import java.util.Random;
      * @return 中心点集 
      */  
     private ArrayList<String> initCenters() {  
-        ArrayList<String> center = new ArrayList<String>();  
-      /**int[] randoms = new int[k];  
-        boolean flag;  
-        int temp = random.nextInt(dataSetLength);  
-        randoms[0] = temp;  
-        for (int i = 1; i < k; i++) {  
-            flag = true;  
-            while (flag) {  
-                temp = random.nextInt(dataSetLength);  
-                int j = 0;  
-                // 不清楚for循环导致j无法加1  
-                // for(j=0;j<i;++j)  
-                // {  
-                // if(temp==randoms[j]);  
-                // {  
-                // break;  
-                // }  
-                // }  
-                while (j < i) {  
-                    if (temp == randoms[j]) {  
-                        break;  
-                    }  
-                    j++;  
-                }  
-                if (j == i) {  
-                    flag = false;  
-                }  
-            }  
-            randoms[i] = temp;  
-        }  
+        ArrayList<String> center = new ArrayList<String>();
+//        lastCenter = new ArrayList<String>();
+//        
+//        int[] randoms = new int[k];  
+//        boolean flag;  
+//        int temp = random.nextInt(dataSetLength);  
+//        randoms[0] = temp;  
+//        for (int i = 1; i < k; i++) 
+//        {  
+//            flag = true;  
+//            while (flag) 
+//            {  
+//                temp = random.nextInt(dataSetLength);  
+//                int j = 0;  
+//                // 不清楚for循环导致j无法加1  
+//                // for(j=0;j<i;++j)  
+//                // {  
+//                // if(temp==randoms[j]);  
+//                // {  
+//                // break;  
+//                // }  
+//                // }  
+//                while (j < i) {  
+//                    if (temp == randoms[j]) 
+//                    {  
+//                        break;  
+//                    }  
+//                    j++;  
+//                }  
+//                if (j == i) 
+//                {  
+//                    flag = false;  
+//                }  
+//            }  
+//            randoms[i] = temp;  
+//        }  
   
         // 测试随机数生成情况  
         // for(int i=0;i<k;i++)  
@@ -111,12 +119,15 @@ import java.util.Random;
         // }  
   
         // System.out.println();  
-        for (int i = 0; i < k; i++) {  
-            center.add(dataSet.get(randoms[i]));// 生成初始化中心链表  
-        }**/
+//        for (int i = 0; i < k; i++) {  
+//            center.add(dataSet.get(randoms[i]));// 生成初始化中心链表  
+//            lastCenter.add(dataSet.get(randoms[i]));
+//        }
+     //   printDataArray(center,"newCenter");  
+    //    printDataArray(lastCenter,"lastCenter");  
         center.add(dataSet.get(0));
+        center.add(dataSet.get(1));
         center.add(dataSet.get(2));
-        center.add(dataSet.get(4));
         return center;  
     }  
   
@@ -135,30 +146,18 @@ import java.util.Random;
     }  
   
     /** 
-     * 计算两个点之间的距离 
+     * 计算两个路径间的相似度 
      *  
-     * @param element 
-     *            点1 
-     * @param center 
-     *            点2 
-     * @return 距离 
+     * @param path1 点1 
+     * @param path2 点2 
+     * @return 相似度  
      */  
-    private float distance(String element, String center) {  
+    private float distance(String path1, String path2) {  
         float distance = 0.0f;  
-//        float x = element[0] - center[0];  
-//        float y = element[1] - center[1];  
-//        float z = x * x + y * y;  
-//        distance = (float) Math.sqrt(z);  
-        distance=GetSim.getLCString(element, center);
+        distance=GetSim.samePathPercent(path1, path2);
         return distance;
         
     }  
-  
-//    public float distance2(){
-    
-   	
-//    }
-//    
     
     
     
@@ -196,12 +195,12 @@ import java.util.Random;
             for (int j = 0; j < k; j++) 
             {  
                // distance[j] = distance(dataSet.get(i), center.get(j));  
-            	distance[j] = GetSim.getLCString(dataSet.get(i), center.get(j));
-                 System.out.println("test2:"+"dataSet["+i+"],center["+j+"],distance="+distance[j]);  
+            	distance[j] = GetSim.samePathPercent(dataSet.get(i), center.get(j));
+                // System.out.println("test2:"+"dataSet["+i+"],center["+j+"],相似度="+distance[j]);  
   
             }  
             int minLocation = maxDistance(distance);  
-             System.out.println("test3:"+"dataSet["+i+"],minLocation="+minLocation);  
+            // System.out.println("test3:"+"dataSet["+i+"],应该属于第="+minLocation+"簇");  
             // System.out.println();  
   
             cluster.get(minLocation).add(dataSet.get(i));// 核心，将当前元素放到最小距离中心相关的簇中  
@@ -227,40 +226,64 @@ import java.util.Random;
         return errSquare;  
     }  
   
-    /** 
-     * 计算误差平方和准则函数方法 
-     
-    private void countRule() {  
-        float jcF = 0;  
-        for (int i = 0; i < cluster.size(); i++) {  
-            for (int j = 0; j < cluster.get(i).size(); j++) {  
-                jcF += errorSquare(cluster.get(i).get(j), center.get(i));  
-  
-            }  
-        }  
-        jc.add(jcF);  
-    }  
+//    /** 
+//     * 计算误差平方和准则函数方法 
+//     */ 
+//    private void countRule() {  
+//        float jcF = 0;  
+//        for (int i = 0; i < cluster.size(); i++) {  
+//            for (int j = 0; j < cluster.get(i).size(); j++) {  
+//                jcF += errorSquare(cluster.get(i).get(j), center.get(i));  
+//  
+//            }  
+//        }  
+//        jc.add(jcF);  
+//    }  
   
     /** 
      * 设置新的簇中心方法 
-       
-    private void setNewCenter() {  
-        for (int i = 0; i < k; i++) {  
+     */
+    private void setNewCenter() 
+    {  
+    	//lastCenter.clear();
+    	for(int i = 0 ;i < lastCenter.size() ;i++)
+    	{
+    		lastCenter.set(i,center.get(i)) ;
+
+    	}
+        for (int i = 0; i < k; i++)
+        {  
             int n = cluster.get(i).size();  
-            if (n != 0) {  
-                float[] newCenter = { 0, 0 };  
-                for (int j = 0; j < n; j++) {  
-                    newCenter[0] += cluster.get(i).get(j)[0];  
-                    newCenter[1] += cluster.get(i).get(j)[1];  
-                }  
-                // 设置一个平均值  
-                newCenter[0] = newCenter[0] / n;  
-                newCenter[1] = newCenter[1] / n;  
-                center.set(i, newCenter);  
+            if (n != 0)
+            {  
+                String newCenter ="";  
+                float maxSum = 0f;
+                int maxIndex = 0;//和簇中其他路径相似度之和的那个路径在簇中的index
+                for (int j = 0; j < n; j++) 
+                {  
+                	float simSum = 0f;
+                	for(int m = 0; m < n; m++)//求得这个路径和簇中其他所有路径的相似度之和
+                	{
+                		simSum += GetSim.samePathPercent(cluster.get(i).get(j),
+                		cluster.get(i).get(m));  
+                	}
+                	
+                	if(simSum > maxSum)//和最大相似度之和比较
+                	{
+                		maxSum = simSum;
+                		maxIndex = j;
+                	}
+                	
+                  
+                }   
+                center.set(i, cluster.get(i).get(maxIndex));  
             }  
         }  
+        
+        printDataArray(center,"newCenter");  
+        printDataArray(lastCenter,"lastCenter");  
     }  
-  */
+  
     /** 
      * 打印数据，测试用 
      *  
@@ -281,54 +304,56 @@ import java.util.Random;
     /** 
      * Kmeans算法核心过程方法 
      */  
-    private void kmeans() {  
+    public void kmeans() {  
         init();  
         // printDataArray(dataSet,"initDataSet");  
         // printDataArray(center,"initCenter");  
   
+        
         // 循环分组，直到误差不变为止  
-      //  while (true) {  
-            clusterSet();  
-             for(int i=0;i<cluster.size();i++)  
-             {  
-             printDataArray(cluster.get(i),"cluster["+i+"]");  
-             }  
+        //while (true) 
+        {
+        	
+        	clusterSet();  
+	        for(int i=0;i<cluster.size();i++)  
+	        {  
+	        	printDataArray(cluster.get(i),"cluster["+i+"]");  
+	        }  
   
-  //          countRule();  
+           // countRule();  
   
-            // System.out.println("count:"+"jc["+m+"]="+jc.get(m));  
+           // System.out.println("count:"+"jc["+m+"]="+jc.get(m));  
   
-            // System.out.println();  
-            // 误差不变了，分组完成  
-         //   if (m != 0) {  
-       //         if (jc.get(m) - jc.get(m - 1) == 0) {  
-        //            break;  
-          //      }  
-           // }  
+            System.out.println();  
+           // 误差不变了，分组完成  
+//            if (m != 0) 
+//            {  
+//            	boolean isBreak = true;
+//            	for(int i = 0 ;i < lastCenter.size() ;i++)
+//            	{
+//            		if(!lastCenter.get(i).equals( center.get(i)))
+//    				{
+//            			isBreak = false;
+//    				}
+//            	}
+//            	if(isBreak == true)
+//            	{
+//            		System.out.println("质心不变了");
+//            		 break;  
+//            	}
+//                   
+//            }  
+             
   
-    //        setNewCenter();  
-            // printDataArray(center,"newCenter");  
-            //m++;  
-            //cluster.clear();  
-           // cluster = initCluster();  
+ //           setNewCenter();  
+ //           m++;  
+ //           cluster.clear();  
+ //           cluster = initCluster();  
         }  
   
-        // System.out.println("note:the times of repeat:m="+m);//输出迭代次数  
-      
+         System.out.println("note:the times of repeat:m="+m);//输出迭代次数  
+    }
   
-    /** 
-     * 执行算法 
-     */  
-    public void execute() {  
-        long startTime = System.currentTimeMillis();  
-        System.out.println("kmeans begins");  
-        kmeans();  
-        long endTime = System.currentTimeMillis();  
-        System.out.println("kmeans running time=" + (endTime - startTime)  
-                + "ms");  
-        System.out.println("kmeans ends");  
-        System.out.println();  
-    }  
 }  
 
 

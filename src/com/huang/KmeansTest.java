@@ -10,17 +10,17 @@ public class KmeansTest {
         Kmeans k=new Kmeans(3);  
         ArrayList<String> dataSet=new ArrayList<String>();  
           
-        dataSet.add("123456");  
-        dataSet.add("564312");  
-        dataSet.add("56789");  
-        dataSet.add("98765");  
-        dataSet.add("90");  
-        dataSet.add("9");  
-       
+        dataSet.add("abcd");  
+        dataSet.add("efgh");  
+        dataSet.add("ijkl");  
+        dataSet.add("lkmn"); 
+        dataSet.add("abqw");
+        dataSet.add("uo");
+        dataSet.add("etu");
         //设置原始数据集  
         k.setDataSet(dataSet);  
         //执行算法  
-        k.execute();  
+        k.kmeans();  
         //得到聚类结果  
         ArrayList<ArrayList<String>> cluster=k.getCluster();  
         //查看结果  
