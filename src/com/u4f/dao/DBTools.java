@@ -167,6 +167,9 @@ public class DBTools
 				String parkTrans = rs.getString("parkTrans");
 				String parkIntrouction = rs.getString("parkIntroduction");
 				String parkPicture=rs.getString("parkPicture");
+				String parkOpenTime=rs.getString("parkOpenTime");
+				String openTime=rs.getString("openTime");
+				String closeTime=rs.getString("closeTime");
 
 				Park park = new Park();
 				park.setParkId(id);
@@ -180,6 +183,8 @@ public class DBTools
 				park.setParkLng(parkLong);
 				park.setParkPicture(parkPicture);
 				park.setParkTrans(parkTrans);
+				park.setParkOpenTime(parkOpenTime);
+				park.setParkTodayOpenTime(openTime+"——"+closeTime);
 
 				// String la=spot.getScenerySpotLat()+"";
 				// String lb=spot.getScenerySpotLong()+"";
@@ -189,6 +194,7 @@ public class DBTools
 						park.getParkLng() + "");
 				System.out.println("distance:" + distance);
 				park.setParkDistance(distance);
+				//System.out.println(park);
 				list.add(park);
 			}
 		} catch (Exception e)

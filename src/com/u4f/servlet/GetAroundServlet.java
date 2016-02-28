@@ -45,9 +45,9 @@ public class GetAroundServlet extends HttpServlet {
 		//list=dao.getAllScenerySpot();
 		
 		JSONArray array = JSONArray.fromObject(list);
-		for(int i=0;i<list.size();i++){
-			System.out.println(list.get(i));
-		}
+//		for(int i=0;i<list.size();i++){
+//			//System.out.println(list.get(i));
+//		}
 		if(array.size()!=0){
 			out.print(array);
 		}

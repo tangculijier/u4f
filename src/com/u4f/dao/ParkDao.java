@@ -42,9 +42,13 @@ public class ParkDao
 
 		// String
 		// sql="select * from ScenerySpot where ScenerySpotLat between ? and ? and ScenerySpotLong between ? and ? ";
-		String sql = "select * from park where parkLat between "
-				+ minLat + " and " + maxLat + " and parkLng between "
+//		String sql = "select * from park where parkLat between "
+//				+ minLat + " and " + maxLat + " and parkLng between "
+//				+ minLong + " and " + maxLong;
+		String sql = "select park.*,parkopentime.* from park, parkopentime where park.parkId=parkopentime.parkId and park.parkLat between "
+				+ minLat + " and " + maxLat + " and park.parkLng between "
 				+ minLong + " and " + maxLong;
+		
 		System.out.println(sql);
 		
 		List<Park> spots = 	DBTools.getNearPark(latitude,longtitude,sql);
