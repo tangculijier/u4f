@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 
 import com.u4f.dao.SignatureDao;
-import com.u4f.model.Scenery;
-import com.u4f.model.ScenerySpot;
+import com.u4f.model.Project;
+import com.u4f.model.Park;
 import com.u4f.tools.MyConst;
 /*
  * 得到用户签到过的所有小景点
@@ -54,10 +54,10 @@ public class GetMySignedScenery extends HttpServlet
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		int	userId=request.getParameter("userId") == null ? MyConst.USERID_DEFAULT  : Integer.parseInt(request.getParameter("userId"));
-		int	scenerySpotId=request.getParameter("scenerySpotId") == null ? 1 : Integer.parseInt(request.getParameter("scenerySpotId"));
+		int	projectId=request.getParameter("scenerySpotId") == null ? 1 : Integer.parseInt(request.getParameter("scenerySpotId"));
 		SignatureDao dao=new SignatureDao();
-		List<Scenery> list=new ArrayList<Scenery>();
-		list=dao.getMySignedScenery(userId,scenerySpotId);
+		List<Project> list=new ArrayList<Project>();
+		list=dao.getMySignedProjects(userId, projectId);
 		JSONArray array = JSONArray.fromObject(list);
 		//System.out.println(list);
 		if(array.size()!=0)

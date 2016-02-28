@@ -44,10 +44,10 @@ public class UploadTravelNote extends HttpServlet
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		int scenerySpotId = 0;
+		int ParkId = 0;
 		if (request.getParameter("scenerySpotId") != null)
 		{
-			scenerySpotId = Integer.parseInt(request.getParameter("scenerySpotId"));
+			ParkId = Integer.parseInt(request.getParameter("scenerySpotId"));
 
 		}
 
@@ -70,12 +70,12 @@ public class UploadTravelNote extends HttpServlet
 		note.setUserId(userId);
 		
 		note.setPublicTime(DateUtil.getNowTime());
-		note.setScenerySpotId(scenerySpotId);
+		note.setParkId(ParkId);
 		note.setTravelNoteContent(travelNoteContent);
 		note.setTravelNoteTitle(travelNoteTitle);
 		
 		
-		System.out.println(note.getUserId()+","+note.getPublicTime()+","+note.getScenerySpotId()+","+note.getTravelNoteContent()+
+		System.out.println(note.getUserId()+","+note.getPublicTime()+","+note.getParkId()+","+note.getTravelNoteContent()+
 		","+note.getTravelNoteTitle());
 		boolean res = dao.uploadTravelNote(note);
 		PrintWriter out = response.getWriter();

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 
 import com.u4f.dao.SceneryDao;
-import com.u4f.model.Scenery;
+import com.u4f.model.Project;
 
 public class GetAllSceneryByScenerySpotId extends HttpServlet
 {
@@ -50,13 +50,13 @@ public class GetAllSceneryByScenerySpotId extends HttpServlet
 
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		int scenerySpotId=0;
+		int parkId=0;
 		if(request.getParameter("scenerySpotId")!=null){
-			scenerySpotId=Integer.parseInt(request.getParameter("scenerySpotId"));
+			parkId=Integer.parseInt(request.getParameter("scenerySpotId"));
 		}
 		SceneryDao dao=new SceneryDao();
-		List<Scenery> ss=new ArrayList<Scenery>();
-		ss=dao.findAllScenery(scenerySpotId);
+		List<Project> ss=new ArrayList<Project>();
+		ss=dao.findAllScenery(parkId);
 		JSONArray array = JSONArray.fromObject(ss);
 		if(array.size()!=0){
 			out.print(array);

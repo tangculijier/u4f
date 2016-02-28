@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 
 import com.u4f.dao.SignatureDao;
-import com.u4f.model.ScenerySpot;
+import com.u4f.model.Park;
 import com.u4f.model.Signature;
 import com.u4f.model.SignedSpot;
 import com.u4f.tools.MyConst;
@@ -57,7 +57,7 @@ public class GetMySignedScenerySpot extends HttpServlet
 
 		SignatureDao dao=new SignatureDao();
 		List<SignedSpot> list=new ArrayList<SignedSpot>();
-		list=dao.getMySignedScenerySpot(userId);
+		list=dao.getMySignedPark(userId);
 		JSONArray array = JSONArray.fromObject(list);
 		System.out.println(list);
 		if(array.size()!=0)

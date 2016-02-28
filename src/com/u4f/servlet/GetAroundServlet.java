@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
 
-import com.u4f.dao.ScenerySpotDao;
-import com.u4f.model.ScenerySpot;
+import com.u4f.dao.ParkDao;
+import com.u4f.model.Park;
 
 public class GetAroundServlet extends HttpServlet {
 
@@ -37,9 +37,9 @@ public class GetAroundServlet extends HttpServlet {
 		double myLng=Double.parseDouble(request.getParameter("longtitude"));
 		
 		
-		List<ScenerySpot> list=new ArrayList<ScenerySpot>();
+		List<Park> list=new ArrayList<Park>();
 		
-		ScenerySpotDao dao=new ScenerySpotDao();
+		ParkDao dao=new ParkDao();
 		//list=dao.getNearScenerySpot(myLng,myLati);
 		list=dao.getNearScenerySpotDao(myLati,myLng);
 		//list=dao.getAllScenerySpot();

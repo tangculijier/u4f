@@ -49,7 +49,7 @@ public class SignInServlet extends HttpServlet
 		PrintWriter out = response.getWriter();
 		
 		int	userId=request.getParameter("userId") == null ? MyConst.USERID_DEFAULT  : Integer.parseInt(request.getParameter("userId"));
-		int	sceneryId=request.getParameter("sceneryId") == null ? 1 : Integer.parseInt(request.getParameter("sceneryId"));
+		int	projectId=request.getParameter("sceneryId") == null ? 1 : Integer.parseInt(request.getParameter("sceneryId"));
 		double  longtitude=request.getParameter("longtitude") == null? 0 :Double.parseDouble(request.getParameter("longtitude"));
 	    double  latitude=request.getParameter("latitude") == null? 0 :Double.parseDouble(request.getParameter("latitude"));
 
@@ -60,7 +60,7 @@ public class SignInServlet extends HttpServlet
 		 */
 		int res = 2;
 		// 判断用户是否已经签到
-		if (dao.isSigned(userId, sceneryId))
+		if (dao.isSigned(userId, projectId))
 		{
 			// 用户已经签到
 			res = 0;
@@ -68,11 +68,11 @@ public class SignInServlet extends HttpServlet
 		} else
 		{
 
-			if (dao.isInSignScope(longtitude, latitude, sceneryId))
+			if (dao.isInSignScope(longtitude, latitude, projectId))
 			{
 				System.out.println("servlet: 签到范围内");
 				Signature s = new Signature();
-				s.setSceneryId(sceneryId);
+				s.setprojectId(projectId);
 				s.setUserId(userId);
 				s.setSignatureLng(longtitude);
 				s.setSignatureLati(latitude);

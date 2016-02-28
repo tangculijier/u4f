@@ -8,7 +8,7 @@ public class Signature
 	private double signatureLng;
 	private double signatureLati;
 	private int userId;
-	private int sceneryId;
+	private int projectId;
 	public int getSignatureId()
 	{
 		return signatureId;
@@ -49,13 +49,13 @@ public class Signature
 	{
 		this.userId = userId;
 	}
-	public int getSceneryId()
+	public int getprojectId()
 	{
-		return sceneryId;
+		return projectId;
 	}
-	public void setSceneryId(int sceneryId)
+	public void setprojectId(int projectId)
 	{
-		this.sceneryId = sceneryId;
+		this.projectId = projectId;
 	}
 	
 	

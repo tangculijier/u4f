@@ -12,7 +12,7 @@ import java.util.Random;
     private int dataSetLength;// 数据集元素个数，即数据集的长度  
     private ArrayList<String> dataSet;// 数据集链表  
     private ArrayList<String> center;// 中心链表  
-    private ArrayList<String> lastCenter;// 上一次中心链表  
+    private ArrayList<ArrayList<String>> lastCluster;// 上一次中心链表  
     private ArrayList<ArrayList<String>> cluster; // 簇  
     private ArrayList<Float> jc;// 误差平方和，k越接近dataSetLength，误差越小  
     private Random random;  
@@ -76,58 +76,52 @@ import java.util.Random;
      */  
     private ArrayList<String> initCenters() {  
         ArrayList<String> center = new ArrayList<String>();
-//        lastCenter = new ArrayList<String>();
-//        
-//        int[] randoms = new int[k];  
-//        boolean flag;  
-//        int temp = random.nextInt(dataSetLength);  
-//        randoms[0] = temp;  
-//        for (int i = 1; i < k; i++) 
-//        {  
-//            flag = true;  
-//            while (flag) 
-//            {  
-//                temp = random.nextInt(dataSetLength);  
-//                int j = 0;  
-//                // 不清楚for循环导致j无法加1  
-//                // for(j=0;j<i;++j)  
-//                // {  
-//                // if(temp==randoms[j]);  
-//                // {  
-//                // break;  
-//                // }  
-//                // }  
-//                while (j < i) {  
-//                    if (temp == randoms[j]) 
-//                    {  
-//                        break;  
-//                    }  
-//                    j++;  
-//                }  
-//                if (j == i) 
-//                {  
-//                    flag = false;  
-//                }  
-//            }  
-//            randoms[i] = temp;  
-//        }  
+      
+        
+        int[] randoms = new int[k];  
+        boolean flag;  
+        int temp = random.nextInt(dataSetLength);  
+        randoms[0] = temp;  
+        for (int i = 1; i < k; i++) 
+        {  
+            flag = true;  
+            while (flag) 
+            {  
+                temp = random.nextInt(dataSetLength);  
+                int j = 0;  
+               //  不清楚for循环导致j无法加1  
+                 for(j=0;j<i;++j)  
+                 {  
+                 if(temp==randoms[j]);  
+                 {  
+                 break;  
+                 }  
+                 }  
+                while (j < i) {  
+                    if (temp == randoms[j]) 
+                    {  
+                        break;  
+                    }  
+                    j++;  
+                }  
+                if (j == i) 
+                {  
+                    flag = false;  
+                }  
+            }  
+            randoms[i] = temp;  
+        }  
   
         // 测试随机数生成情况  
-        // for(int i=0;i<k;i++)  
-        // {  
-        // System.out.println("test1:randoms["+i+"]="+randoms[i]);  
-        // }  
+         for(int i=0;i<k;i++)  
+         {  
+         System.out.println("test1:randoms["+i+"]="+randoms[i]);  
+         }  
   
-        // System.out.println();  
-//        for (int i = 0; i < k; i++) {  
-//            center.add(dataSet.get(randoms[i]));// 生成初始化中心链表  
-//            lastCenter.add(dataSet.get(randoms[i]));
-//        }
-     //   printDataArray(center,"newCenter");  
-    //    printDataArray(lastCenter,"lastCenter");  
-        center.add(dataSet.get(0));
-        center.add(dataSet.get(1));
-        center.add(dataSet.get(2));
+        printDataArray(center,"newCenter");  
+        center.add(dataSet.get(randoms[0]));
+        center.add(dataSet.get(randoms[1]));
+        center.add(dataSet.get(randoms[2]));
         return center;  
     }  
   
@@ -137,11 +131,15 @@ import java.util.Random;
      * @return 一个分为k簇的空数据的簇集合 
      */  
     private ArrayList<ArrayList<String>> initCluster() {  
-        ArrayList<ArrayList<String>> cluster = new ArrayList<ArrayList<String>>();  
+        ArrayList<ArrayList<String>> cluster = new ArrayList<ArrayList<String>>();
+        if(m == 0 )
+        lastCluster = new ArrayList<ArrayList<String>>();  
         for (int i = 0; i < k; i++) {  
             cluster.add(new ArrayList<String>());  
+            if(m == 0 )
+            lastCluster.add(new ArrayList<String>());  
         }  
-  
+       
         return cluster;  
     }  
   
@@ -226,31 +224,48 @@ import java.util.Random;
         return errSquare;  
     }  
   
-//    /** 
-//     * 计算误差平方和准则函数方法 
-//     */ 
-//    private void countRule() {  
-//        float jcF = 0;  
-//        for (int i = 0; i < cluster.size(); i++) {  
-//            for (int j = 0; j < cluster.get(i).size(); j++) {  
-//                jcF += errorSquare(cluster.get(i).get(j), center.get(i));  
-//  
-//            }  
-//        }  
-//        jc.add(jcF);  
-//    }  
+   
+    private boolean countRule() {  
+    	if(lastCluster.size() == 0 )
+    	{
+    		return false;
+    	}
+    	if(lastCluster.get(0).size() == 0 )
+    	{
+    		return false;
+    	}
+    		boolean isSame = true;
+        	for(int i = 0 ;i < cluster.size() ;i++)
+        	{
+        		ArrayList<String> clusterItem  = cluster.get(i);
+        		ArrayList<String> lastClusterItem  = lastCluster.get(i);
+        		if(clusterItem.size() != lastClusterItem.size())
+        		{
+        			isSame = false;
+    				break;
+        		}
+        		for(int j = 0 ; j < clusterItem.size();j++)
+        		{
+        			if(!lastClusterItem.get(j).equals(clusterItem.get(j)))
+        			{
+        				isSame = false;
+        				break;
+        			}
+        		}
+        		
+        	
+    	}
+    	
+    	return isSame;
+    }  
   
     /** 
      * 设置新的簇中心方法 
      */
     private void setNewCenter() 
     {  
-    	//lastCenter.clear();
-    	for(int i = 0 ;i < lastCenter.size() ;i++)
-    	{
-    		lastCenter.set(i,center.get(i)) ;
 
-    	}
+   
         for (int i = 0; i < k; i++)
         {  
             int n = cluster.get(i).size();  
@@ -281,7 +296,7 @@ import java.util.Random;
         }  
         
         printDataArray(center,"newCenter");  
-        printDataArray(lastCenter,"lastCenter");  
+        //printDataArray(lastCluster,"lastCenter");  
     }  
   
     /** 
@@ -304,51 +319,47 @@ import java.util.Random;
     /** 
      * Kmeans算法核心过程方法 
      */  
-    public void kmeans() {  
+    public void kmeans()
+    {  
         init();  
         // printDataArray(dataSet,"initDataSet");  
         // printDataArray(center,"initCenter");  
   
         
         // 循环分组，直到误差不变为止  
-        //while (true) 
+        while (true) 
         {
+
+        	clusterSet();
         	
-        	clusterSet();  
-	        for(int i=0;i<cluster.size();i++)  
-	        {  
-	        	printDataArray(cluster.get(i),"cluster["+i+"]");  
-	        }  
-  
-           // countRule();  
-  
-           // System.out.println("count:"+"jc["+m+"]="+jc.get(m));  
-  
             System.out.println();  
            // 误差不变了，分组完成  
-//            if (m != 0) 
-//            {  
-//            	boolean isBreak = true;
-//            	for(int i = 0 ;i < lastCenter.size() ;i++)
-//            	{
-//            		if(!lastCenter.get(i).equals( center.get(i)))
-//    				{
-//            			isBreak = false;
-//    				}
-//            	}
-//            	if(isBreak == true)
-//            	{
-//            		System.out.println("质心不变了");
-//            		 break;  
-//            	}
-//                   
-//            }  
+            if (m != 0) 
+            {  
+            	boolean isBreak = countRule();  
+            	for(int i=0;i<cluster.size();i++) 
+       	        {  
+       	        	printDataArray(cluster.get(i),"cluster["+i+"]");  
+       	        }  
+         
+            	if(isBreak == true)
+            	{
+            		System.out.println("列表不变了");
+            		break;  
+            	}
+                   
+            }  
              
   
- //           setNewCenter();  
- //           m++;  
- //           cluster.clear();  
- //           cluster = initCluster();  
+            setNewCenter();  
+            m++;  
+            for(int i  = 0 ; i < cluster.size();i++)
+        	{
+            	ArrayList<String> itme =cluster.get(i);
+        		lastCluster.set(i, itme);
+        	}
+            cluster.clear();  
+            cluster = initCluster();  
         }  
   
          System.out.println("note:the times of repeat:m="+m);//输出迭代次数  

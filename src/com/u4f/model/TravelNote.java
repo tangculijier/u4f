@@ -8,7 +8,7 @@ public class TravelNote {
 	private int travelNoteId;
 	private int userId;
 	private User user;
-	private int ScenerySpotId;
+	private int parkId;
 	private String travelNoteTitle;
 	private String travelNoteContent;
 	private String publicTime;
@@ -34,11 +34,11 @@ public class TravelNote {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public int getScenerySpotId() {
-		return ScenerySpotId;
+	public int getParkId() {
+		return parkId;
 	}
-	public void setScenerySpotId(int scenerySpotId) {
-		ScenerySpotId = scenerySpotId;
+	public void setParkId(int parkId) {
+		parkId = parkId;
 	}
 	public String getTravelNoteTitle() {
 		return travelNoteTitle;
@@ -62,7 +62,7 @@ public class TravelNote {
 	public String toString()
 	{
 		return "TravelNote [travelNoteId=" + travelNoteId + ", user="
-				+ user + ", ScenerySpotId=" + ScenerySpotId
+				+ user + ", parkId=" + parkId
 				+ ", travelNoteTitle=" + travelNoteTitle
 				+ ", travelNoteContent=" + travelNoteContent + ", publicTime="
 				+ publicTime + ", travelPhotos=" + travelPhotosURL + "]";

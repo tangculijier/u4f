@@ -6,11 +6,47 @@ public class GetSim
 {
 	public static void main(String[] args)
 	{
-		float len = samePathPercent("7", "23456");
-		System.out.println(len);
+//		float len = samePathPercent("abcdfhjkeilmy", "opquvrtcdwxilzn");
+//		System.out.println("青春-合家欢"+len);
+//		float len1 = samePathPercent("abcdfhjkeilmy", "prsbcdfhklzym");
+//		System.out.println("青春-情侣"+len1);
+//		float len3 = samePathPercent("abcdfhjkeilmy", "oquvrstcwxln");
+//		System.out.println("青春-合家欢"+len3);
+		
 
+		//String[] path1 = {"bcdefg","hijkqg","xlmopg","hijdefg","bcdjkqg","lxmondefg","hijdefgpomxl","lxmondjih","bcdjnopg","bcdefgpomxl"};
+		//String[] path2 = {"bcdjkqg","hijkqg","lxmondefg","hijdefg","bcdefg","xlmopg","hijdefgpomxl","lxmondjih","bcdjnopg","bcdefgpomxl"};
+		String[] test = {"lxmondefg","xlmopg","hijdefgpomxl","lxmondjih","bcdefgpomxl"};
+		printSimMaxtri(test);
+	
+		
 	}
 
+	public static void printSimMaxtri(String[] paths)
+	{
+		System.out.println("相似度矩阵");
+		System.out.print("    ");
+		for(int i = 0 ; i < paths.length;i++)
+		{
+			System.out.print("\t"+paths[i]);
+		}
+		System.out.println("");
+		for(int i = 0 ; i < paths.length;i++)
+		{
+			System.out.print(paths[i]);
+			float sum = 0f;
+			for(int j = 0;j < paths.length;j++)
+			{
+				float sim = samePathPercent(paths[i], paths[j]);
+				sum = (float) MyMath.add(sum, sim);
+				System.out.print("\t"+sim);
+			}
+			System.out.print("  sum="+sum);
+			System.out.println();
+
+		}
+	}
+	
 	private static int compute(char[] str1, char[] str2)
 	{
 		int substringLength1 = str1.length;

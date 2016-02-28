@@ -2,8 +2,8 @@ package com.u4f.dao;
 
 import java.util.List;
 
-import com.u4f.model.Scenery;
-import com.u4f.model.ScenerySpot;
+import com.u4f.model.Project;
+import com.u4f.model.Park;
 import com.u4f.model.Signature;
 import com.u4f.model.SignedSpot;
 
@@ -22,22 +22,22 @@ public class SignatureDao
 	 return DBTools.insertIntoSignature(s);
  }
 
-public List<SignedSpot> getMySignedScenerySpot(int userId)
+public List<SignedSpot> getMySignedPark(int userId)
 {
 	
-	return DBTools.FindMySignedScenerySpot(userId);
+	return DBTools.FindMySignedPark(userId);
 }
 
-public List<Scenery> getMySignedScenery(int userId,int scenerySpotId)
+public List<Project> getMySignedProjects(int userId,int projectId)
 {
 	// TODO Auto-generated method stub
-	return DBTools.FindMySignedScenery(userId,scenerySpotId);
+	return DBTools.FindMySignedProject(userId,projectId);
 }
 
-public boolean isSigned(int userId, int sceneryId)
+public boolean isSigned(int userId, int projectId)
 {
 	
-	return DBTools.isSigned(userId,sceneryId);
+	return DBTools.isSigned(userId,projectId);
 }
 	
 }

@@ -7,16 +7,16 @@ public class Facility
 	private double facilityLng;
 	private double facilityLati;
 	private int facilityType;
-	private int scenerySpotId;
+	private int parkId;
 
-	public int getScenerySpotId()
+	public int getparkId()
 	{
-		return scenerySpotId;
+		return parkId;
 	}
 
-	public void setScenerySpotId(int scenerySpotId)
+	public void setparkId(int parkId)
 	{
-		this.scenerySpotId = scenerySpotId;
+		this.parkId = parkId;
 	}
 
 	public int getFacilityId()
@@ -75,7 +75,7 @@ public class Facility
 		return "Facility [facilityId=" + facilityId + ", facilityName="
 				+ facilityName + ", facilityLng=" + facilityLng
 				+ ", facilityLati=" + facilityLati + ", facilityType="
-				+ facilityType + ", scenerySpotId=" + scenerySpotId + "]";
+				+ facilityType + ", parkId=" + parkId + "]";
 	}
 	
 	

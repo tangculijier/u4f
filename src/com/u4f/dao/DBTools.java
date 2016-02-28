@@ -12,8 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.u4f.model.Facility;
-import com.u4f.model.Scenery;
-import com.u4f.model.ScenerySpot;
+import com.u4f.model.Path;
+import com.u4f.model.Project;
+import com.u4f.model.Park;
 import com.u4f.model.Signature;
 import com.u4f.model.SignedSpot;
 import com.u4f.model.TravelNote;
@@ -43,7 +44,7 @@ public class DBTools
 
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/travel?useUnicode=true&characterEncoding=utf-8", DataBase_USER,DataBase_PASSWORD);
-			System.out.println("连接数据库成功");
+		//	System.out.println("连接数据库成功");
 		} catch (Exception se)
 		{
 			System.out.println("fail");
@@ -87,48 +88,45 @@ public class DBTools
 			}
 		}
 	}
-	public static List<ScenerySpot> getAllScenerySpot()
+	public static List<Park> getAllScenerySpot()
 	{
 		if(conn == null)
 		{
 			conn = getConn();
 		}
-		List<ScenerySpot> spots  = new ArrayList<ScenerySpot>();
-		String sql = "select * from ScenerySpot where ScenerySpotLat>34.2566";
+		List<Park> list  = new ArrayList<Park>();
+		String sql = "select * from park where parkLat > 34.2566";
 		try
 		{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next())
 			{
-				int id = rs.getInt("ScenerySpotId");
-				String name = rs.getString("ScenerySpotName");
-				String adress = rs.getString("ScenerySpotAddress");
-				double scenerySpotLat = rs.getDouble("ScenerySpotLat");
-				double scenerySpotLong = rs.getDouble("ScenerySpotLong");
+				int id = rs.getInt("parkId");
+				String name = rs.getString("parkName");
+				String adress = rs.getString("parkName");
+				double Lat = rs.getDouble("parkLat");
+				double Long = rs.getDouble("parkLng");
 				int belongCityId = rs.getInt("belongCityId");
-				String scenerySpotTicket = rs.getString("ScenerySpotTicket");
-				String scenerySpotTrans = rs.getString("ScenerySpotTrans");
-				String scenerySpotLab1 = rs.getString("ScenerySpotLab1");
-				String scenerySpotLab2 = rs.getString("ScenerySpotLab2");
-				String scenerySpotLab3 = rs.getString("ScenerySpotLab3");
+				String Ticket = rs.getString("parkTicket");
+				String Trans = rs.getString("parkTrans");
+				String parkIntroduction = rs.getString("parkIntroduction");
 				// String ScenerySpotPicture=rs.getString("");
 
-				ScenerySpot spot = new ScenerySpot();
-				spot.setBelongCityId(belongCityId);
-				spot.setScenerySpotAddress(adress);
-				spot.setBelongCityId(belongCityId);
-				spot.setScenerySpotId(id);
-				spot.setScenerySpotLab1(scenerySpotLab1);
-				spot.setScenerySpotLab2(scenerySpotLab2);
-				spot.setScenerySpotLab3(scenerySpotLab3);
-				spot.setScenerySpotTicket(scenerySpotTicket);
-				spot.setScenerySpotLat(scenerySpotLat);
-				spot.setScenerySpotLong(scenerySpotLong);
-				spot.setScenerySpotName(name);
-				spot.setScenerySpotTrans(scenerySpotTrans);
+				Park park = new Park();
+				park.setParkId(id);
+				park.setParkName(name);
+				park.setBelongCityId(belongCityId);
+				park.setParkAdress(adress);
+			
+				park.setParkIntroduction(parkIntroduction);
+				park.setParkTicket(Ticket);
+				park.setParkLati(Lat);
+				park.setParkLng(Long);
+			
+				park.setParkTrans(Trans);
 
-				spots.add(spot);
+				list.add(park);
 
 			}
 
@@ -139,66 +137,59 @@ public class DBTools
 		{			
 			close();
 		}
-		return spots;
+		return list;
 	}
 	
 	/**
 	 * 根据当前位置得到所有的附近景点信息
 	 */
 	
-	public static List<ScenerySpot>  getNearScenerySpot(Double latitude, Double longtitude, String sql)
+	public static List<Park>  getNearPark(Double latitude, Double longtitude, String sql)
 	{
-		List<ScenerySpot> spots = new ArrayList<ScenerySpot>();
+		List<Park> list = new ArrayList<Park>();
 		
 	
 		try
 		{
 			conn = getConn();
-			System.out.println("aaa");
 			ps = conn.prepareStatement(sql);
-			System.out.println("bbb");
 			rs = ps.executeQuery();
-			System.out.println("rs=" + rs);
 			while (rs.next())
 			{
 				// System.out.println("bbb");
-				int id = rs.getInt("scenerySpotId");
-				String name = rs.getString("scenerySpotName");
-				String adress = rs.getString("scenerySpotAddress");
-				double scenerySpotLat = rs.getDouble("scenerySpotLat");
-				double scenerySpotLong = rs.getDouble("scenerySpotLong");
+				int id = rs.getInt("parkId");
+				String name = rs.getString("parkName");
+				String adress = rs.getString("parkAddress");
+				double parkLat = rs.getDouble("parkLat");
+				double parkLong = rs.getDouble("parkLng");
 				int belongCityId = rs.getInt("belongCityId");
-				String scenerySpotTicket = rs.getString("scenerySpotTicket");
-				String scenerySpotTrans = rs.getString("scenerySpotTrans");
-				String scenerySpotLab1 = rs.getString("scenerySpotLab1");
-				String scenerySpotLab2 = rs.getString("scenerySpotLab2");
-				String scenerySpotLab3 = rs.getString("scenerySpotLab3");
-				String scenerySpotPicture=rs.getString("scenerySpotPicture");
+				String parkTicket = rs.getString("parkTicket");
+				String parkTrans = rs.getString("parkTrans");
+				String parkIntrouction = rs.getString("parkIntroduction");
+				String parkPicture=rs.getString("parkPicture");
 
-				ScenerySpot spot = new ScenerySpot();
-				spot.setBelongCityId(belongCityId);
-				spot.setScenerySpotAddress(adress);
-				spot.setBelongCityId(belongCityId);
-				spot.setScenerySpotId(id);
-				spot.setScenerySpotLab1(scenerySpotLab1);
-				spot.setScenerySpotLab2(scenerySpotLab2);
-				spot.setScenerySpotLab3(scenerySpotLab3);
-				spot.setScenerySpotTicket(scenerySpotTicket);
-				spot.setScenerySpotLat(scenerySpotLat);
-				spot.setScenerySpotLong(scenerySpotLong);
-				spot.setScenerySpotName(name);
-				spot.setScenerySpotTrans(scenerySpotTrans);
-				spot.setScenerySpotPicture(scenerySpotPicture);
+				Park park = new Park();
+				park.setParkId(id);
+				park.setParkName(name);
+				park.setBelongCityId(belongCityId);
+				park.setParkAdress(adress);
+			
+				park.setParkIntroduction(parkIntrouction);
+				park.setParkTicket(parkTicket);
+				park.setParkLati(parkLat);
+				park.setParkLng(parkLong);
+				park.setParkPicture(parkPicture);
+				park.setParkTrans(parkTrans);
+
 				// String la=spot.getScenerySpotLat()+"";
 				// String lb=spot.getScenerySpotLong()+"";
 				String distance =MapDistance.getDistance(
 						latitude + "", longtitude + "",
-						spot.getScenerySpotLat() + "",
-						spot.getScenerySpotLong() + "");
+						park.getParkLati() + "",
+						park.getParkLng() + "");
 				System.out.println("distance:" + distance);
-				spot.setScenerySpotDistance(distance);
-				spots.add(spot);
-				System.out.println("ccc");
+				park.setParkDistance(distance);
+				list.add(park);
 			}
 		} catch (Exception e)
 		{
@@ -208,19 +199,19 @@ public class DBTools
 			close();
 
 		}
-		return spots;
+		return list;
 	}
 	
 	
 	/**
 	 * 根据景点id返回所有攻略信息
 	 */
-	public static List<TravelNote> getTravelNote(int scenerySpotId)
+	public static List<TravelNote> getTravelNote(int parkId)
 	{
 		String sql="select user.userId,user.username,user.level,travelNote.travelNoteId,travelNote.userId,travelNote.travelNoteTitle," +
 				"travelNote.travelNoteContent,DATE_FORMAT(travelNote.publicTime,'%Y-%m-%d') as time" +
 				" from user,travelNote " +
-		"where user.userId=travelNote.userId and travelNoteId in(select travelNoteId from travelNote where ScenerySpotId="+scenerySpotId+")";
+		"where user.userId=travelNote.userId and travelNoteId in(select travelNoteId from travelNote where parkId = "+parkId+")";
 		System.out.println(sql);
 		
 		List<TravelNote> notes  = new ArrayList<TravelNote>();
@@ -238,7 +229,7 @@ public class DBTools
 				String travelNoteContent=rs.getString("travelNote.travelNoteContent");
 				String publicTime=rs.getString("time");
 				note.setTravelNoteId(travelNoteId);
-				note.setScenerySpotId(scenerySpotId);
+				note.setParkId(parkId);
 				note.setTravelNoteTitle(travelNoteTitle);
 				note.setTravelNoteContent(travelNoteContent);
 				note.setPublicTime(publicTime);
@@ -303,7 +294,7 @@ public class DBTools
 	public static boolean insertTravelNote(TravelNote note)
 	{
 		boolean res = false;
-		String sql="insert into travelNote(userId,travelNoteTitle,travelNoteContent,publicTime,scenerySpotId) values(?,?,?,?,?)";
+		String sql="insert into travelNote(userId,travelNoteTitle,travelNoteContent,publicTime,parkId) values(?,?,?,?,?)";
 		System.out.println(sql);
 		try{
 			conn=getConn();
@@ -312,7 +303,7 @@ public class DBTools
 			ps.setString(2, note.getTravelNoteTitle());
 			ps.setString(3, note.getTravelNoteContent());
 			ps.setString(4, note.getPublicTime());
-			ps.setInt(5, note.getScenerySpotId());
+			ps.setInt(5, note.getParkId());
 			System.out.println(sql);
 			int updateRow  = ps.executeUpdate();
 			if(updateRow != 0)
@@ -363,7 +354,7 @@ public class DBTools
  */
 	public static List<Facility> findFacilitys(int id, int type)
 	{
-		String sql="select * from facility where scenerySpotId="+id+" and facilityType="+type;
+		String sql="select * from facility where parkId="+id+" and facilityType="+type;
 		System.out.println(sql);
 		List<Facility> list=new ArrayList<Facility>();
 		conn=getConn();
@@ -382,7 +373,7 @@ public class DBTools
 			   f.setFacilityLng(facilityLng);
 			   f.setFacilityLati(facilityLati);
 			   f.setFacilityType(type);
-			   f.setScenerySpotId(id);
+			   f.setparkId(id);
 			   list.add(f);
 			}
 			
@@ -429,30 +420,30 @@ public class DBTools
 		return res;
 	}
 
-	public static Scenery findSceneryById(int sceneryId){
+	public static Project findProjectsById(int parkId){
 		
-		String sql="select * from scenery where sceneryId="+sceneryId;
+		String sql="select * from project where parkId="+parkId;
 		conn=getConn();
-		Scenery s=new Scenery();
+		Project s=new Project();
 		try
 		{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			while(rs.next()){
-				//int sceneRyId=rs.getInt("sceneryId");
-				String sceneryName=rs.getString("sceneryName");
-				double sceneryLng=Double.parseDouble(rs.getString("sceneryLng"));
-				double sceneryLati=Double.parseDouble(rs.getString("sceneryLati"));
-				String sceneryDescribe="";
-				if(rs.getString("sceneryDescribe")!=null)
-				sceneryDescribe=rs.getString("sceneryDescribe");	
+				int projectId=rs.getInt("projectId");
+				String projectName=rs.getString("projectName");
+				double projectLng=Double.parseDouble(rs.getString("projectLng"));
+				double projectLati=Double.parseDouble(rs.getString("projectLati"));
+				String projectDescribe="";
+				if(rs.getString("projectDescribe")!=null)
+					projectDescribe=rs.getString("projectDescribe");	
 				
-				
-				s.setSceneryDescribe(sceneryDescribe);
-				s.setSceneryId(sceneryId);
-				s.setSceneryName(sceneryName);
-				s.setSceneryLng(sceneryLng);
-				s.setSceneryLati(sceneryLati);
+				s.setProjectId(projectId);
+				s.setProjectDescribe(projectDescribe);
+				s.setParkId(parkId);
+				s.setProjectName(projectName);
+				s.setProjectLng(projectLng);
+				s.setProjectLati(projectLati);
 				
 				
 			}
@@ -474,13 +465,13 @@ public class DBTools
 		//设定景点范围距离为100米
 		double fixDistance=100;
 		boolean res=false;
-		Scenery s=findSceneryById(sceneryId);
+		Project s= findProjectsById(sceneryId);
 //	  System.out.println("latitude:"+latitude+",longtitude:"+longtitude);
-			double lng2=s.getSceneryLng();
-			double lati2=s.getSceneryLati();
+			double lng2=s.getProjectLng();
+			double lati2=s.getProjectLati();
 	//	System.out.println("lati2:"+lati2+",lng2:"+lng2);
 			
-		String distance=MapDistance.getDistance(latitude+"", longtitude+"", s.getSceneryLati()+"", s.getSceneryLng()+"");
+		String distance=MapDistance.getDistance(latitude+"", longtitude+"", s.getProjectLati()+"", s.getProjectLng()+"");
 		System.out.println("distance:"+distance);
 		//如果结果返回千米
 		if(distance.indexOf("k")!=-1){
@@ -500,9 +491,10 @@ public class DBTools
 		}
 		return res;
 	}
-	public static boolean insertIntoSignature(Signature s){
+	public static boolean insertIntoSignature(Signature s)
+	{
 		boolean res=false;
-		String sql="insert into signature(signatureTime,signatureLng,signatureLati,userId,sceneryId) values(?,?,?,?,?)";
+		String sql="insert into signature(signatureTime,signatureLng,signatureLati,userId,projectId) values(?,?,?,?,?)";
 		try{
 			conn=getConn();
 			ps=conn.prepareStatement(sql);
@@ -510,7 +502,7 @@ public class DBTools
 			ps.setString(2, s.getSignatureLng()+"");
 			ps.setString(3, s.getSignatureLati()+"");
 			ps.setInt(4, s.getUserId());
-			ps.setInt(5, s.getSceneryId());
+			ps.setInt(5, s.getprojectId());
 			
 		    int updateRow=ps.executeUpdate();
 			if(updateRow>0){
@@ -534,30 +526,30 @@ public class DBTools
 /*
  * 得到某景区内所有景点
  */
-	public static List<Scenery> findAllScenery(int scenerySpotId)
+	public static List<Project> findAllScenery(int parkId)
 	{
-		List<Scenery> ss=new ArrayList<Scenery>();
-		String sql="select * from scenery where scenerySpotId="+scenerySpotId;
+		List<Project> ss=new ArrayList<Project>();
+		String sql="select * from project where parkId="+parkId;
 		conn=getConn();
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			while(rs.next()){
-				int sceneryId=rs.getInt("sceneryId");
-				String sceneryName=rs.getString("sceneryName");
-				double sceneryLng=Double.parseDouble(rs.getString("sceneryLng"));
-				double sceneryLati=Double.parseDouble(rs.getString("sceneryLati"));
-				String sceneryDescribe="";
-				if(rs.getString("sceneryDescribe")!=null)
-				sceneryDescribe=rs.getString("sceneryDescribe");	
+				int projectId=rs.getInt("projectId");
+				String projectName=rs.getString("projectName");
+				//double projectLng=Double.parseDouble(rs.getString("projectLng"));
+				//double projectLati=Double.parseDouble(rs.getString("projectLati"));
+				String projectDescribe="";
+				if(rs.getString("projectDescribe")!=null)
+				projectDescribe=rs.getString("projectDescribe");	
 				
-				Scenery s=new Scenery();
-				s.setSceneryId(sceneryId);
-				s.setSceneryDescribe(sceneryDescribe);
-				s.setSceneryName(sceneryName);
-				s.setSceneryLng(sceneryLng);
-				s.setSceneryLati(sceneryLati);
-				s.setScenerySpotId(scenerySpotId);
+				Project s=new Project();
+				s.setProjectId(projectId);
+				s.setProjectDescribe(projectDescribe);
+				s.setProjectName(projectName);
+				//s.setProjectLng(projectLng);
+				//s.setProjectLati(projectLati);
+				s.setParkId(parkId);
 				
 				ss.add(s);
 			}
@@ -573,9 +565,9 @@ public class DBTools
 	/*
 	 * 得到用户签到过的所有景区
 	 */
-	public static List<SignedSpot> FindMySignedScenerySpot(int userId)
+	public static List<SignedSpot> FindMySignedPark(int userId)
 	{
-		String sql="select count(*) as count,sceneryspot.*,signature.signatureTime from signature,scenery,sceneryspot where signature.sceneryId=scenery.sceneryId and scenery.scenerySpotId=sceneryspot.scenerySpotId and signature.userId="+userId+" group by scenerySpotId";
+		String sql="select count(*) as count,park.*,signature.signatureTime from signature,park,project where signature.projectId=project.projectId and project.parkId=park.parkId and signature.userId="+userId+" group by parkId";
 		conn=getConn();
 		System.out.println(sql);
 		List<SignedSpot> spots = new ArrayList<SignedSpot>();
@@ -585,17 +577,17 @@ public class DBTools
 			rs = ps.executeQuery();
 			while (rs.next())
 			{   int count=rs.getInt("count");
-				int id = rs.getInt("ScenerySpotId");
-				String name =rs.getString("ScenerySpotName");
+				int id = rs.getInt("parkId");
+				String name =rs.getString("parkName");
 				String time=DateUtil.getDateOnlyYearMonthDay(rs.getString("signature.signatureTime"));
 				
-				String scenerySpotPicture=rs.getString("scenerySpotPicture");
+				String parkPicture=rs.getString("parkPicture");
 
 				SignedSpot spot = new SignedSpot();
 				
 				spot.setSpotId(id);
 				spot.setSpotName(name);
-				spot.setSpotAvatar(scenerySpotPicture);
+				spot.setSpotAvatar(parkPicture);
                 spot.setSignedTime(time);
                 spot.setSignedCounts(count);
                 
@@ -616,33 +608,32 @@ public class DBTools
 	}
 
 
-	public static List<Scenery> FindMySignedScenery(int userId,int scenerySpotId)
+	public static List<Project> FindMySignedProject(int userId,int parkId)
 	{
-		String sql="select scenery.* from signature,scenery where signature.sceneryId=scenery.sceneryId and signature.userId="+userId+" and scenery.scenerySpotId="+scenerySpotId+" order by signature.signatureTime DESC";
+		String sql="select project.* from signature,project where signature.projectId=project.projectId and signature.userId="+userId+" and project.parkId="+parkId+" order by signature.signatureTime DESC";
 		System.out.println(sql);
 		conn=getConn();
-		List<Scenery>  ss=new ArrayList<Scenery>();
+		List<Project>  ss=new ArrayList<Project>();
 		
 		try
 		{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			while(rs.next()){
-				int sceneryId=rs.getInt("sceneryId");
-				String sceneryName=rs.getString("sceneryName");
-				double sceneryLng=Double.parseDouble(rs.getString("sceneryLng"));
-				double sceneryLati=Double.parseDouble(rs.getString("sceneryLati"));
-				String sceneryDescribe="";
-				if(rs.getString("sceneryDescribe")!=null)
-				sceneryDescribe=rs.getString("sceneryDescribe");	
+				int projectId=rs.getInt("projectId");
+				String projectName=rs.getString("projectName");
+				//double projectLng=Double.parseDouble(rs.getString("projectLng"));
+				//double projectLati=Double.parseDouble(rs.getString("projectLati"));
+				String projectDescribe="";
+				if(rs.getString("projectDescribe")!=null)
+				projectDescribe=rs.getString("projectDescribe");	
 				
-				Scenery s=new Scenery();
-				s.setSceneryDescribe(sceneryDescribe);
-				s.setSceneryId(sceneryId);
-				s.setSceneryName(sceneryName);
-				s.setSceneryLng(sceneryLng);
-				s.setSceneryLati(sceneryLati);
-				s.setScenerySpotId(scenerySpotId);
+				Project s=new Project();
+				s.setProjectDescribe(projectDescribe);
+				s.setProjectId(projectId);
+				s.setProjectName(projectName);
+				//s.setProjectLng(projectLng);
+				//s.setProjectLati(projectLati);
 				ss.add(s);
 								
 			}			
@@ -659,10 +650,10 @@ public class DBTools
 	}
 
 
-	public static boolean isSigned(int userId, int sceneryId)
+	public static boolean isSigned(int userId, int projectId)
 	{
 		boolean res=false;
-		String sql="select * from signature where userId="+userId+" and sceneryId="+sceneryId;
+		String sql="select * from signature where userId="+userId+" and projectId="+projectId;
 		conn=getConn();
 		
 		try
@@ -671,7 +662,7 @@ public class DBTools
 			rs=ps.executeQuery();
 			while(rs.next()){
 				Signature s=new Signature();
-				s.setSceneryId(rs.getInt("sceneryId"));
+				s.setprojectId(rs.getInt("projectId"));
 				s.setSignatureId(rs.getInt("signatureId"));
 				s.setSignatureLati(rs.getDouble("signatureLati"));
 				s.setSignatureLng(rs.getDouble("signatureLng"));
@@ -689,4 +680,141 @@ public class DBTools
 		}	
 		return res;
 	}
+	
+
+/*
+ * 得到某景区内所有项目
+ */
+	public static List<Project> findAllProject(int parkId)
+	{
+		List<Project> ss=new ArrayList<Project>();
+		String sql="select * from project_copy_2 where parkId="+parkId;
+		conn=getConn();
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				
+				int projectId=rs.getInt("projectId");
+				String projectCode=rs.getString("projectCode");
+				String projectName=rs.getString("projectName");
+				double projectTime=rs.getDouble("projectTime");
+				String projectType=rs.getString("projectType");
+				int projectPop=rs.getInt("projectPop");
+				//double sceneryLng=Double.parseDouble(rs.getString("sceneryLng"));
+				//double sceneryLati=Double.parseDouble(rs.getString("sceneryLati"));
+				
+				Project s=new Project();
+				s.setProjectId(projectId);
+				s.setProjectCode(projectCode);
+				s.setProjectName(projectName);
+				s.setProjectPop(projectPop);
+				s.setProjectTime(projectTime);
+				s.setProjectType(projectType);
+				
+				ss.add(s);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close();
+		}
+		return ss;
+	}
+	
+	public static List<Path> findAllPaths(int parkId)
+	{
+		List<Path> list=new ArrayList<Path>();
+		String sql="select * from path_copy where parkId="+parkId;
+		conn=getConn();
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				
+				int pathId=rs.getInt("pathId");
+				int pathFrom=rs.getInt("pathFrom");
+				int pathTo=rs.getInt("pathTo");
+				Path p = new Path(pathId, pathFrom, pathTo);
+				list.add(p);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close();
+		}
+		return list;
+	}
+	
+	
+	public void insertTravle(String userName,String travle) throws SQLException
+	{
+			conn=getConn();
+			String sql="insert into user(username,level) values(?,1)";
+			
+				ps=conn.prepareStatement(sql);
+				ps.setString(1,userName);
+				ps.executeUpdate();
+				System.out.println("userName="+userName);
+				String sql2="select userId from user where username='"+userName+"'";
+				ps=conn.prepareStatement(sql2);
+				rs=ps.executeQuery();
+				if(rs.next())
+				{
+					int userId = rs.getInt("userId");
+					System.out.println("userId"+rs.getInt("userId"));
+					String insert="insert into travelnote(userId,travelNoteContent,publicTime,ScenerySpotId) values(?,?,?,?)";
+					ps=conn.prepareStatement(insert);
+					ps.setInt(1,userId);
+					ps.setString(2,travle);
+					ps.setString(3,DateUtil.getNowTime());
+					ps.setString(4, "13");
+					int updateRow=ps.executeUpdate();
+					if(updateRow>0)
+					{
+						System.out.println("插入成功");
+					}
+					else
+					{
+						System.out.println("插入失败");
+					}
+					
+				}
+				
+			
+
+		
+	}
+
+	public static boolean update( )
+	{
+		boolean res=false;
+		String sql="update project_copy set projectId=projectId-100 where projectId >= 0";
+		System.out.println(sql);
+		try{
+			conn=getConn();
+			ps = conn.prepareStatement(sql);
+			int updateRow=ps.executeUpdate();
+			if(updateRow>0){
+				res = true;
+				System.out.println("upload  success!");
+			}
+			else
+			{	
+				System.out.println("upload  falied!");
+			}
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}finally{
+				close();
+			}
+		
+		return res;
+	}
+
 }
