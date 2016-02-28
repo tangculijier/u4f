@@ -54,6 +54,29 @@ public class Park
 	
 	private String parkDistance;
 
+	
+	private String parkTodayOpenTime;
+	
+	public String getParkAddress()
+	{
+		return parkAddress;
+	}
+
+	public void setParkAddress(String parkAddress)
+	{
+		this.parkAddress = parkAddress;
+	}
+
+	public String getParkTodayOpenTime()
+	{
+		return parkTodayOpenTime;
+	}
+
+	public void setParkTodayOpenTime(String parkTodayOpenTime)
+	{
+		this.parkTodayOpenTime = parkTodayOpenTime;
+	}
+
 	public int getParkId()
 	{
 		return parkId;
