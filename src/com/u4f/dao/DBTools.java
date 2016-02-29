@@ -531,7 +531,7 @@ public class DBTools
 
 /*
  * 得到某景区内所有景点
- */
+
 	public static List<Project> findAllScenery(int parkId)
 	{
 		List<Project> ss=new ArrayList<Project>();
@@ -554,7 +554,7 @@ public class DBTools
 				String projectDescribe="";
 				if(rs.getString("projectDescribe")!=null)
 				projectDescribe=rs.getString("projectDescribe");	
-				
+				int parkZoneId =rs.getInt("parkZoneId");
 				Project s=new Project();
 				s.setProjectId(projectId);
 				s.setProjectCode(projectCode);
@@ -577,7 +577,7 @@ public class DBTools
 		}
 		return ss;
 	}
-
+ */
 	/*
 	 * 得到用户签到过的所有景区
 	 */
@@ -635,11 +635,12 @@ public class DBTools
 		{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
-			while(rs.next()){
+			while(rs.next())
+			{
 				int projectId=rs.getInt("projectId");
 				String projectName=rs.getString("projectName");
-				//double projectLng=Double.parseDouble(rs.getString("projectLng"));
-				//double projectLati=Double.parseDouble(rs.getString("projectLati"));
+				double projectLng=Double.parseDouble(rs.getString("projectLng"));
+				double projectLati=Double.parseDouble(rs.getString("projectLati"));
 				String projectDescribe="";
 				if(rs.getString("projectDescribe")!=null)
 				projectDescribe=rs.getString("projectDescribe");	
@@ -648,8 +649,8 @@ public class DBTools
 				s.setProjectDescribe(projectDescribe);
 				s.setProjectId(projectId);
 				s.setProjectName(projectName);
-				//s.setProjectLng(projectLng);
-				//s.setProjectLati(projectLati);
+				s.setProjectLng(projectLng);
+				s.setProjectLati(projectLati);
 				ss.add(s);
 								
 			}			
@@ -723,6 +724,7 @@ public class DBTools
 				String projectDescribe="";
 				if(rs.getString("projectDescribe")!=null)
 				projectDescribe=rs.getString("projectDescribe");	
+				int parkZoneId =rs.getInt("parkZoneId");
 				
 				Project s=new Project();
 				s.setProjectId(projectId);
@@ -735,7 +737,7 @@ public class DBTools
 				s.setParkId(parkId);
 				s.setProjectOpenTime(projectOpenTime);
 				s.setProjectPop(projectPop);
-				
+				s.setParkZoneId(parkZoneId);
 				ss.add(s);
 			}
 			

@@ -65,6 +65,13 @@
     <servlet-name>GetMySignedScenery</servlet-name>
     <servlet-class>com.u4f.servlet.GetMySignedScenery</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetPlannRounte</servlet-name>
+    <servlet-class>com.u4f.servlet.GetPlannRounte</servlet-class>
+  </servlet>
+
 
 
 
@@ -114,6 +121,10 @@
   <servlet-mapping>
     <servlet-name>GetMySignedScenery</servlet-name>
     <url-pattern>/GetMySignedScenery</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetPlannRounte</servlet-name>
+    <url-pattern>/GetPlannRounte</url-pattern>
   </servlet-mapping>	
   
 <!--   <filter>

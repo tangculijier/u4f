@@ -9,6 +9,6 @@ public class SceneryDao
 
 	 public List<Project> findAllScenery(int scenerySpotId){
 		
-		 return DBTools.findAllScenery(scenerySpotId);
+		 return DBTools.findAllProject(scenerySpotId);
 	 }
 }

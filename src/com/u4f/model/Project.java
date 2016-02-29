@@ -6,16 +6,7 @@ package com.u4f.model;
 public class Project
 {
 	
-	public Project()
-	{
-		super();
-
-	}
-	public Project(int projectId)
-	{
-		super();
-		this.projectId = projectId;
-	}
+	
 	private int projectId;
 	private int parkId;
 	private String projectCode;
@@ -27,6 +18,19 @@ public class Project
 	private int projectPop;
 	private String projectDescribe;
 	private String projectOpenTime;
+	private int parkZoneId; 
+
+	public Project()
+	{
+		super();
+
+	}
+	public Project(int projectId)
+	{
+		super();
+		this.projectId = projectId;
+	}
+	
 	public int getProjectId()
 	{
 		return projectId;
@@ -114,6 +118,17 @@ public class Project
 	public void setProjectDescribe(String projectDescribe)
 	{
 		this.projectDescribe = projectDescribe;
+	}
+	
+	public int getParkZoneId()
+	{
+		return parkZoneId;
+	}
+
+
+	public void setParkZoneId(int parkZoneId)
+	{
+		this.parkZoneId = parkZoneId;
 	}
 	
 }
