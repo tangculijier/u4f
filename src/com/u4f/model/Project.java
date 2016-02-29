@@ -11,7 +11,7 @@ public class Project
 	private int parkId;
 	private String projectCode;
 	private String projectName;
-	private double projectStayTime;
+	private int projectStayTime;
 	private double projectLng;
 	private double projectLati;
 	private String projectType;
@@ -47,11 +47,11 @@ public class Project
 	{
 		this.parkId = parkId;
 	}
-	public double getProjectStayTime()
+	public int getProjectStayTime()
 	{
 		return projectStayTime;
 	}
-	public void setProjectStayTime(double projectStayTime)
+	public void setProjectStayTime(int projectStayTime)
 	{
 		this.projectStayTime = projectStayTime;
 	}

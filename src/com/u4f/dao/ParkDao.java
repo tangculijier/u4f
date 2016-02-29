@@ -18,7 +18,7 @@ public class ParkDao
 
 	}
 
-	public List<Park> getNearScenerySpotDao(Double latitude,Double longtitude)
+	public List<Park> getNearScenerySpotDao(Double latitude,Double longtitude, String date)
 	{
 		
 		String raidus = "2000000";
@@ -47,7 +47,7 @@ public class ParkDao
 //				+ minLong + " and " + maxLong;
 		String sql = "select park.*,parkopentime.* from park, parkopentime where park.parkId=parkopentime.parkId and park.parkLat between "
 				+ minLat + " and " + maxLat + " and park.parkLng between "
-				+ minLong + " and " + maxLong;
+				+ minLong + " and " + maxLong + " and parkopentime.parkDate = '" +date +"'";
 		
 		System.out.println(sql);
 		

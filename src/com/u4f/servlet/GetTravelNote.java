@@ -42,10 +42,6 @@ public class GetTravelNote extends HttpServlet
 		TravelNoteDao dao=new TravelNoteDao();
 		List<TravelNote> notes=dao.getTravelNote(scenerySpotId);
 		JSONArray array = JSONArray.fromObject(notes);
-		for(int i=0;i<notes.size();i++)
-		{
-			System.out.println(notes.get(i).getTravelNoteId()+"....."+notes.get(i).getTravelNoteTitle()+"....."+notes.get(i).getTravelNoteContent());
-		}
 		if(array.size()!=0)
 		{
 			out.print(array);

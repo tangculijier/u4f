@@ -35,13 +35,13 @@ public class GetAroundServlet extends HttpServlet {
 		System.out.println("ok");
 		double myLati=Double.parseDouble(request.getParameter("latitude"));
 		double myLng=Double.parseDouble(request.getParameter("longtitude"));
-		
+		String date = request.getParameter("date");
 		
 		List<Park> list=new ArrayList<Park>();
 		
 		ParkDao dao=new ParkDao();
 		//list=dao.getNearScenerySpot(myLng,myLati);
-		list=dao.getNearScenerySpotDao(myLati,myLng);
+		list=dao.getNearScenerySpotDao(myLati,myLng,date);
 		//list=dao.getAllScenerySpot();
 		
 		JSONArray array = JSONArray.fromObject(list);

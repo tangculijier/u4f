@@ -56,10 +56,10 @@ public class UploadTravelNote extends HttpServlet
 		{
 			userId = Integer.parseInt(request.getParameter("userId"));
 		}
-		System.out.println("userId:"+userId);
+	//	System.out.println("userId:"+userId);
 		
 		String travelNoteContent = request.getParameter("travelNoteContent");
-		System.out.println("travelNoteContent:"+travelNoteContent);
+	//System.out.println("travelNoteContent:"+travelNoteContent);
 		
 		//List<String> travelNotePhotos = request.getParameter("travelNotePhotos");
 		
@@ -75,8 +75,8 @@ public class UploadTravelNote extends HttpServlet
 		note.setTravelNoteTitle(travelNoteTitle);
 		
 		
-		System.out.println(note.getUserId()+","+note.getPublicTime()+","+note.getParkId()+","+note.getTravelNoteContent()+
-		","+note.getTravelNoteTitle());
+		//System.out.println(note.getUserId()+","+note.getPublicTime()+","+note.getParkId()+","+note.getTravelNoteContent()+
+	//	","+note.getTravelNoteTitle());
 		boolean res = dao.uploadTravelNote(note);
 		PrintWriter out = response.getWriter();
 		out.print(res);

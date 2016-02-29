@@ -156,7 +156,6 @@ public class DBTools
 			rs = ps.executeQuery();
 			while (rs.next())
 			{
-				// System.out.println("bbb");
 				int id = rs.getInt("parkId");
 				String name = rs.getString("parkName");
 				String adress = rs.getString("parkAddress");
@@ -192,7 +191,6 @@ public class DBTools
 						latitude + "", longtitude + "",
 						park.getParkLati() + "",
 						park.getParkLng() + "");
-				System.out.println("distance:" + distance);
 				park.setParkDistance(distance);
 				//System.out.println(park);
 				list.add(park);
@@ -274,7 +272,7 @@ public class DBTools
 	{
 		List<String> photos = new ArrayList<String>();
 		String sql = "select image from travelPhoto where travelNoteId="+ travelNoteId;
-		System.out.println(sql);
+		//System.out.println(sql);
 		try
 		{
 			conn = getConn();
@@ -705,7 +703,7 @@ public class DBTools
 	public static List<Project> findAllProject(int parkId)
 	{
 		List<Project> ss=new ArrayList<Project>();
-		String sql="select * from project where parkId="+parkId;
+		String sql="select * from project_copy where parkId="+parkId;
 		conn=getConn();
 		try{
 			ps=conn.prepareStatement(sql);
@@ -715,7 +713,7 @@ public class DBTools
 				int projectId=rs.getInt("projectId");
 				String projectName=rs.getString("projectName");
 				String projectCode = rs.getString("projectCode");
-				double projectStayTime=Double.parseDouble(rs.getString("projectStayTime"));
+				int projectStayTime=rs.getInt("projectStayTime");
 				double projectLng=Double.parseDouble(rs.getString("projectLng"));
 				double projectLati=Double.parseDouble(rs.getString("projectLati"));
 				String projectType = rs.getString("projectType");
@@ -815,6 +813,7 @@ public class DBTools
 		
 	}
 
+	/**
 	public static boolean update( )
 	{
 		boolean res=false;
@@ -841,5 +840,6 @@ public class DBTools
 		
 		return res;
 	}
+	*/
 
 }

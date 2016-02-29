@@ -32,14 +32,16 @@ public class GetPlannRounte extends HttpServlet
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 	
-		String beginTime = request.getParameter("beginTime");
-		String playTime = request.getParameter("playTime");
-		String parkId = request.getParameter("parkId");
+		String startTime = request.getParameter("startTime");
+		int playTime = Integer.parseInt(request.getParameter("playTime"));
+		int parkId = Integer.parseInt(request.getParameter("parkId"));
+		
+		System.out.println(" startTime="+startTime +" playTime="+playTime+" parkId="+parkId);
 		
 		PlanningDao dao = new PlanningDao();
-		List<Project> planRounteResult = dao.getPlanningRoute(beginTime,playTime,parkId);
+		List<Project> planRounteResult = dao.getPlanningRoute(startTime,playTime,parkId);
 		
-		//out.print(array);
+		out.print("ok");
 		out.flush();
 		out.close();
 	}

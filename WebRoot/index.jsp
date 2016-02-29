@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <a href="GetAroundServlet?latitude=34.2494&longtitude=108.9934">默认参数latitude=34.2494&longtitude=108.9934，获取附近景点</a>
+   <a href="GetAroundServlet?latitude=34.2494&longtitude=108.9934&date=2016-02-29">默认参数latitude=34.2494&longtitude=108.9934&date=2016-02-29，获取附近景点</a>
    <br>
    
    <a href="GetTravelNote?scenerySpotId=13">获取该景点信息</a>
