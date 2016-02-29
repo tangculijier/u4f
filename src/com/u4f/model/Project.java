@@ -20,12 +20,13 @@ public class Project
 	private int parkId;
 	private String projectCode;
 	private String projectName;
-	private double projectTime;
+	private double projectStayTime;
 	private double projectLng;
 	private double projectLati;
 	private String projectType;
 	private int projectPop;
 	private String projectDescribe;
+	private String projectOpenTime;
 	public int getProjectId()
 	{
 		return projectId;
@@ -42,6 +43,22 @@ public class Project
 	{
 		this.parkId = parkId;
 	}
+	public double getProjectStayTime()
+	{
+		return projectStayTime;
+	}
+	public void setProjectStayTime(double projectStayTime)
+	{
+		this.projectStayTime = projectStayTime;
+	}
+	public String getProjectOpenTime()
+	{
+		return projectOpenTime;
+	}
+	public void setProjectOpenTime(String projectOpenTime)
+	{
+		this.projectOpenTime = projectOpenTime;
+	}
 	public String getProjectCode()
 	{
 		return projectCode;
@@ -57,14 +74,6 @@ public class Project
 	public void setProjectName(String projectName)
 	{
 		this.projectName = projectName;
-	}
-	public double getProjectTime()
-	{
-		return projectTime;
-	}
-	public void setProjectTime(double projectTime)
-	{
-		this.projectTime = projectTime;
 	}
 	public double getProjectLng()
 	{

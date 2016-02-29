@@ -184,7 +184,7 @@ public class DBTools
 				park.setParkPicture(parkPicture);
 				park.setParkTrans(parkTrans);
 				park.setParkOpenTime(parkOpenTime);
-				park.setParkTodayOpenTime(openTime+"——"+closeTime);
+				park.setParkTodayOpenTime(openTime+"-"+closeTime);
 
 				// String la=spot.getScenerySpotLat()+"";
 				// String lb=spot.getScenerySpotLong()+"";
@@ -540,22 +540,32 @@ public class DBTools
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
-			while(rs.next()){
+			while(rs.next())
+			{
 				int projectId=rs.getInt("projectId");
 				String projectName=rs.getString("projectName");
-				//double projectLng=Double.parseDouble(rs.getString("projectLng"));
-				//double projectLati=Double.parseDouble(rs.getString("projectLati"));
+				String projectCode = rs.getString("projectCode");
+				double projectStayTime=Double.parseDouble(rs.getString("projectStayTime"));
+				double projectLng=Double.parseDouble(rs.getString("projectLng"));
+				double projectLati=Double.parseDouble(rs.getString("projectLati"));
+				String projectType = rs.getString("projectType");
+				int projectPop =rs.getInt("projectPop");
+				String projectOpenTime = rs.getString("projectOpenTime");
 				String projectDescribe="";
 				if(rs.getString("projectDescribe")!=null)
 				projectDescribe=rs.getString("projectDescribe");	
 				
 				Project s=new Project();
 				s.setProjectId(projectId);
+				s.setProjectCode(projectCode);
+				s.setProjectStayTime(projectStayTime);
 				s.setProjectDescribe(projectDescribe);
 				s.setProjectName(projectName);
-				//s.setProjectLng(projectLng);
-				//s.setProjectLati(projectLati);
+				s.setProjectLng(projectLng);
+				s.setProjectLati(projectLati);
 				s.setParkId(parkId);
+				s.setProjectOpenTime(projectOpenTime);
+				s.setProjectPop(projectPop);
 				
 				ss.add(s);
 			}
@@ -694,30 +704,37 @@ public class DBTools
 	public static List<Project> findAllProject(int parkId)
 	{
 		List<Project> ss=new ArrayList<Project>();
-		String sql="select * from project_copy_2 where parkId="+parkId;
+		String sql="select * from project where parkId="+parkId;
 		conn=getConn();
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			while(rs.next())
 			{
-				
 				int projectId=rs.getInt("projectId");
-				String projectCode=rs.getString("projectCode");
 				String projectName=rs.getString("projectName");
-				double projectTime=rs.getDouble("projectTime");
-				String projectType=rs.getString("projectType");
-				int projectPop=rs.getInt("projectPop");
-				//double sceneryLng=Double.parseDouble(rs.getString("sceneryLng"));
-				//double sceneryLati=Double.parseDouble(rs.getString("sceneryLati"));
+				String projectCode = rs.getString("projectCode");
+				double projectStayTime=Double.parseDouble(rs.getString("projectStayTime"));
+				double projectLng=Double.parseDouble(rs.getString("projectLng"));
+				double projectLati=Double.parseDouble(rs.getString("projectLati"));
+				String projectType = rs.getString("projectType");
+				int projectPop =rs.getInt("projectPop");
+				String projectOpenTime = rs.getString("projectOpenTime");
+				String projectDescribe="";
+				if(rs.getString("projectDescribe")!=null)
+				projectDescribe=rs.getString("projectDescribe");	
 				
 				Project s=new Project();
 				s.setProjectId(projectId);
 				s.setProjectCode(projectCode);
+				s.setProjectStayTime(projectStayTime);
+				s.setProjectDescribe(projectDescribe);
 				s.setProjectName(projectName);
+				s.setProjectLng(projectLng);
+				s.setProjectLati(projectLati);
+				s.setParkId(parkId);
+				s.setProjectOpenTime(projectOpenTime);
 				s.setProjectPop(projectPop);
-				s.setProjectTime(projectTime);
-				s.setProjectType(projectType);
 				
 				ss.add(s);
 			}
