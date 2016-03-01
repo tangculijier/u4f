@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.u4f.model.Cluster;
 import com.u4f.model.Facility;
 import com.u4f.model.Path;
 import com.u4f.model.Project;
@@ -697,6 +698,11 @@ public class DBTools
 	}
 	
 
+	public static List<Project> getAllProject(int parkId)
+	{
+		return findAllProject(parkId);
+		
+	}
 /*
  * 得到某景区内所有项目
  */
@@ -811,6 +817,36 @@ public class DBTools
 			
 
 		
+	}
+
+
+	public List<Cluster> getParkClusterPaths(int parkId)
+	{
+		List<Cluster> list=new ArrayList<Cluster>();
+		String sql="select cluster.*,playpath.pathStr from cluster,playpath where cluster.centerId = playpath.playPathId  and cluster.parkId="+parkId;
+		conn=getConn();
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next())
+			{
+				
+				int clusterId=rs.getInt("clusterId");
+				String pathStr=rs.getString("pathStr");
+				int clusterNumber=rs.getInt("clusterNumber");
+				Cluster c = new Cluster();
+				c.setClusterId(clusterId);
+				c.setClusterNumber(clusterNumber);
+				c.setPlayPathStr(pathStr);
+				list.add(c);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close();
+		}
+		return list;
 	}
 
 	/**

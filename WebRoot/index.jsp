@@ -44,5 +44,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <a href="GetMySignedScenery?userId=2&scenerySpotId=13">默认参数为userId=2&scenerySpotId=13，得到用户签到过某景区内的所有小景点</a>
    <br>
+   
+   
+     <a href="GetPathCluster?parkId=13">默认参数为parkId=13 得到某景区内的聚类路径</a>
+   <br>
   </body>
 </html>
