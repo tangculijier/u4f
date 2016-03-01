@@ -19,7 +19,16 @@ public class Project
 	private String projectDescribe;
 	private String projectOpenTime;
 	private int parkZoneId; 
-
+	private boolean isPass;
+	
+	public boolean isPass()
+	{
+		return isPass;
+	}
+	public void setPass(boolean isPass)
+	{
+		this.isPass = isPass;
+	}
 	public Project()
 	{
 		super();

@@ -13,16 +13,16 @@ import com.u4f.model.Route;
 import com.u4f.path.plan.RounterPlan;
 import com.u4f.tools.DateUtil;
 
-public class PlanningDao
+public class CopyOfPlanningDao
 {
 	public static void main(String[] args)
 	{
-		PlanningDao dao = new PlanningDao();
-		List<Project> planRounteResult = dao.getPlanningRoute("11:00:00",30,13);
+		CopyOfPlanningDao dao = new CopyOfPlanningDao();
+		List<Project> planRounteResult = dao.getPlanningRoute("11:00:00",60*8,13);
 		//canPlayOverInOpenTime("11:00:00", 61, "11:21:00-12:00:00");
 	}
 	public static Set<List<Project>> set ;
-	
+	public static int out = 0 ;
 	/**
 	 * 
 	 * @param startTime 开始玩的时间 eg:11:21:00
@@ -37,13 +37,16 @@ public class PlanningDao
 		List<Path> paths = db.findAllPaths(parkId);
 		int[][] matrix = makeMatrix(projects, paths);
 		System.out.println("---------------");
-		
+		long start=System.currentTimeMillis();   //获取开始时间   
+		 
 		set = new HashSet<List<Project>>();
 		
 		List<Project> plannNow = new ArrayList<Project>();
 		plannNow.add(projects.get(0));
 		this.addNext(startTime,playTime,projects,plannNow,matrix);
-		System.out.println("一共路径"+set.size()+"条");
+		//System.out.println("一共路径"+set.size()+"条");
+		 long endTime=System.currentTimeMillis(); //获取结束时间   
+		 System.out.println("程序运行时间： "+(endTime-start)/1000/60+"min");
 		return null;
 		
 	}
@@ -55,6 +58,7 @@ public class PlanningDao
 	 * @param allProjects 项目集合 不变
 	 * @param planningNow 现在已经规划的路线 动态变化
 	 * @param matrix 项目路线矩阵 不变
+	 * @param islastPlay 
 	 */
 	public  void addNext(String startTime, int playTime, List<Project> allProjects, List<Project> planningNow,int[][] matrix)
 	{
@@ -90,10 +94,18 @@ public class PlanningDao
 						{
 							List<Project> plannNextVertex = new ArrayList<Project>();
 							plannNextVertex.addAll(planningNow);
+							nextProject.setPass(false);
 							plannNextVertex.add(nextProject);
 							String nextStartTime = DateUtil.addMins(DateUtil.StringToDate(DateUtil.getNowTimeWithoutHourAndMin()+startTime),projectStayMins);
 							addNext(nextStartTime,playTime -projectStayMins ,allProjects,plannNextVertex,matrix);
-							//addNext(startTime,playTime ,allProjects,plannNextVertex,matrix);
+							
+							List<Project> plannNextVertexNoPlay = new ArrayList<Project>();
+							plannNextVertexNoPlay.addAll(planningNow);
+							//Project pass = nextProject;
+							//pass.setPass(true);
+							nextProject.setPass(true);
+							plannNextVertexNoPlay.add(nextProject);
+							addNext(startTime,playTime ,allProjects,plannNextVertexNoPlay,matrix);
 
 						}
 					}
@@ -200,13 +212,14 @@ public class PlanningDao
 	
 	private static void printRounter(List<Project> plannRouter)
 	{
-		System.out.print("path=");
+		System.out.print("path"+(out++)+"=");
 		for(Project p:plannRouter)
 		{
-			System.out.print(p.getProjectCode()+"-");
+			System.out.print(p.getProjectCode()+""+p.isPass()+"-");
 		}
 		System.out.println();
 	}
+	
 	public static int getIndex(List<Project> projects, Project beginProject)
 	{
 		int index = 0;

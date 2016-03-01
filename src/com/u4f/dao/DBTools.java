@@ -703,7 +703,7 @@ public class DBTools
 	public static List<Project> findAllProject(int parkId)
 	{
 		List<Project> ss=new ArrayList<Project>();
-		String sql="select * from project_copy where parkId="+parkId;
+		String sql="select * from project where parkId="+parkId;
 		conn=getConn();
 		try{
 			ps=conn.prepareStatement(sql);
@@ -750,7 +750,7 @@ public class DBTools
 	public static List<Path> findAllPaths(int parkId)
 	{
 		List<Path> list=new ArrayList<Path>();
-		String sql="select * from path_copy where parkId="+parkId;
+		String sql="select * from path where parkId="+parkId;
 		conn=getConn();
 		try{
 			ps=conn.prepareStatement(sql);
