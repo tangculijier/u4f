@@ -63,9 +63,5 @@ public class GetPathCluster extends HttpServlet
 		out.flush();
 		out.close();
 	}
-	 public  static void main(String[] args)  
-	    {  
-		 
-	    }
 
 }

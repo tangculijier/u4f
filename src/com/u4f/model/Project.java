@@ -19,6 +19,10 @@ public class Project
 	private String projectDescribe;
 	private String projectOpenTime;
 	private int parkZoneId; 
+	private String projectPictureURL;
+
+
+
 	private boolean isPass;
 	
 	public boolean isPass()
@@ -138,6 +142,15 @@ public class Project
 	public void setParkZoneId(int parkZoneId)
 	{
 		this.parkZoneId = parkZoneId;
+	}
+	
+	public String getProjectPictureURL()
+	{
+		return projectPictureURL;
+	}
+	public void setProjectPictureURL(String projectPictureURL)
+	{
+		this.projectPictureURL = projectPictureURL;
 	}
 	
 }

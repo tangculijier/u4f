@@ -442,6 +442,7 @@ public class DBTools
 				String projectDescribe="";
 				if(rs.getString("projectDescribe")!=null)
 					projectDescribe=rs.getString("projectDescribe");	
+				String projectPictureURL=rs.getString("projectPictureURL");
 				
 				s.setProjectId(projectId);
 				s.setProjectDescribe(projectDescribe);
@@ -449,6 +450,7 @@ public class DBTools
 				s.setProjectName(projectName);
 				s.setProjectLng(projectLng);
 				s.setProjectLati(projectLati);
+				s.setProjectPictureURL(projectPictureURL);
 				
 				
 			}
@@ -643,14 +645,17 @@ public class DBTools
 				String projectDescribe="";
 				if(rs.getString("projectDescribe")!=null)
 				projectDescribe=rs.getString("projectDescribe");	
-				
+				String projectPictureURL=rs.getString("projectPictureURL");
+
 				Project s=new Project();
 				s.setProjectDescribe(projectDescribe);
 				s.setProjectId(projectId);
 				s.setProjectName(projectName);
 				s.setProjectLng(projectLng);
 				s.setProjectLati(projectLati);
+				s.setProjectPictureURL(projectPictureURL);
 				ss.add(s);
+			
 								
 			}			
 			
@@ -729,7 +734,8 @@ public class DBTools
 				if(rs.getString("projectDescribe")!=null)
 				projectDescribe=rs.getString("projectDescribe");	
 				int parkZoneId =rs.getInt("parkZoneId");
-				
+				String projectPictureURL=rs.getString("projectPictureURL");
+			
 				Project s=new Project();
 				s.setProjectId(projectId);
 				s.setProjectCode(projectCode);
@@ -742,6 +748,7 @@ public class DBTools
 				s.setProjectOpenTime(projectOpenTime);
 				s.setProjectPop(projectPop);
 				s.setParkZoneId(parkZoneId);
+				s.setProjectPictureURL(projectPictureURL);
 				ss.add(s);
 			}
 			
