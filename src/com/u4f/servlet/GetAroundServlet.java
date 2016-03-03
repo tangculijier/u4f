@@ -3,6 +3,9 @@ package com.u4f.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -43,7 +46,21 @@ public class GetAroundServlet extends HttpServlet {
 		//list=dao.getNearScenerySpot(myLng,myLati);
 		list=dao.getNearScenerySpotDao(myLati,myLng,date);
 		//list=dao.getAllScenerySpot();
-		
+		Collections.sort(list, new Comparator<Park>()
+		{
+			//按照距离排序
+			public int compare(Park o1, Park o2)
+			{
+				//去掉后面Km 暂时没考虑m的情况
+				String o1distanceStr = o1.getParkDistance().substring(0,o1.getParkDistance().length()-2);
+				String o2distanceStr = o2.getParkDistance().substring(0,o2.getParkDistance().length()-2);
+
+				double o1Distance = Double.parseDouble(o1distanceStr);
+				double o2Distance = Double.parseDouble(o2distanceStr);
+				return o1Distance > o2Distance ? 1 : -1;
+			}
+			
+		});
 		JSONArray array = JSONArray.fromObject(list);
 //		for(int i=0;i<list.size();i++){
 //			//System.out.println(list.get(i));
