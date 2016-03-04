@@ -10,26 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50067
 File Encoding         : 65001
 
-Date: 2016-02-29 22:09:17
+Date: 2016-03-04 15:27:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for `bestsiteforphoto`
--- ----------------------------
-DROP TABLE IF EXISTS `bestsiteforphoto`;
-CREATE TABLE `bestsiteforphoto` (
-  `bestId` int(10) NOT NULL,
-  `placeName` varchar(30) NOT NULL,
-  `blongitude` double(10,0) NOT NULL,
-  `blatitude` double(10,0) NOT NULL,
-  PRIMARY KEY  (`bestId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bestsiteforphoto
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `city`
@@ -39,12 +23,37 @@ CREATE TABLE `city` (
   `cityId` int(11) NOT NULL auto_increment,
   `cityName` varchar(30) NOT NULL,
   PRIMARY KEY  (`cityId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of city
 -- ----------------------------
-INSERT INTO `city` VALUES ('1', '西安');
+INSERT INTO `city` VALUES ('1', '北京');
+INSERT INTO `city` VALUES ('2', '西安');
+INSERT INTO `city` VALUES ('3', '成都');
+INSERT INTO `city` VALUES ('4', '香港');
+INSERT INTO `city` VALUES ('5', '深圳');
+INSERT INTO `city` VALUES ('6', '芜湖');
+INSERT INTO `city` VALUES ('7', '大连');
+
+-- ----------------------------
+-- Table structure for `cluster`
+-- ----------------------------
+DROP TABLE IF EXISTS `cluster`;
+CREATE TABLE `cluster` (
+  `clusterId` int(11) NOT NULL auto_increment,
+  `centerId` int(20) default NULL,
+  `clusterNumber` int(20) default NULL,
+  `parkId` int(11) NOT NULL,
+  PRIMARY KEY  (`clusterId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cluster
+-- ----------------------------
+INSERT INTO `cluster` VALUES ('1', '1', '5', '13');
+INSERT INTO `cluster` VALUES ('2', '2', '5', '13');
+INSERT INTO `cluster` VALUES ('3', '3', '5', '13');
 
 -- ----------------------------
 -- Table structure for `comment`
@@ -62,19 +71,6 @@ CREATE TABLE `comment` (
 
 -- ----------------------------
 -- Records of comment
--- ----------------------------
-
--- ----------------------------
--- Table structure for `commmenttype`
--- ----------------------------
-DROP TABLE IF EXISTS `commmenttype`;
-CREATE TABLE `commmenttype` (
-  `commTypeId` int(2) NOT NULL,
-  `type` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of commmenttype
 -- ----------------------------
 
 -- ----------------------------
@@ -123,11 +119,14 @@ CREATE TABLE `park` (
 -- ----------------------------
 -- Records of park
 -- ----------------------------
-INSERT INTO `park` VALUES ('1', '深圳欢乐谷', '1', '华侨城杜鹃山', '全票：200元，夜场票：60元', '1、乘坐深圳地铁1、2号线在世界之窗站下车，步行3分钟即至欢乐谷；\r\n2、罗湖火车站乘坐观光巴士直达欢乐谷；\r\n3.市内乘坐20，21，26，32，42，43，54，59，66，70，72，78路等公交车车至世界之窗站下车', '22.545734', '113.987004', '欢乐谷', '公园开放时间：9:30-21:00，\r\n夜场开放时间：18:00-21:00', 'images/shenzhenhlg.png');
-INSERT INTO `park` VALUES ('2', '深圳世界之窗', '1', '南山区深南大道9037号(欧陆风情街)	', '160元', '地铁1、2号线至世界之窗下车；\r\n市内乘坐204,M388、222、223、230、232、234、245、M413、323、324、327、329,369路等公交车至世界之窗站下车', '22.542287', '113.980444', '园林艺术', '9:00-22:30 ', 'images/shenzhensjzc.png');
-INSERT INTO `park` VALUES ('3', '香港迪士尼', '2', '香港新界荃湾区大屿山东北部之竹篙湾', '一日门票：成人（12-64岁）：499港币；小童门票（3-11岁）：355港币；长者门票（65岁或以上）：100港币；普通日门票适用于有效期内的所有日期，特选日除外。\r\n两日门票：成人（12-64岁）：680港币；小童门票（3-11岁）：480港币；长者门票（65岁或以上）：170港币（适用于七日内任意两日）', '可乘搭\'A\'或\'E\'线路线至青屿干线缴费广场转乘R8线巴士，R8线巴士日间定期开往香港迪士尼乐园。', '22.318356', '114.056704', '迪士尼', '10：00-20：00', 'images/xianggangdsn.png');
-INSERT INTO `park` VALUES ('4', '北京水魔方', '4', '北京市丰台区小屯路', '230元 网购215元', '地铁：地铁1号线, 在 玉泉路站 下车(D2口出),120米步行至玉泉路口南站乘坐338/507路, 在梅市口站下车\r\n\r\n自驾：西四环莲石路向西，玉泉路出口，左转向南沿小屯路500米即到.\r\n\r\n公交车：338/507路, 在梅市口站下车', '39.888184', '116.255402', '北京欢乐水魔方嬉水乐园位于北京市丰台区小屯路。占地500亩，总投资10亿元人民币。最大游客接待量3万人，是目前全球规模最大、游乐设施最先进、设备数量最多的顶级水上主题公园。 乐园由国际顶尖的主题景区设计公司精心规划，将中国传统建筑风情与高科技水上游乐项目相融合，将美国式的现代惊险水上娱乐与欧洲的古典健康的水疗理念相结合，建成首个中国人自己的水上乐园。 全球最大的万人海啸造浪池、惊险的龙卷风滑道、刺激的尖峰极速滑道、亚洲最大的黑暗漩涡等项目、形成最富有激情、最充满动感的巨型水上狂欢乐园。', '10:00—19:00。', 'images/beijingsmf.png');
-INSERT INTO `park` VALUES ('13', '成都欢乐谷', '3', '成都市金牛区北三环一段与交大路交界', '全票190元/人，中小学生140元/人，大学生160元/人，1.2-1.5米儿童120元/人，夜场票70元/人。', '成都欢乐谷位于成都市北三环交大立交，金牛区西华大道16号，距天府广场6.6公里，至成都市中心商务区车行二十余分钟，至成绵、成渝高速入口车行时间分别为15和20分钟。', '30.72728', '104.041179', '', '9:00—21:00 夜场18:00—21:00', 'images/chengdu.png');
+INSERT INTO `park` VALUES ('1', '深圳欢乐谷', '5', '深圳华侨城杜鹃山', '全票：200元，夜场票：60元', '1、乘坐深圳地铁1、2号线在世界之窗站下车，步行3分钟即至欢乐谷；\r\n2、罗湖火车站乘坐观光巴士直达欢乐谷；\r\n3.市内乘坐20，21，26，32，42，43，54，59，66，70，72，78路等公交车车至世界之窗站下车', '22.545734', '113.987004', '欢乐谷', '公园开放时间：9:30-21:00，\r\n夜场开放时间：18:00-21:00', 'images/shenzhenhlg.png');
+INSERT INTO `park` VALUES ('2', '深圳世界之窗', '5', '深圳南山区深南大道9037号(欧陆风情街)	', '160元', '地铁1、2号线至世界之窗下车；\r\n市内乘坐204,M388、222、223、230、232、234、245、M413、323、324、327、329,369路等公交车至世界之窗站下车', '22.542287', '113.980444', '园林艺术', '9:00-22:30 ', 'images/shenzhensjzc.png');
+INSERT INTO `park` VALUES ('3', '香港迪士尼', '4', '香港新界荃湾区大屿山东北部之竹篙湾', '一日门票：成人（12-64岁）：499港币；小童门票（3-11岁）：355港币；长者门票（65岁或以上）：100港币；普通日门票适用于有效期内的所有日期，特选日除外。\r\n两日门票：成人（12-64岁）：680港币；小童门票（3-11岁）：480港币；长者门票（65岁或以上）：170港币（适用于七日内任意两日）', '可乘搭\'A\'或\'E\'线路线至青屿干线缴费广场转乘R8线巴士，R8线巴士日间定期开往香港迪士尼乐园。', '22.318356', '114.056704', '迪士尼', '10：00-20：00', 'images/xianggangdsn.png');
+INSERT INTO `park` VALUES ('4', '北京水魔方', '1', '北京市丰台区小屯路', '230元 网购215元', '地铁：地铁1号线, 在 玉泉路站 下车(D2口出),120米步行至玉泉路口南站乘坐338/507路, 在梅市口站下车\r\n\r\n自驾：西四环莲石路向西，玉泉路出口，左转向南沿小屯路500米即到.\r\n\r\n公交车：338/507路, 在梅市口站下车', '39.888184', '116.255402', '北京欢乐水魔方嬉水乐园位于北京市丰台区小屯路。占地500亩，总投资10亿元人民币。最大游客接待量3万人，是目前全球规模最大、游乐设施最先进、设备数量最多的顶级水上主题公园。 乐园由国际顶尖的主题景区设计公司精心规划，将中国传统建筑风情与高科技水上游乐项目相融合，将美国式的现代惊险水上娱乐与欧洲的古典健康的水疗理念相结合，建成首个中国人自己的水上乐园。 全球最大的万人海啸造浪池、惊险的龙卷风滑道、刺激的尖峰极速滑道、亚洲最大的黑暗漩涡等项目、形成最富有激情、最充满动感的巨型水上狂欢乐园。', '10:00—19:00。', 'images/beijingsmf.png');
+INSERT INTO `park` VALUES ('5', '西安乐华欢乐世界', '2', '西安市西咸新区泾河新城沣泾大道', '门市230元/人，网购198元/人', null, '34.484923', '108.925835', '乐华欢乐世界是西安乐华城 . 国际欢乐度假区的一期项目，坐落于陕西省西咸新区泾河新城，是中国首个过山车主题乐园。公园布置经典游艺设备33套，互动参与项目100余个，运用国际领先的游乐形式表现动感文化主题，创造出充满激情和挑战的欢乐空间。乐华欢乐世界是中国目前拥有过山车数量最多的主题乐园，8台不同类型的过山车，可满足不同人群的玩乐需求。', '周一至周五： 10:00-18:00；周末及节假日： 9:30-18:00。', 'images/lehuacheng.png');
+INSERT INTO `park` VALUES ('6', '芜湖方特欢乐世界', '6', '芜湖市鸠江区银湖北路80号方特欢乐世界经营管理有限公司', '成人及身高1.4米以上（含1.4米）的未成年人每票200元。（1.1m≤身高＜1.4m的儿童每票150元；身高1.1米以下的儿童和年满70周岁以上的老人（凭有效身份证件）免票）', '1、乘5路、13路、23路、30路、32路、47路、103路（夜班）等多线路公交车至银湖北路站下，可直达芜湖方特欢乐世界主题公园； \r\n2、乘8路、19路、25路、26路、34路等公交车再转乘5路、13路、23路、30路、32路也可抵达芜湖方特欢乐世界主题公园； \r\n3、从火车站、汽车站乘32路公交车可直接抵达芜湖方特欢乐世界主题公园。', '31.382192', '118.382696', '芜湖方特欢乐世界是通过多种现代高科技手段和艺术的完美结合缔造出的一个充满激情和惊喜的梦幻乐园。公园由 阳光广场 、渔人码头 、 方特欢乐大道 、 太空世界 、 神秘河谷 、 维苏威火山 、精灵山谷 、悟空归来 、 西部传奇 、 恐龙半岛 、 海螺湾 、 嘟噜嘟吡农庄 、 儿童王国 、 水世界 、天地之间、 火流星 等16个主题项目区组成。其中，阳光广场、方特欢乐大道、渔人码头是全开放式区域，游客可以自由出入。芜湖方特欢乐世界中的主题项目、游乐项目、休闲及景观项目共300多个。公园的内容涵盖现代科技、未来科技、科学幻想、神话传说、历史文化、综合表演、儿童游乐等多个方面。形式新颖，内容丰富，适应不同年龄层游客的需要。', '周一至周五： 10:00-18:00；周末及节假日： 9:30-18:00。', 'images/fangte.png');
+INSERT INTO `park` VALUES ('7', '大连老虎滩海洋公园', '7', '大连中山区滨海中路9号(近解放路)	', '旺季通票220元，65周岁以上老人凭证件游园享受半价优惠，官网上购票为通票190元。', '公交：2路、4路、30路、403路、404路公交汽车及大连城市旅游巴士，在老虎滩均有乘降站点（旅游巴士只在旅游旺季运行，始发和终到站均在大连火车站站南广场，是一条环绕大连市主要街区和景区的旅游环线。票价十元，当日有效，可无限次乘降）；\r\n自驾：沈海高速公路大连后盐出口 → 东北快速路（东快路）→ 东北路 → 长春路 → 解放路 → 老虎滩海洋公园；\r\n出租车：大连火车站至老虎滩海洋公园约8公里，费用约15元；大连北站约25公里，费用约35元；大连周水子国际机场约25公里，费用约35元；大连港码头约10公里，费用约17元。', '38.882397', '121.684126', '老虎滩海洋公园坐落于辽宁省大连市南部海滨中部，是市区南部最大的景区，4000余米海岸线，是中国最大的一座现代化海滨游乐场。园区自然风光秀丽，山海互映，景色迷人。公园内建有“浓缩极地世界，展现海洋奇观”的极地海洋动物馆、海兽馆，还有中国最大的珊瑚馆、标志性建筑虎雕可供观赏，乘坐跨海空中索道、海上游艇，可欣赏大海风光和虎滩乐园的全貌。园外的鸟语林、四维电影院也为游人提供了新奇的娱乐享受。', '8:00-17:00。', 'images/laohutan.png');
+INSERT INTO `park` VALUES ('13', '成都欢乐谷', '3', '成都市金牛区北三环一段与交大路交界', '全票190元/人，中小学生140元/人，大学生160元/人，1.2-1.5米儿童120元/人，夜场票70元/人。', '成都欢乐谷位于成都市北三环交大立交，金牛区西华大道16号，距天府广场6.6公里，至成都市中心商务区车行二十余分钟，至成绵、成渝高速入口车行时间分别为15和20分钟。', '30.72728', '104.041179', '欢乐谷连锁品牌，创立于1998年10月1日，是国家首批5A级旅游景区——华侨城旅游的核心产品之一，中国主题公园第一品牌。成都欢乐谷是继深圳欢乐谷、北京欢乐谷之后，欢乐谷连锁品牌走向全国的第三站。成都欢乐谷主题公园（成都天府华侨城实业发展有限公司欢乐谷旅游分公司），是成都市文化产业重点项目和旅游产业重点项目。位于成都市金牛区北三环一段与交大路交界处，项目占地47万平方米。 成都欢乐谷以“时尚、动感、欢乐、梦幻”的激情体验吸引着无数的国内外游客。园区由阳光港、欢乐时光、加勒比旋风、巴蜀迷情、飞行岛、魔幻城堡、飞跃地中海等七大主题区域组成，其中设置了130余项体验观赏项目，包括43项娱乐设备设施、58处人文生态景观、10项艺术表演、20项主题游戏和商业辅助性项目。公园项目体验惊险刺激！成都欢乐谷拥有中国第一台Mega过山车，中国第一套双龙过山车组合设计，中国最长的双提升矿山车，中国第一个顶仓旋转式飞行岛，中国荧幕最大的4D影院，中国第一台双塔太空梭等16套国际国内顶尖的大型游艺设施设备。', '9:00—21:00 夜场18:00—21:00', 'images/chengdu.png');
 
 -- ----------------------------
 -- Table structure for `parkopentime`
@@ -140,21 +139,19 @@ CREATE TABLE `parkopentime` (
   `openTime` time default NULL,
   `closeTime` time default NULL,
   PRIMARY KEY  (`partTimeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of parkopentime
 -- ----------------------------
-INSERT INTO `parkopentime` VALUES ('1', '3', '2016-02-29', '10:00:00', '18:00:00');
-INSERT INTO `parkopentime` VALUES ('2', '3', '2016-03-01', '10:00:00', '18:00:00');
-INSERT INTO `parkopentime` VALUES ('3', '3', '2016-03-02', '10:00:00', '18:00:00');
-INSERT INTO `parkopentime` VALUES ('4', '13', '2016-02-29', '10:00:00', '18:00:00');
-INSERT INTO `parkopentime` VALUES ('5', '2', '2016-02-29', '09:00:00', '22:00:00');
-INSERT INTO `parkopentime` VALUES ('6', '1', '2016-02-29', '10:00:00', '21:15:00');
-INSERT INTO `parkopentime` VALUES ('7', '2', '2016-03-01', '09:00:00', '22:00:00');
-INSERT INTO `parkopentime` VALUES ('9', '4', '2016-02-29', null, null);
-INSERT INTO `parkopentime` VALUES ('10', '4', '2016-03-01', null, null);
-INSERT INTO `parkopentime` VALUES ('11', '1', '2016-03-01', '10:00:00', '21:15:00');
+INSERT INTO `parkopentime` VALUES ('1', '3', '2016-03-03', '10:00:00', '18:00:00');
+INSERT INTO `parkopentime` VALUES ('4', '13', '2016-03-03', '10:00:00', '18:00:00');
+INSERT INTO `parkopentime` VALUES ('5', '2', '2016-03-03', '09:00:00', '22:00:00');
+INSERT INTO `parkopentime` VALUES ('6', '1', '2016-03-03', '10:00:00', '21:15:00');
+INSERT INTO `parkopentime` VALUES ('10', '4', '2016-03-03', null, null);
+INSERT INTO `parkopentime` VALUES ('14', '5', '2016-03-03', '10:00:01', '20:00:00');
+INSERT INTO `parkopentime` VALUES ('15', '6', '2016-03-03', '00:00:10', '10:00:00');
+INSERT INTO `parkopentime` VALUES ('16', '7', '2016-03-03', '10:00:00', '10:00:00');
 
 -- ----------------------------
 -- Table structure for `parkzone`
@@ -283,6 +280,60 @@ INSERT INTO `path_copy` VALUES ('24', '16', '17', '13');
 INSERT INTO `path_copy` VALUES ('25', '17', '1', '13');
 
 -- ----------------------------
+-- Table structure for `path_copy_copy`
+-- ----------------------------
+DROP TABLE IF EXISTS `path_copy_copy`;
+CREATE TABLE `path_copy_copy` (
+  `pathId` int(11) NOT NULL,
+  `pathFrom` int(11) default NULL,
+  `pathTo` int(11) default NULL,
+  `parkId` int(11) default NULL,
+  PRIMARY KEY  (`pathId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of path_copy_copy
+-- ----------------------------
+INSERT INTO `path_copy_copy` VALUES ('1', '1', '2', '13');
+INSERT INTO `path_copy_copy` VALUES ('2', '1', '5', '13');
+INSERT INTO `path_copy_copy` VALUES ('3', '2', '3', '13');
+INSERT INTO `path_copy_copy` VALUES ('4', '3', '4', '13');
+INSERT INTO `path_copy_copy` VALUES ('5', '4', '5', '13');
+
+-- ----------------------------
+-- Table structure for `playpath`
+-- ----------------------------
+DROP TABLE IF EXISTS `playpath`;
+CREATE TABLE `playpath` (
+  `playPathId` int(11) NOT NULL auto_increment,
+  `parkId` int(11) default NULL,
+  `pathStr` varchar(300) default NULL,
+  `userId` int(11) default NULL,
+  `playTime` varchar(20) default NULL,
+  `clusterId` int(11) default NULL,
+  PRIMARY KEY  (`playPathId`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of playpath
+-- ----------------------------
+INSERT INTO `playpath` VALUES ('1', '13', '100110101111010010101010101', '0', null, '1');
+INSERT INTO `playpath` VALUES ('2', '13', '10101001010111111100000101001010', '0', null, '2');
+INSERT INTO `playpath` VALUES ('3', '13', '1000010101010', '0', '', '3');
+INSERT INTO `playpath` VALUES ('4', '13', '1010101010', '1', null, '1');
+INSERT INTO `playpath` VALUES ('5', '13', '101000001000', '2', null, '2');
+INSERT INTO `playpath` VALUES ('6', '13', '10000101010010', '3', null, '3');
+INSERT INTO `playpath` VALUES ('7', '13', '100000', '4', null, '1');
+INSERT INTO `playpath` VALUES ('8', '13', '101010100101', '5', null, '2');
+INSERT INTO `playpath` VALUES ('9', '13', '1010010101010', '6', null, '3');
+INSERT INTO `playpath` VALUES ('10', '13', '10100101010', '7', null, '1');
+INSERT INTO `playpath` VALUES ('11', '13', '101010010101', '8', null, '2');
+INSERT INTO `playpath` VALUES ('12', '13', '1010100101', '9', null, '3');
+INSERT INTO `playpath` VALUES ('13', '13', '1000101010', '10', null, '1');
+INSERT INTO `playpath` VALUES ('14', '13', '1010100101', '11', null, '2');
+INSERT INTO `playpath` VALUES ('15', '13', '101001010', '12', null, null);
+
+-- ----------------------------
 -- Table structure for `project`
 -- ----------------------------
 DROP TABLE IF EXISTS `project`;
@@ -299,61 +350,62 @@ CREATE TABLE `project` (
   `projectDescribe` varchar(300) default NULL,
   `projectOpenTime` varchar(30) default NULL,
   `parkZoneId` int(10) default NULL,
+  `projectPictureURL` varchar(30) default NULL,
   PRIMARY KEY  (`projectId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of project
 -- ----------------------------
-INSERT INTO `project` VALUES ('1', '13', '0', '入口', '0.0', '104.041097', '30.726739', '0/1/2', '0', null, '9:00—21:00', '1');
-INSERT INTO `project` VALUES ('2', '13', 'A1', '旋转飞椅', '0.3', '104.042794', '30.728062', '1/2', '21318', null, '11:00-20:30', '2');
-INSERT INTO `project` VALUES ('3', '13', 'A2', '旋转木马', '0.3', '104.042498', '30.727733', '1/2', '6491', null, '09:30-20:30', '2');
-INSERT INTO `project` VALUES ('4', '13', 'A3', '水上摩天轮', '0.5', '104.041824', '30.727985', '2', '7780', null, '09:30-20:30', '2');
-INSERT INTO `project` VALUES ('5', '13', 'A4', '碰碰车', '0.3', '104.043163', '30.728031', '0/2', '11462', null, '11:00-20:30', '2');
-INSERT INTO `project` VALUES ('6', '13', 'A5', '天地双雄', '0.6', '104.041937', '30.728253', '0', '18181', null, '12:30-20:30', '2');
-INSERT INTO `project` VALUES ('7', '13', 'A6', '大摆锤', '0.3', '104.042678', '30.728307', '0', '3090', null, '12:30-20:30', '2');
-INSERT INTO `project` VALUES ('8', '13', 'A7', '精灵幽魂', '0.1', '104.043185', '30.728357', '2', '915', null, '12:30-20:30', '2');
-INSERT INTO `project` VALUES ('9', '13', 'A8', '能量风暴', '0.3', '104.042372', '30.72847', '0/2', '1021', null, '12:30-20:30', '2');
-INSERT INTO `project` VALUES ('10', '13', 'B1', '加勒比风暴', '1.5', '104.041892', '30.729417', '0/2', '10123', null, '09:30-18:00', '3');
-INSERT INTO `project` VALUES ('11', '13', 'B2', '天地旋转', '0.4', '104.041249', '30.729351', '0/2', '1317', null, '10:00-18:00', '3');
-INSERT INTO `project` VALUES ('12', '13', 'B3', '加勒比水公园', '0.5', '104.042026', '30.730538', '2', '1794', null, '10:00-18:00', '3');
-INSERT INTO `project` VALUES ('13', '13', 'C1', '雪域飞龙', '1.5', '104.040652', '30.731659', '0', '44538', null, '10:00-18:00', '4');
-INSERT INTO `project` VALUES ('14', '13', 'C2', '古墓奇遇', '0.5', '104.040701', '30.731939', '0', '454', null, '10:30-18:00', '4');
-INSERT INTO `project` VALUES ('15', '13', 'C3', '水陆攻占', '0.3', '104.040558', '30.732226', '2', '1058', null, '11:00-18:00', '4');
-INSERT INTO `project` VALUES ('16', '13', 'C4', '神树天梯', '0.4', '104.040239', '30.731997', '0/2', '831', null, '11:00-18:00', '4');
-INSERT INTO `project` VALUES ('17', '13', 'C5', '日晷迷旋', '0.2', '104.039835', '30.731834', '2', '524', null, '11:00-18:00', '4');
-INSERT INTO `project` VALUES ('18', '13', 'C6', '渔猎漂流', '1.0', '104.039592', '30.731299', '2', '5200', null, '10:30-18:00', '4');
-INSERT INTO `project` VALUES ('19', '13', 'D1', '蝴蝶花园', '0.1', '104.039677', '30.729828', '1', '1113', null, '11:00-18:00', '5');
-INSERT INTO `project` VALUES ('20', '13', 'D2', '观鸟园', '0.1', '104.040037', '30.729471', '1', '303', null, '11:00-18:00', '5');
-INSERT INTO `project` VALUES ('21', '13', 'D3', '飞行岛', '0.4', '104.040953', '30.728788', '0', '1304', null, '11:00-18:00', '5');
-INSERT INTO `project` VALUES ('22', '13', 'E1', '小青蛙跳', '0.2', '104.039345', '30.728761', '1', '420', null, '11:00-18:00', '6');
-INSERT INTO `project` VALUES ('23', '13', 'E2', '转转杯', '0.2', '104.039358', '30.728687', '1/2', '653', null, '11:00-18:00', '6');
-INSERT INTO `project` VALUES ('24', '13', 'E3', '小观光轮', '0.2', '104.039484', '30.728462', '2', '287', null, '11:00-18:00', '6');
-INSERT INTO `project` VALUES ('25', '13', 'E4', '墨西哥大草帽', '0.3', '104.039278', '30.728245', '1', '1735', null, '10:00-18:00', '6');
-INSERT INTO `project` VALUES ('26', '13', 'E5', '转转马', '0.3', '104.039053', '30.728396', '1', '442', null, '10:00-18:00', '6');
-INSERT INTO `project` VALUES ('27', '13', 'E6', '疯狂的小鸟', '0.4', '104.038846', '30.728482', '1', '899', null, '10:00-18:00', '6');
-INSERT INTO `project` VALUES ('28', '13', 'E7', '真人Cs', '1.0', '104.038478', '30.728617', '2', '15783', null, '11:00-18:00', '6');
-INSERT INTO `project` VALUES ('29', '13', 'E8', '北极探险', '0.1', '104.038074', '30.728742', '1/2', '457', null, '10:00-18:00', '6');
-INSERT INTO `project` VALUES ('30', '13', 'E9', '西部牛仔', '0.3', '104.037809', '30.72897', '2', '345', null, '10:00-18:00', '6');
-INSERT INTO `project` VALUES ('31', '13', 'E10', '泡球战场', '0.3', '104.038348', '30.728994', '1/2', '811', null, '11:00-18:00', '6');
-INSERT INTO `project` VALUES ('32', '13', 'E11', '疯狂老鼠', '0.4', '104.038123', '30.7293', '1', '1354', null, '10:00-18:00', '6');
-INSERT INTO `project` VALUES ('33', '13', 'E12', '互动剧场', '1.2', '104.037764', '30.729192', '1/2', '17000', null, '10:00-18:00', '6');
-INSERT INTO `project` VALUES ('34', '13', 'E13', '桑巴气球', '0.2', '104.037544', '30.729079', '1', '198', null, '11:00-18:00', '7');
-INSERT INTO `project` VALUES ('35', '13', 'F1', 'KAKA汽车', '0.5', '104.037225', '30.728986', '2', '367', null, '10:00-18:00', '7');
-INSERT INTO `project` VALUES ('36', '13', 'F2', '疯狂汽车', '0.4', '104.037427', '30.72892', '1', '269', null, '10:00-18:00', '7');
-INSERT INTO `project` VALUES ('37', '13', 'F3', '星际飞翔', '0.8', '104.037194', '30.728726', '0/2', '14930', null, '10:00-18:00', '7');
-INSERT INTO `project` VALUES ('38', '13', 'F4', '深海探奇', '1.0', '104.037297', '30.728423', '1/2', '59717', null, '11:00-17:30', '7');
-INSERT INTO `project` VALUES ('39', '13', 'F5', 'X战车', '0.6', '104.037328', '30.72802', '0', '19223', null, '11:30-18:00', '7');
-INSERT INTO `project` VALUES ('40', '13', 'F6', '弹跳车', '0.3', '104.037405', '30.72814', '2', '198', null, '10:00-18:00', '7');
-INSERT INTO `project` VALUES ('41', '13', 'F7', '小火车', '0.2', '104.037436', '30.728361', '1', '1110', null, '11:00-18:00', '7');
-INSERT INTO `project` VALUES ('42', '13', 'F8', '飞跃西部', '1.2', '104.037185', '30.728078', '0', '20470', null, '11:30-17:30', '7');
-INSERT INTO `project` VALUES ('43', '13', 'F9', '冲浪者', '1.0', '104.037679', '30.727562', '0', '2661', null, '10:30-18:00', '7');
-INSERT INTO `project` VALUES ('44', '13', 'F10', '熊猫侠', '1.0', '104.037189', '30.727151', '1/2', '22136', null, '11:30-17:30', '7');
-INSERT INTO `project` VALUES ('45', '13', 'G1', '云霄飞龙', '1.2', '104.038954', '30.727372', '0', '26056', null, '10:30-18:00', '8');
-INSERT INTO `project` VALUES ('46', '13', 'G2', '飞跃地中海', '1.2', '104.038775', '30.726025', '0', '29503', null, '10:00-18:00', '8');
-INSERT INTO `project` VALUES ('47', '13', 'G3', '地中海影院', '0.8', '104.039385', '30.726545', '1/2', '17726', null, '12:00-20:00', '8');
-INSERT INTO `project` VALUES ('48', '13', 'G4', '金沙探险', '0.2', '104.039628', '30.72736', '2', '2348', null, '10:00-18:00', '8');
-INSERT INTO `project` VALUES ('49', '13', 'G5', '幽灵古堡', '0.4', '104.039803', '30.726662', '2', '2769', null, '10:00-18:00', '8');
+INSERT INTO `project` VALUES ('1', '13', '0', '入口', '0.0', '104.041097', '30.726739', '0/1/2', '0', null, '09:00:00-21:00:00', '1', null);
+INSERT INTO `project` VALUES ('2', '13', 'A1', '旋转飞椅', '0.3', '104.042794', '30.728062', '1/2', '21318', null, '11:00:00-20:30:00', '2', null);
+INSERT INTO `project` VALUES ('3', '13', 'A2', '旋转木马', '0.3', '104.042498', '30.727733', '1/2', '6491', null, '09:30:00-20:30:00', '2', 'images/xuanzhuan.png');
+INSERT INTO `project` VALUES ('4', '13', 'A3', '水上摩天轮', '0.5', '104.041824', '30.727985', '2', '7780', null, '09:30:00-20:30:00', '2', 'images/motianlun.png');
+INSERT INTO `project` VALUES ('5', '13', 'A4', '碰碰车', '0.3', '104.043163', '30.728031', '0/2', '11462', null, '11:00:00-20:30:00', '2', null);
+INSERT INTO `project` VALUES ('6', '13', 'A5', '天地双雄', '0.6', '104.041937', '30.728253', '0', '18181', null, '12:30:00-20:30:00', '2', 'images/tiandishuangxiong.png');
+INSERT INTO `project` VALUES ('7', '13', 'A6', '大摆锤', '0.3', '104.042802', '30.728659', '0', '3090', null, '12:30:00-20:30:00', '2', null);
+INSERT INTO `project` VALUES ('8', '13', 'A7', '精灵幽魂', '0.1', '104.043185', '30.728357', '2', '915', null, '12:30:00-20:30:00', '2', null);
+INSERT INTO `project` VALUES ('9', '13', 'A8', '能量风暴', '0.3', '104.042372', '30.72847', '0/2', '1021', null, '12:30:00-20:30:00', '2', null);
+INSERT INTO `project` VALUES ('10', '13', 'B1', '加勒比风暴', '1.5', '104.041892', '30.729417', '0/2', '10123', null, '09:30:00-18:00:00', '3', null);
+INSERT INTO `project` VALUES ('11', '13', 'B2', '天地旋转', '0.4', '104.041249', '30.729351', '0/2', '1317', null, '10:00:00-18:00:00', '3', null);
+INSERT INTO `project` VALUES ('12', '13', 'B3', '加勒比水公园', '0.5', '104.042026', '30.730538', '2', '1794', null, '10:00:00-18:00:00', '3', null);
+INSERT INTO `project` VALUES ('13', '13', 'C1', '雪域飞龙', '1.5', '104.040652', '30.731659', '0', '44538', null, '10:00:00-18:00:00', '4', null);
+INSERT INTO `project` VALUES ('14', '13', 'C2', '古墓奇遇', '0.5', '104.040701', '30.731939', '0', '454', null, '10:30:00-18:00:00', '4', null);
+INSERT INTO `project` VALUES ('15', '13', 'C3', '水陆攻占', '0.3', '104.040558', '30.732226', '2', '1058', null, '11:00:00-18:00:00', '4', null);
+INSERT INTO `project` VALUES ('16', '13', 'C4', '神树天梯', '0.4', '104.040239', '30.731997', '0/2', '831', null, '11:00:00-18:00:00', '4', null);
+INSERT INTO `project` VALUES ('17', '13', 'C5', '日晷迷旋', '0.2', '104.039835', '30.731834', '2', '524', null, '11:00:00-18:00:00', '4', null);
+INSERT INTO `project` VALUES ('18', '13', 'C6', '渔猎漂流', '1.0', '104.039592', '30.731299', '2', '5200', null, '10:30:00-18:00:00', '4', null);
+INSERT INTO `project` VALUES ('19', '13', 'D1', '蝴蝶花园', '0.1', '104.039677', '30.729828', '1', '1113', null, '11:00:00-18:00:00', '5', null);
+INSERT INTO `project` VALUES ('20', '13', 'D2', '观鸟园', '0.1', '104.040037', '30.729471', '1', '303', null, '11:00:00-18:00:00', '5', null);
+INSERT INTO `project` VALUES ('21', '13', 'D3', '飞行岛', '0.4', '104.040953', '30.728788', '0', '1304', null, '11:00:00-18:00:00', '5', null);
+INSERT INTO `project` VALUES ('22', '13', 'E1', '小青蛙跳', '0.2', '104.039345', '30.728761', '1', '420', null, '11:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('23', '13', 'E2', '转转杯', '0.2', '104.039358', '30.728687', '1/2', '653', null, '11:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('24', '13', 'E3', '小观光轮', '0.2', '104.039484', '30.728462', '2', '287', null, '11:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('25', '13', 'E4', '墨西哥大草帽', '0.3', '104.039278', '30.728245', '1', '1735', null, '10:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('26', '13', 'E5', '转转马', '0.3', '104.039053', '30.728396', '1', '442', null, '10:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('27', '13', 'E6', '疯狂的小鸟', '0.4', '104.038846', '30.728482', '1', '899', null, '10:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('28', '13', 'E7', '真人Cs', '1.0', '104.038478', '30.728617', '2', '15783', null, '11:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('29', '13', 'E8', '北极探险', '0.1', '104.038074', '30.728742', '1/2', '457', null, '10:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('30', '13', 'E9', '西部牛仔', '0.3', '104.037809', '30.72897', '2', '345', null, '10:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('31', '13', 'E10', '泡球战场', '0.3', '104.038348', '30.728994', '1/2', '811', null, '11:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('32', '13', 'E11', '疯狂老鼠', '0.4', '104.038123', '30.7293', '1', '1354', null, '10:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('33', '13', 'E12', '互动剧场', '1.2', '104.037764', '30.729192', '1/2', '17000', null, '10:00:00-18:00:00', '6', null);
+INSERT INTO `project` VALUES ('34', '13', 'E13', '桑巴气球', '0.2', '104.037544', '30.729079', '1', '198', null, '11:00:00-18:00:00', '7', null);
+INSERT INTO `project` VALUES ('35', '13', 'F1', 'KAKA汽车', '0.5', '104.037225', '30.728986', '2', '367', null, '10:00:00-18:00:00', '7', null);
+INSERT INTO `project` VALUES ('36', '13', 'F2', '疯狂汽车', '0.4', '104.037427', '30.72892', '1', '269', null, '10:00:00-18:00:00', '7', null);
+INSERT INTO `project` VALUES ('37', '13', 'F3', '星际飞翔', '0.8', '104.037194', '30.728726', '0/2', '14930', null, '10:00:00-18:00:00', '7', null);
+INSERT INTO `project` VALUES ('38', '13', 'F4', '深海探奇', '1.0', '104.037297', '30.728423', '1/2', '59717', null, '11:30:00-17:30:00', '7', null);
+INSERT INTO `project` VALUES ('39', '13', 'F5', 'X战车', '0.6', '104.037328', '30.72802', '0', '19223', null, '11:30:00-18:00:00', '7', null);
+INSERT INTO `project` VALUES ('40', '13', 'F6', '弹跳车', '0.3', '104.037405', '30.72814', '2', '198', null, '10:00:00-18:00:00', '7', null);
+INSERT INTO `project` VALUES ('41', '13', 'F7', '小火车', '0.2', '104.037436', '30.728361', '1', '1110', null, '10:00:00-18:00:00', '7', null);
+INSERT INTO `project` VALUES ('42', '13', 'F8', '飞跃西部', '1.2', '104.037185', '30.728078', '0', '20470', null, '11:30:00-17:30:00', '7', null);
+INSERT INTO `project` VALUES ('43', '13', 'F9', '冲浪者', '1.0', '104.037679', '30.727562', '0', '2661', null, '10:30:00-18:00:00', '7', null);
+INSERT INTO `project` VALUES ('44', '13', 'F10', '熊猫侠', '1.0', '104.037189', '30.727151', '1/2', '22136', null, '11:30:00-17:30:00', '7', null);
+INSERT INTO `project` VALUES ('45', '13', 'G1', '云霄飞龙', '1.2', '104.038954', '30.727372', '0', '26056', null, '10:30:00-18:00:00', '8', null);
+INSERT INTO `project` VALUES ('46', '13', 'G2', '飞跃地中海', '1.2', '104.038775', '30.726025', '0', '29503', null, '10:00:00-18:00:00', '8', null);
+INSERT INTO `project` VALUES ('47', '13', 'G3', '地中海影院', '0.8', '104.039385', '30.726545', '1/2', '17726', null, '12:00:00-20:00:00', '8', null);
+INSERT INTO `project` VALUES ('48', '13', 'G4', '金沙探险', '0.2', '104.039628', '30.72736', '2', '2348', null, '10:00:00-18:00:00', '8', null);
+INSERT INTO `project` VALUES ('49', '13', 'G5', '幽灵古堡', '0.4', '104.039803', '30.726662', '2', '2769', null, '10:00:00-18:00:00', '8', null);
 
 -- ----------------------------
 -- Table structure for `project_copy`
@@ -397,19 +449,33 @@ INSERT INTO `project_copy` VALUES ('16', '13', 'G1', '地中海影院', '80', '1
 INSERT INTO `project_copy` VALUES ('17', '13', 'G2', '金沙探险', '15', '104.039628', '30.72736', '2', '2348', null, '10:00:00-18:00:00', '8');
 
 -- ----------------------------
--- Table structure for `scenic`
+-- Table structure for `project_copy_copy`
 -- ----------------------------
-DROP TABLE IF EXISTS `scenic`;
-CREATE TABLE `scenic` (
-  `scenId` int(10) NOT NULL,
-  `scenName` varchar(100) NOT NULL,
-  `location` varchar(100) NOT NULL,
-  `scenAreaId` int(10) NOT NULL
+DROP TABLE IF EXISTS `project_copy_copy`;
+CREATE TABLE `project_copy_copy` (
+  `projectId` int(10) NOT NULL,
+  `parkId` int(10) default NULL,
+  `projectCode` varchar(20) default NULL,
+  `projectName` varchar(100) default NULL,
+  `projectStayTime` int(20) default NULL,
+  `projectLng` varchar(20) default NULL,
+  `projectLati` varchar(20) default NULL,
+  `projectType` varchar(10) default NULL,
+  `projectPop` int(30) default NULL,
+  `projectDescribe` varchar(300) default NULL,
+  `projectOpenTime` varchar(30) default NULL,
+  `parkZoneId` int(10) default NULL,
+  PRIMARY KEY  (`projectId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of scenic
+-- Records of project_copy_copy
 -- ----------------------------
+INSERT INTO `project_copy_copy` VALUES ('1', '13', '0', '入口', '0', '104.041097', '30.726739', '0/1/2', '0', null, '09:00:00-21:00:00', '1');
+INSERT INTO `project_copy_copy` VALUES ('4', '13', 'A1', '碰碰车', '20', '104.043163', '30.728031', '0/2', '11462', null, '11:00:00-20:30:00', '2');
+INSERT INTO `project_copy_copy` VALUES ('6', '13', 'B1', '天地旋转', '35', '104.041249', '30.729351', '0/2', '1317', null, '10:00:00-18:00:00', '3');
+INSERT INTO `project_copy_copy` VALUES ('8', '13', 'C1', '渔猎漂流', '60', '104.039592', '30.731299', '2', '5200', null, '10:30:00-18:00:00', '4');
+INSERT INTO `project_copy_copy` VALUES ('9', '13', 'D1', '蝴蝶花园', '10', '104.039677', '30.729828', '1', '1113', null, '11:00:00-18:00:00', '5');
 
 -- ----------------------------
 -- Table structure for `signature`
@@ -423,24 +489,35 @@ CREATE TABLE `signature` (
   `userId` int(10) NOT NULL,
   `projectId` int(10) NOT NULL,
   PRIMARY KEY  (`signatureId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of signature
 -- ----------------------------
-INSERT INTO `signature` VALUES ('1', '2016-01-11 05:33:53', '108.99002', '34.25707', '2', '1');
-INSERT INTO `signature` VALUES ('2', '2016-01-16 16:52:41', '108.990078', '34.24765', '2', '2');
-INSERT INTO `signature` VALUES ('3', '2016-01-12 21:06:37', '108.99', '34.253', '2', '3');
-INSERT INTO `signature` VALUES ('4', '2016-01-16 21:09:00', '108.989', '34.2619', '2', '14');
-INSERT INTO `signature` VALUES ('5', '2016-01-16 21:09:56', '108.988622', '34.261656', '2', '13');
-INSERT INTO `signature` VALUES ('6', '2016-01-13 21:14:05', '108.990034', '34.251998', '2', '4');
-INSERT INTO `signature` VALUES ('7', '2016-01-14 21:18:02', '108.992648', '34.252514', '2', '6');
-INSERT INTO `signature` VALUES ('8', '2016-01-16 21:18:31', '108.990199', '34.259653', '2', '8');
-INSERT INTO `signature` VALUES ('9', '2016-01-16 21:18:59', '108.990592', '34.260612', '2', '12');
-INSERT INTO `signature` VALUES ('10', '2016-01-15 21:19:24', '108.987751', '34.250962', '2', '7');
-INSERT INTO `signature` VALUES ('11', '2016-01-16 21:19:54', '108.99324', '34.258176', '2', '9');
-INSERT INTO `signature` VALUES ('12', '2016-01-16 21:20:20', '108.990347', '34.262853', '2', '11');
-INSERT INTO `signature` VALUES ('13', '2016-01-16 21:20:39', '108.988722', '34.261756', '2', '10');
+INSERT INTO `signature` VALUES ('1', '2016-03-04 14:46:57', '104.041097', '30.726739', '2', '1');
+INSERT INTO `signature` VALUES ('2', '2016-03-04 14:51:10', '104.042794', '30.728062', '2', '3');
+INSERT INTO `signature` VALUES ('3', '2016-03-04 14:51:09', '104.042498', '30.727733', '2', '2');
+INSERT INTO `signature` VALUES ('4', '2016-03-04 14:52:21', '108.989', '34.2619', '2', '7');
+INSERT INTO `signature` VALUES ('5', '2016-03-04 14:57:37', '108.988622', '34.261656', '2', '10');
+INSERT INTO `signature` VALUES ('6', '2016-03-04 15:01:41', '108.990034', '34.251998', '2', '11');
+INSERT INTO `signature` VALUES ('7', '2016-03-04 15:02:46', '108.992648', '34.252514', '2', '13');
+INSERT INTO `signature` VALUES ('8', '2016-03-04 15:05:49', '108.990199', '34.259653', '2', '16');
+INSERT INTO `signature` VALUES ('9', '2016-03-04 15:08:59', '108.990592', '34.260612', '2', '18');
+INSERT INTO `signature` VALUES ('10', '2016-03-04 15:11:02', '108.987751', '34.250962', '2', '19');
+INSERT INTO `signature` VALUES ('11', '2016-03-04 15:12:09', '108.99324', '34.258176', '2', '20');
+INSERT INTO `signature` VALUES ('12', '2016-03-04 15:13:10', '108.990347', '34.262853', '2', '22');
+INSERT INTO `signature` VALUES ('13', '2016-03-04 15:14:13', '108.988722', '34.261756', '2', '24');
+INSERT INTO `signature` VALUES ('14', '2016-03-04 15:15:36', '104.039278', '1', '2', '25');
+INSERT INTO `signature` VALUES ('15', '2016-03-04 15:16:04', '1', '1', '2', '31');
+INSERT INTO `signature` VALUES ('16', '2016-03-04 15:17:12', '1', '1', '2', '35');
+INSERT INTO `signature` VALUES ('17', '2016-03-04 15:18:22', '1', '1', '2', '37');
+INSERT INTO `signature` VALUES ('18', '2016-03-04 15:19:30', '1', '1', '2', '38');
+INSERT INTO `signature` VALUES ('19', '2016-03-04 15:22:34', '1', '1', '2', '39');
+INSERT INTO `signature` VALUES ('20', '2016-03-04 15:23:57', '1', '1', '2', '44');
+INSERT INTO `signature` VALUES ('21', '2016-03-04 15:24:01', '1', '1', '2', '45');
+INSERT INTO `signature` VALUES ('22', '2016-03-04 15:26:07', '1', '1', '2', '46');
+INSERT INTO `signature` VALUES ('23', '2016-03-04 15:33:13', '1', '1', '2', '49');
+INSERT INTO `signature` VALUES ('24', '2016-03-04 15:44:18', '1', '1', '2', '1');
 
 -- ----------------------------
 -- Table structure for `travelnote`
