@@ -1,5 +1,7 @@
 package com.u4f.dao;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,12 +49,26 @@ public class ParkDao
 //				+ minLong + " and " + maxLong;
 		String sql = "select park.*,parkopentime.* from park, parkopentime where park.parkId=parkopentime.parkId and park.parkLat between "
 				+ minLat + " and " + maxLat + " and park.parkLng between "
-				+ minLong + " and " + maxLong + " and parkopentime.parkDate = '" +date +"'";
+				+ minLong + " and " + maxLong  ;//" and parkopentime.parkDate = '" +date +"'";
 		
 		System.out.println(sql);
 		
 		List<Park> spots = 	DBTools.getNearPark(latitude,longtitude,sql);
-	
+		Collections.sort(spots, new Comparator<Park>()
+				{
+					//按照距离排序
+					public int compare(Park o1, Park o2)
+					{
+						//去掉后面Km 暂时没考虑m的情况
+						String o1distanceStr = o1.getParkDistance().substring(0,o1.getParkDistance().length()-2);
+						String o2distanceStr = o2.getParkDistance().substring(0,o2.getParkDistance().length()-2);
+
+						double o1Distance = Double.parseDouble(o1distanceStr);
+						double o2Distance = Double.parseDouble(o2distanceStr);
+						return o1Distance > o2Distance ? 1 : -1;
+					}
+					
+				});
 	
 		return spots;
 	}

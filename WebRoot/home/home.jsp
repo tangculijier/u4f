@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
+<base target="content" />
 <div class="top"></div>
 <div id="header">
 	<div class="logo">主题公园后台管理系统</div>
@@ -35,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <li>
           <h4 class="M1"><span></span>公园管理</h4>
           <div class="list-item none">
-            <a href=''>公园信息</a>
+            <a href='home.jsp' target="_self">公园信息</a>
             <a href=''>便利设施</a>
             <a href=''>游乐项目</a>
           </div>
@@ -57,8 +58,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li>
           <h4 class="M5"><span></span>路线管理</h4>
           <div class="list-item none">
-            <a href=''>查看热门路线</a>
-            <a href=''>查看已规划路线</a>
+            <a >查看热门路线</a>
+            <a href='plannPath.jsp'>查看已规划路线</a>
+          </div>
+        </li>
+        	<li>
+          <h4 class="M6"><span></span>数据统计</h4>
+          <div class="list-item none">
+            <a >公园信息统计</a>
+            <a href=''>用户统计</a>
+            <a href=''>游记统计</a>
+            <a href=''>路线规划统计</a>
           </div>
         </li>
 				
@@ -75,36 +85,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</ul>
 			</div>
 			<div class="main">
-				<table align="center" border="1" cellpadding="15px" style="margin-top: 50">
-				<th></th>
-				<th><a href=''>编号</a></th>
-				<th>区域 
-				<select><option >全国</option></select></th>
-				<th>主题公园名称</th>
-				<%
-					ParkDao dao = new ParkDao();
-					double lat = 34.2494d;
-					double lng = 108.9934d;
-					List<Park>  listPark = dao.getNearScenerySpotDao(lat,lng,"2016-03-03");
-					for(int i =0;i<listPark.size();i++)
-					{
-						Park p = listPark.get(i);
-						%>
-						<tr>
-						<td><img width="130px" src="<%="../"+p.getParkPicture()%>"/></td>
-						<td><%=(i+1)%></td>
-						<td><%=p.getParkName().substring(0,2)%></td>
-						<td><%=p.getParkName()%></td>
-						<td><input type="button" value="查看"/></td></tr>
-						<% 
-						System.out.print(p.getParkName().substring(0,2));
-						System.out.print(p.getParkName()+" ");
-						System.out.println(p.getParkPicture()+" ");
-					}
-					
-				 %>
+			<iframe  class="main" src="iframe.jsp" name="content" id="contentFrame" scrolling="yes" frameborder="0" height="1500px" width="950px" >
+			</iframe>
+						
 				
-				</table>
 			</div>
 		</div>
 </div>

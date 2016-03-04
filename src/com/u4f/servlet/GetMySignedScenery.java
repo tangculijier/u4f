@@ -59,7 +59,10 @@ public class GetMySignedScenery extends HttpServlet
 		List<Project> list=new ArrayList<Project>();
 		list=dao.getMySignedProjects(userId, projectId);
 		JSONArray array = JSONArray.fromObject(list);
-		//System.out.println(list);
+		for(Project p :list)
+		{
+			System.out.print(p.getProjectId()+" ");
+		}
 		if(array.size()!=0)
 		{
 			out.print(array);
