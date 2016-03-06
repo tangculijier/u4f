@@ -29,6 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<th>区域 
 				<select><option >全国</option></select></th>
 				<th>主题公园名称</th>
+				<th><input type="button" value="添加主题公园"/></th>
 				<%
 					ParkDao dao = new ParkDao();
 					double lat = 34.2494d;

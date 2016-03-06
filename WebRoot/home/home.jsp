@@ -79,9 +79,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<ul>
 							<li><img src="images/home.png"></li>
 								<li style="margin-left:25px;">您当前的位置：</li>
-								<li><a href="#">主题公园管理</a></li>
+								<li><a href="#">路线规划</a></li>
 								<li>></li>
-								<li><a href="#">公园信息</a></li>
+								<li><a href="#">查看已规划路线</a></li>
 						</ul>
 			</div>
 			<div class="main">

@@ -39,7 +39,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	主题公园Id:13</br>
 	开始时间:13:20:31</br>
 	游玩时间:8*60 mins</br>
-	游玩类型...</br>
 	请求时间:2015-12-12 10:11:31</br>
 	</br>
 	</div>
