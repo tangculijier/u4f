@@ -627,7 +627,7 @@ public class DBTools
 
 	public static List<Project> FindMySignedProject(int userId,int parkId)
 	{
-		String sql="select project.* from signature,project where signature.projectId=project.projectId and signature.userId="+userId+" and project.parkId="+parkId+" order by signature.signatureTime DESC";
+		String sql="select project.* from signature,project where signature.projectId=project.projectId and signature.userId="+userId+" and project.parkId="+parkId+" order by signature.signatureTime ASC";
 		System.out.println(sql);
 		conn=getConn();
 		List<Project>  ss=new ArrayList<Project>();

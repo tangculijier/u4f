@@ -152,7 +152,7 @@ import java.util.Random;
      */  
     private float distance(String path1, String path2) {  
         float distance = 0.0f;  
-        distance=GetSim.samePathPercent(path1, path2);
+        distance=GetSimUtil.GetJaccardSimilarity(path1, path2);
         return distance;
         
     }  
@@ -193,7 +193,7 @@ import java.util.Random;
             for (int j = 0; j < k; j++) 
             {  
                // distance[j] = distance(dataSet.get(i), center.get(j));  
-            	distance[j] = GetSim.samePathPercent(dataSet.get(i), center.get(j));
+            	distance[j] = GetSimUtil.GetJaccardSimilarity(dataSet.get(i), center.get(j));
                 // System.out.println("test2:"+"dataSet["+i+"],center["+j+"],相似度="+distance[j]);  
   
             }  
@@ -279,7 +279,7 @@ import java.util.Random;
                 	float simSum = 0f;
                 	for(int m = 0; m < n; m++)//求得这个路径和簇中其他所有路径的相似度之和
                 	{
-                		simSum += GetSim.samePathPercent(cluster.get(i).get(j),
+                		simSum += GetSimUtil.GetJaccardSimilarity(cluster.get(i).get(j),
                 		cluster.get(i).get(m));  
                 	}
                 	
