@@ -48,5 +48,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
      <a href="GetPathCluster?parkId=13">默认参数为parkId=13 得到某景区内的聚类路径</a>
    <br>
+   
+     <a href="home/home.jsp">跳转到后台管理系统首页</a>
+       <br>
   </body>
 </html>
