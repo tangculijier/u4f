@@ -33,7 +33,7 @@ public class kmedoidsController {
         }  
           
     }  
-    /*
+    /*写论文用 没有实现
     public boolean  clustering(int parkId)
     {
     	boolean res = false;
@@ -58,7 +58,8 @@ public class kmedoidsController {
             res = dao.insertCluster(clusterResult) ;
     	}
     	return res;
+    	}
     	*/
-    }
+    
     
 }  
