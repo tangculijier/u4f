@@ -8,10 +8,10 @@ public class Main
 	 */
 	public static void main(String[] args)
 	{
-		ACO aco = new ACO();  
-        aco.init(1000);  
-        aco.run(20000);  
-        aco.ReportResult();  
+//		ACO aco = new ACO();  
+//        aco.init(1000);  
+//        aco.run(20000);  
+//        aco.ReportResult();  
 	}
 
 }

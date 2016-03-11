@@ -7,7 +7,16 @@ import java.util.Map;
 	
 public class MapDistance
 {
-
+	/**
+	 * 注释掉
+	 * 用来测试用
+	 *
+	public static void main(String[] args)
+	{
+		MapDistance m = new MapDistance();
+		System.out.println(m.getDistanceByM(30.726739d, 104.041097d, 30.732226d, 104.040558d));
+	}
+	 */
 	private static double EARTH_RADIUS = 6378.137;
 
 	private static double rad(double d)
