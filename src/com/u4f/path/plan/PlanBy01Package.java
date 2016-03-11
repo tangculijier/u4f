@@ -1,6 +1,7 @@
 package com.u4f.path.plan;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class PlanBy01Package
 	public static void main(String[] args)
 	{
 		PlanBy01Package p  = new PlanBy01Package();
-		p.getsovle("11:00:00",60,13);
+		p.getsovle("11:00:00",30,13);
 
 	}
 	
@@ -28,8 +29,8 @@ public class PlanBy01Package
 		projects.add(new Project());
 		projects.addAll(db.findAllProject(13));
 		List<Path> paths = db.findAllPaths(13);
-		int[][] matrix = makeMatrix(projects, paths);
-		System.out.println("---------------");
+//		int[][] matrix = makeMatrix(projects, paths);
+//		System.out.println("---------------");
 		this.Knapsack(projects, playTime);
 //		List<Project> result = 
 //		for(Project p :result)
@@ -53,31 +54,30 @@ public class PlanBy01Package
 			int pWeight = p.getProjectStayTime();//项目的weight即就是他的消耗时间
 			for(int w = 1 ; w <= maxWeight ;w++)//w为当前的时间
 			{
-				HashSet<Project> set = new HashSet<Project>();
-				if(pWeight > w)
+				//HashSet<Project> set = new HashSet<Project>();
+				if(pWeight > w)//如果这个项目的weight 大于当前 w
 				{
 					dp[i][w] = dp[i-1][w];//它就等于前一个的value
-					set.add(projects.get(i-1));
+					//set.add(projects.get(i-1));
 				}
 				else
 				{
 					dp[i][w] = Math.max(dp[i-1][w - pWeight] + p.getProjectPop(),  dp[i-1][w]);
-					set.add(projects.get(i));
+					//set.add(projects.get(i));
 				}
-//				if(dp[i][w] > maxValue)
-//				{
-//					maxValue = dp[i][w] ; 
-//				}
-//				else if (dp[i][w] < maxValue)
-//				{ 
-//					set.clear();
-//				}
-				System.out.print("dp[i][w]="+dp[i][w]);
-				for(Project p2 :set)
+				if(dp[i][w] > maxValue)
 				{
-					System.out.print(p2.getProjectCode()+" ");
+					maxValue = dp[i][w] ; 
+//					System.out.print("max="+maxValue+" i="+i+" w="+w);
+					findPath(projects, dp, i, w);
 				}
-				System.out.println();
+
+//				System.out.print("dp[i][w]="+dp[i][w]);
+//				for(Project p2 :set)
+//				{
+//					System.out.print(p2.getProjectCode()+" ");
+//				}
+//				System.out.println();
 				
 			}
 		}
@@ -90,6 +90,25 @@ public class PlanBy01Package
 //		}
 		
 	}
+	
+	public void findPath(List<Project> projects,int[][] dp,int maxX,int maxY)
+	{
+		int[] x = new int[dp.length];
+		for(int i  = maxX ; i > 0 ;i--)
+		{
+			if(dp[i][maxY] == dp[i-1][maxY] )//说明dp[maxX]它的重量没有被算进去
+			{
+				x[i] = 0;
+			}
+			else
+			{
+				x[i] = 1;
+				maxY -= projects.get(i).getProjectStayTime();
+			}
+		}
+		System.out.println("x="+Arrays.toString(x));
+	}
+	
 	
 	public static void printPackage(List<Project> projects, int[][] dp)
 	{
