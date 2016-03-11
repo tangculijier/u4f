@@ -18,81 +18,70 @@ public class PlanBy01Package
 	public static void main(String[] args)
 	{
 		PlanBy01Package p  = new PlanBy01Package();
-		p.getsovle("11:00:00",30,13);
+		p.getsovle("11:00:00",60*10,13);
 
 	}
 	
-	public  void getsovle(String startTime, int playTime, int parkId)
+	public  List<Project> getsovle(String startTime, int playTime, int parkId)
 	{
 		DBTools db = new DBTools();
 		List<Project> projects = new ArrayList<Project>();
 		projects.add(new Project());
 		projects.addAll(db.findAllProject(13));
-		List<Path> paths = db.findAllPaths(13);
+//		List<Path> paths = db.findAllPaths(13);
 //		int[][] matrix = makeMatrix(projects, paths);
 //		System.out.println("---------------");
-		this.Knapsack(projects, playTime);
-//		List<Project> result = 
-//		for(Project p :result)
-//		{
-//			System.out.print(p.getProjectCode()+" ");
-//		}
-//		return result;
+		
+		List<Project> result = this.Knapsack(projects, playTime);
+		for(Project p :result)
+		{
+			System.out.print(p.getProjectName()+" ");
+		}
+		return result;
 	}
 	
-	public  void Knapsack(List<Project> projects,int playTime)
+	public  List<Project> Knapsack(List<Project> projects,int playTime)
 	{
-		//List<Project> result = new ArrayList<Project>();
 		int maxWeight = playTime;
 		int n = projects.size();
 		int[][] dp = new int[n][maxWeight+1];//第一行与第一列初始化都为0
 		int maxValue  = 0 ;
-		
+		int maxX = 0;
+		int maxY = 0;
 		for(int i  = 1 ; i < n;i++)
 		{
 			Project p = projects.get(i);
 			int pWeight = p.getProjectStayTime();//项目的weight即就是他的消耗时间
 			for(int w = 1 ; w <= maxWeight ;w++)//w为当前的时间
 			{
-				//HashSet<Project> set = new HashSet<Project>();
 				if(pWeight > w)//如果这个项目的weight 大于当前 w
 				{
 					dp[i][w] = dp[i-1][w];//它就等于前一个的value
-					//set.add(projects.get(i-1));
 				}
 				else
 				{
+					//动态规划
 					dp[i][w] = Math.max(dp[i-1][w - pWeight] + p.getProjectPop(),  dp[i-1][w]);
-					//set.add(projects.get(i));
 				}
-				if(dp[i][w] > maxValue)
+				if(dp[i][w] > maxValue)//找出最大值
 				{
 					maxValue = dp[i][w] ; 
+					maxX = i ;//记录最大值下标
+					maxY = w;
 //					System.out.print("max="+maxValue+" i="+i+" w="+w);
-					findPath(projects, dp, i, w);
 				}
 
-//				System.out.print("dp[i][w]="+dp[i][w]);
-//				for(Project p2 :set)
-//				{
-//					System.out.print(p2.getProjectCode()+" ");
-//				}
-//				System.out.println();
-				
 			}
 		}
-		printPackage(projects,dp);
+//		printPackage(projects,dp);
 		System.out.println("maxValue="+maxValue);
-//		return projects;
-//		for(Project p :set)
-//		{
-//			System.out.println(p.getProjectCode()+" ");
-//		}
+		return findPath(projects, dp, maxX, maxY);//找出点并且返回点
 		
 	}
 	
-	public void findPath(List<Project> projects,int[][] dp,int maxX,int maxY)
+	public List<Project> findPath(List<Project> projects,int[][] dp,int maxX,int maxY)
 	{
+		List<Project> result = new ArrayList<Project>();
 		int[] x = new int[dp.length];
 		for(int i  = maxX ; i > 0 ;i--)
 		{
@@ -103,10 +92,13 @@ public class PlanBy01Package
 			else
 			{
 				x[i] = 1;
+				result.add(projects.get(i));
 				maxY -= projects.get(i).getProjectStayTime();
 			}
 		}
 		System.out.println("x="+Arrays.toString(x));
+		return result;
+		
 	}
 	
 	
