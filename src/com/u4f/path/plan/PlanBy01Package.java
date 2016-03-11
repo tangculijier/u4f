@@ -12,15 +12,6 @@ import com.u4f.model.Project;
 public class PlanBy01Package
 {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args)
-	{
-		PlanBy01Package p  = new PlanBy01Package();
-		p.getsovle("11:00:00",60*10,13);
-
-	}
 	
 	public  List<Project> getsovle(String startTime, int playTime, int parkId)
 	{
@@ -37,6 +28,8 @@ public class PlanBy01Package
 		{
 			System.out.print(p.getProjectName()+" ");
 		}
+		System.out.println();
+		System.out.println("可以玩"+result.size());
 		return result;
 	}
 	

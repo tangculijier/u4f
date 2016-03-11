@@ -136,4 +136,30 @@ public class MapDistance
 		return squareMap;
 	}
 
+	
+	/**
+	 * 以米计算两点之间的算法
+	 * @param projectLati
+	 * @param projectLng
+	 * @param projectLati2
+	 * @param projectLng2
+	 * @return
+	 */
+	public static int getDistanceByM(double lat1, double lng1,
+			double lat2, double lng2)
+	{
+
+		double radLat1 = rad(lat1);
+		double radLat2 = rad(lat2);
+		double difference = radLat1 - radLat2;
+		double mdifference = rad(lng1) - rad(lng2);
+		double distance = 2 * Math.asin(Math.sqrt(Math.pow(
+				Math.sin(difference / 2), 2)
+				+ Math.cos(radLat1)
+				* Math.cos(radLat2)
+				* Math.pow(Math.sin(mdifference / 2), 2)));
+		distance = distance * EARTH_RADIUS;
+		return (int) take_effect_number(distance * 1000, 1);
+	}
+
 }
