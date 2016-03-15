@@ -17,7 +17,7 @@ public class PlanBy01Package
 	{
 		DBTools db = new DBTools();
 		List<Project> projects = new ArrayList<Project>();
-		projects.add(new Project());
+		//projects.add(new Project());
 		projects.addAll(db.findAllProject(13));
 //		List<Path> paths = db.findAllPaths(13);
 //		int[][] matrix = makeMatrix(projects, paths);
