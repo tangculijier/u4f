@@ -75,6 +75,7 @@ public class PlanBy01Package
 	public List<Project> findPath(List<Project> projects,int[][] dp,int maxX,int maxY)
 	{
 		List<Project> result = new ArrayList<Project>();
+		result.add(projects.get(0));//添加入口
 		int[] x = new int[dp.length];
 		for(int i  = maxX ; i > 0 ;i--)
 		{
