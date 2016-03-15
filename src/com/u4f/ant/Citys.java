@@ -10,16 +10,10 @@ import com.u4f.tools.MapDistance;
  * 城市类
  */
 public class Citys {
-//	private String cityName[] = {"北京", "上海", "天津", "重庆", "哈尔滨", "长春", "沈阳", "呼和浩特", 
-//			"石家庄", "太原", "济南", "郑州", "西安", "杭州", "武汉", "成都", "广州", "昆明", "拉萨"};
-//	private int[][] distance = new int[34][34];
-	
-	
+
 	private List<Project> projects;
 	private int[][] distance ;
-	
-	//private String cityName[] = {"北京", "天津","石家庄", "太原","西安","呼和浩特"};
-	
+
 	public Citys(List<Project> projects)
 	{
 		this.projects = projects;
@@ -41,8 +35,6 @@ public class Citys {
 		}
 	}
 		
-	
-	
 	public int[][] getDistance() {
 		return distance;
 	}

@@ -37,8 +37,8 @@ public class Ant {
 		 for(int i=0; i<count; i++) {
 			 city[i] = 0;
 		 }
-		// int random = 0;
-		 int random = new Random(System.currentTimeMillis()).nextInt(count);
+		 int random = 0;//规定其实点是city0
+		// int random = new Random(System.currentTimeMillis()).nextInt(count);//
 		 city[random] = 1;
 		 tour[0] = random;//每一个蚂蚁初始化的时候都随机走了一个地方
 	 }
@@ -72,7 +72,8 @@ public class Ant {
 	 }
 
 	  //轮盘赌选择一个城市；
-	private int getSelect(double[] p) {
+	private int getSelect(double[] p) 
+	{
 		double selectP = new Random(System.currentTimeMillis()).nextDouble();
 		double sumSel = 0.0;
 		for(int i=0; i<count; i++) 

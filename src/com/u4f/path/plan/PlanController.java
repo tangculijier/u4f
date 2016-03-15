@@ -15,7 +15,7 @@ public class PlanController
 	public static void main(String[] args)
 	{
 		PlanController controller = new PlanController();
-		List<Project> planProjects = controller.getSolve("11:00:00",60*5,13);
+		List<Project> planProjects = controller.getSolve("11:00:00",60*10,13);
 		ACO aco = new ACO();  
 		Citys citys = new Citys(planProjects);
         aco.run(1000,20,citys);  
